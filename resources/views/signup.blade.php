@@ -55,7 +55,8 @@
                         <h4>Join Us</h4>
                         <p>Create Your Account, It's Free.</p>
                     </div>
-                    <form action="" method="post" class="signin-form">
+                    <form action="/signup" method="post" class="signin-form">
+                        @csrf
                         <div class="alert alert-danger" role="alert">
                             <i class="far fa-times-circle"></i>
                         </div>
