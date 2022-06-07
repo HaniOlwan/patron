@@ -26,7 +26,6 @@ Route::post('/signin', [SessionController::class, 'authenticate']);
 
 Route::get('/logout', [SessionController::class, 'logout']);
 
-
 Route::group(['middleware' => ['student']], function () {
     // all students routes goes here
     Route::get('/student',  function () {
@@ -34,11 +33,9 @@ Route::group(['middleware' => ['student']], function () {
     });
 });
 
-
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
     Route::get('/teacher',  function () {
-        return view('teacher');
+        return view('teacher.dashboard');
     });
 });
-

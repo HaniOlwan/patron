@@ -28,13 +28,14 @@ class SessionController extends Controller
             $rule = User::where('email', $validatedUser['email'])->pluck('rule')->first();
             if ($rule === 'teacher') {
                 return redirect()->intended('teacher');
+                // also send quizz and subject counts for teacher
             }
             return redirect()->intended('student');
         } else {
             return back()->with('error', 'The provided credentials do not match our records.')->onlyInput('email');
         }
     }
-    
+
     function logout()
     {
         Session::flush();

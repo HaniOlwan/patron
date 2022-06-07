@@ -22,12 +22,8 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <!-- //Meta tag Keywords -->
-    <!--/Style-CSS -->
-    <!--    <link rel="stylesheet" href="css/bootstrap.css">-->
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/sign_style.css') }}" type="text/css" media="all" />
-    <!--//Style-CSS -->
 </head>
 
 <body>
