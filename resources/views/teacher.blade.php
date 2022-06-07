@@ -35,7 +35,7 @@
 
                 <a href="teacher-profile.php?id=1">
                     <i class="far fa-user-circle"></i>
-                    <span>{{session()->get('name')}}</span>
+                    <span>{{Auth::user()->first_name." ".Auth::user()->last_name}}</span>
                 </a>
 
                 <ul class="cd-nav__sub-list">
@@ -48,7 +48,7 @@
                 </ul>
             </li>
         </ul>
-    </header> 
+    </header>
 
     <main class="cd-main-content">
         <nav class="cd-side-nav js-cd-side-nav">
@@ -93,7 +93,7 @@
                     <div class="col">
                         <div class="hero hero-dashboard">
                             <div class="layout">
-                                <h3>Hi <span>{{session()->get('name')}}</span></h3>
+                                <h3>Hi <span>{{Auth::user()->first_name}}</span></h3>
                                 <p>we wish you having a good day.</p>
                             </div>
                         </div>

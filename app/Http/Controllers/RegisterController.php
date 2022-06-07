@@ -33,12 +33,10 @@ class RegisterController extends Controller
                 'password' =>   Hash::make($request->password),
                 'rule' =>   $request->rule,
             ]);
-            $name = Auth::user()->first_name . " " . Auth::user()->last_name;
-
             if ($request->rule === 'teacher') {
-                return redirect()->intended('teacher')->with('name', $name);
+                return redirect()->intended('teacher');
             } else {
-                return redirect()->intended('student')->with('name', $name);
+                return redirect()->intended('student');
             }
         } catch (Exception $e) {
             return back()->withInput($request->all)->with('error', 'User already exists!');
