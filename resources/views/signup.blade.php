@@ -69,19 +69,19 @@
                         </div> -->
                         <div class="form-input">
                             <label for="fn">First Name</label>
-                            <input type="text" id="fn" name="first_name" value=" echo $first_name; ?>" placeholder="" required />
+                            <input type="text" id="fn" name="first_name" value="{{old('first_name')}}" placeholder="eg. John" required />
                         </div>
                         <div class="form-input">
                             <label for="ln">Last Name</label>
-                            <input type="text" id="ln" name="last_name" value=" echo $last_name; ?>" placeholder="" required />
+                            <input type="text" id="ln" name="last_name" value="{{old('last_name')}}" placeholder="eg. Doe" required />
                         </div>
                         <div class="form-input">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value=" echo $email; ?>" placeholder="" required />
+                            <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="example@exp.com" required />
                         </div>
                         <div class="form-input">
                             <label for="pass">Password</label>
-                            <input type="password" id="pass" name="password" value=" echo $pass; ?>" placeholder="" required />
+                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="" required />
                         </div>
                         <label for="rule">Account Rule</label>
                         <div class="custom-control custom-radio custom-control-inline">

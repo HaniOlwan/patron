@@ -17,9 +17,16 @@ class UserContoller extends Controller
         return view('signup');
     }
 
-    function createUser(Request $request)
+    function store(Request $request)
     {
         try {
+            $validatedUser = $request->validate([
+                'first_name' => 'required',
+                'last_name' =>   'required',
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+                'rule' => 'required|string',
+            ]);
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' =>   $request->last_name,
@@ -27,10 +34,9 @@ class UserContoller extends Controller
                 'password' =>   Hash::make($request->password),
                 'rule' =>   $request->rule,
             ]);
-        } catch (\Illuminate\Database\QueryException $qe) {
-            return back()->with('error', 'User already exists!');
+            return redirect('/');
         } catch (Exception $e) {
-            return back()->with('error', 'Something went wrong!');
+            return back()->withInput($request->all)->with('error', 'User already exists!');
         }
     }
 }

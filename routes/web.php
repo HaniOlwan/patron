@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/signup', [UserContoller::class, 'index']);
-Route::post('/signup', [UserContoller::class, 'createUser']);
+Route::post('/signup', [UserContoller::class, 'store']);
 
