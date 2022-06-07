@@ -25,6 +25,8 @@ Route::get('/student', function () {
     return view('student');
 });
 
-Route::get('/signup', [UserContoller::class, 'index']);
+Route::get('/signup', [UserContoller::class, 'signup']);
 Route::post('/signup', [UserContoller::class, 'store']);
+
+Route::get('/signin', [UserContoller::class, 'signin']);
 

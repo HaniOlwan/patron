@@ -12,10 +12,11 @@ use Exception;
 
 class UserContoller extends Controller
 {
-    function index()
+    function signup()
     {
         return view('signup');
     }
+    
 
     function store(Request $request)
     {
@@ -42,5 +43,10 @@ class UserContoller extends Controller
         } catch (Exception $e) {
             return back()->withInput($request->all)->with('error', 'User already exists!');
         }
+    }
+
+    function signin()
+    {
+        return view('signin');
     }
 }
