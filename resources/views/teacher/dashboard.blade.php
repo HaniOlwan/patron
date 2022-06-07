@@ -55,17 +55,17 @@
             <ul class="cd-side__list js-cd-side__list">
                 <li class="cd-side__label"><span><i class="fas fa-tachometer-alt"></i> Dashboard</span></li>
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="dashboard.php"><i class="fas fa-home"></i> Home</a>
+                    <a href="/teacher"><i class="fas fa-home"></i> Home</a>
 
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="subjects.php"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">@yield('subject_count')</span></a>
+                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">@yield('subject_count')</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="subjects.php"><i class="fas fa-server"></i> View subjects</a></li>
-                        <li class="cd-side__sub-item"><a href="create-subject.php"><i class="fas fa-plus-circle"></i> Create subject</a></li>
+                        <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
+                        <li class="cd-side__sub-item"><a href="/create-subject"><i class="fas fa-plus-circle"></i> Create subject</a></li>
                     </ul>
                 </li>
 
@@ -74,7 +74,7 @@
                     <a href="/quizzez"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">@yield('quiz_count')</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="view-quizzes.php"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/view-quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
                     </ul>
                 </li>
 
