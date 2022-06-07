@@ -56,7 +56,7 @@
                         <h4>Login</h4>
                         <p>Patron wishes you a good day.</p>
                     </div>
-                    <form action="" method="post" class="signin-form">
+                    <form action="/signin" method="post" class="signin-form">
                         @csrf
                         @if(session()->has('error'))
                         <div class="alert alert-danger" role="alert">
@@ -66,13 +66,12 @@
                         @endif
                         <div class="form-input">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value="" placeholder="" required />
+                            <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="example@exp.com" required />
                         </div>
                         <div class="form-input">
                             <label for="pass">Password</label>
-                            <input type="password" id="pass" name="password" value="" placeholder="" required minlength="3"/>
+                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="Password" required minlength="3"/>
                         </div>
-
                         <button class="btn" type="submit" name="login">Login</button>
                     </form>
                     <div class="copy-right text-center">

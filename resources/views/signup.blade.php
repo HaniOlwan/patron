@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-input">
                             <label for="pass">Password</label>
-                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="" required minlength="3"/>
+                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="Password" required minlength="3"/>
                         </div>
                         <label for="rule">Account Rule</label>
                         <div class="custom-control custom-radio custom-control-inline">
