@@ -33,6 +33,4 @@ Route::post('/signup', [RegisterController::class, 'store']);
 Route::get('/signin', [LoginController::class, 'login']);
 Route::post('/signin', [LoginController::class, 'authenticate']);
 
-
-
-
+Route::get('/logout', [UserContoller::class, 'logout'])->middleware('auth');

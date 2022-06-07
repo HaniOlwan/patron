@@ -93,7 +93,7 @@
                     <div class="col">
                         <div class="hero hero-dashboard">
                             <div class="layout">
-                                <h3>Hi <span>Teacher</span></h3>
+                                <h3>Hi <span>{{session()->get('name')}}</span></h3>
                                 <p>we wish you having a good day.</p>
                             </div>
                         </div>
