@@ -47,7 +47,7 @@
                                 analyzed feedback about the answers of the students.
                             </p>
                             <h5>Does not have account yet?</h5>
-                            <a href="signup.php" class="read-more-1 btn">Register now</a>
+                            <a href="/signup" class="read-more-1 btn">Register now</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-input">
                             <label for="pass">Password</label>
-                            <input type="password" id="pass" name="password" value="" placeholder="" required />
+                            <input type="password" id="pass" name="password" value="" placeholder="" required minlength="3"/>
                         </div>
 
                         <button class="btn" type="submit" name="login">Login</button>

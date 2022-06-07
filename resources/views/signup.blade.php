@@ -46,7 +46,7 @@
                                 analyzed feedback about the answers of the students.
                             </p>
                             <h5>Already have account?</h5>
-                            <a href="login.php" class="read-more-1 btn">Login</a>
+                            <a href="/signin" class="read-more-1 btn">Login</a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-input">
                             <label for="pass">Password</label>
-                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="" required />
+                            <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="" required minlength="3"/>
                         </div>
                         <label for="rule">Account Rule</label>
                         <div class="custom-control custom-radio custom-control-inline">
