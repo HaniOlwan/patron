@@ -34,3 +34,5 @@ Route::get('/signin', [LoginController::class, 'login']);
 Route::post('/signin', [LoginController::class, 'authenticate']);
 
 
+
+
