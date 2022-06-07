@@ -34,7 +34,11 @@ class UserContoller extends Controller
                 'password' =>   Hash::make($request->password),
                 'rule' =>   $request->rule,
             ]);
-            return redirect('/');
+            if ($request->rule === 'teacher') {
+                return redirect('/teacher');
+            } else {
+                return redirect('/student');
+            }
         } catch (Exception $e) {
             return back()->withInput($request->all)->with('error', 'User already exists!');
         }
