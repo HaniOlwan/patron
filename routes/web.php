@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UserContoller;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,17 +18,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/teacher', function () {
-    return view('teacher');
-});
-Route::get('/student', function () {
-    return view('student');
-});
-
 Route::get('/signup', [RegisterController::class, 'signup']);
 Route::post('/signup', [RegisterController::class, 'store']);
 
-Route::get('/signin', [LoginController::class, 'login']);
-Route::post('/signin', [LoginController::class, 'authenticate']);
+Route::get('/signin', [SessionController::class, 'login']);
+Route::post('/signin', [SessionController::class, 'authenticate']);
 
+Route::get('/logout', [SessionController::class, 'logout']);
+
+
+Route::group(['middleware' => ['student']], function () {
+    // all students routes goes here
+    Route::get('/student',  function () {
+        return view('student');
+    });
+});
+
+
+Route::group(['middleware' => ['teacher']], function () {
+    // all teacher routes goes here
+    Route::get('/teacher',  function () {
+        return view('teacher');
+    });
+});
 
