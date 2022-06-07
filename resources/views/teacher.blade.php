@@ -35,7 +35,7 @@
 
                 <a href="teacher-profile.php?id=1">
                     <i class="far fa-user-circle"></i>
-                    <span>Teacher Name</span>
+                    <span>{{session()->get('name')}}</span>
                 </a>
 
                 <ul class="cd-nav__sub-list">
