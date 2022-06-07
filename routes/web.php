@@ -38,4 +38,9 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/teacher',  function () {
         return view('teacher.dashboard');
     });
+
+    Route::get('/teacher/subjects',  function () {
+        return view('teacher.subjects');
+    });
+
 });

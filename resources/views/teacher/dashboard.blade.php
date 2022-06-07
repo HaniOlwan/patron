@@ -61,7 +61,7 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">@yield('subject_count')</span></a>
+                    <a href="/teacher/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">@yield('subject_count')</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
@@ -71,7 +71,7 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/quizzez"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">@yield('quiz_count')</span></a>
+                    <a href="/teacher/quizzez"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">@yield('quiz_count')</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/view-quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
@@ -79,7 +79,7 @@
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
+                    <a href="/teacher/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
 
 
                 </li>
