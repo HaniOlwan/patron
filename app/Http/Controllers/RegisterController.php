@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 
 class RegisterController extends Controller
@@ -32,10 +33,12 @@ class RegisterController extends Controller
                 'password' =>   Hash::make($request->password),
                 'rule' =>   $request->rule,
             ]);
+            $name = Auth::user()->first_name . " " . Auth::user()->last_name;
+
             if ($request->rule === 'teacher') {
-                return redirect('/teacher');
+                return redirect()->intended('teacher')->with('name', $name);
             } else {
-                return redirect('/student');
+                return redirect()->intended('student')->with('name', $name);
             }
         } catch (Exception $e) {
             return back()->withInput($request->all)->with('error', 'User already exists!');
