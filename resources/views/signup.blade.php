@@ -57,13 +57,16 @@
                     </div>
                     <form action="/signup" method="post" class="signin-form">
                         @csrf
+                        @if(session()->has('error'))
                         <div class="alert alert-danger" role="alert">
                             <i class="far fa-times-circle"></i>
+                            {{ session()->get('error') }}
                         </div>
-                        <div class="alert alert-success" role="alert">
+                        @endif
+                        <!-- Success Message -->
+                        <!-- <div class="alert alert-success" role="alert">
                             <i class="far fa-check-circle"></i>
-                            <!--  echo $success; ?> -->
-                        </div>
+                        </div> -->
                         <div class="form-input">
                             <label for="fn">First Name</label>
                             <input type="text" id="fn" name="first_name" value=" echo $first_name; ?>" placeholder="" required />
