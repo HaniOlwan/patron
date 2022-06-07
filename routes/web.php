@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserContoller;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,10 @@ Route::get('/student', function () {
     return view('student');
 });
 
-Route::get('/signup', [UserContoller::class, 'index']);
+Route::get('/signup', [UserContoller::class, 'signup']);
 Route::post('/signup', [UserContoller::class, 'store']);
+
+Route::get('/signin', [LoginController::class, 'login']);
+Route::post('/signin', [LoginController::class, 'authenticate']);
+
 

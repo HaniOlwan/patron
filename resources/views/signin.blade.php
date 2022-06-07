@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Patron - Signup</title>
+    <title>Patron - Login</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
@@ -24,6 +24,7 @@
     </script>
     <!-- //Meta tag Keywords -->
     <!--/Style-CSS -->
+    <!--    <link rel="stylesheet" href="css/bootstrap.css">-->
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/sign_style.css') }}" type="text/css" media="all" />
     <!--//Style-CSS -->
@@ -34,28 +35,28 @@
     <section class="w3l-login-6">
         <div class="login-hny">
             <div class="form-content">
-                <div class="form-right ">
+                <div class="form-right">
                     <div class="overlay">
                         <div class="grid-info-form">
                             <h2><a href="index.php">PATRON</a></h2>
-                            <h3>CREATE ACCOUNT</h3>
+                            <h3>LOGIN</h3>
                             <p>
                                 Patron is an platform that provides integrated,
                                 educational-leading technology that enables teachers to make
                                 an online quiz to their students in a modern way and get
                                 analyzed feedback about the answers of the students.
                             </p>
-                            <h5>Already have account?</h5>
-                            <a href="/signin" class="read-more-1 btn">Login</a>
+                            <h5>Does not have account yet?</h5>
+                            <a href="/signup" class="read-more-1 btn">Register now</a>
                         </div>
                     </div>
                 </div>
                 <div class="form-left">
                     <div class="middle">
-                        <h4>Join Us</h4>
-                        <p>Create Your Account, It's Free.</p>
+                        <h4>Login</h4>
+                        <p>Patron wishes you a good day.</p>
                     </div>
-                    <form action="/signup" method="post" class="signin-form">
+                    <form action="/signin" method="post" class="signin-form">
                         @csrf
                         @if(session()->has('error'))
                         <div class="alert alert-danger" role="alert">
@@ -63,18 +64,6 @@
                             {{ session()->get('error') }}
                         </div>
                         @endif
-                        <!-- Success Message -->
-                        <!-- <div class="alert alert-success" role="alert">
-                            <i class="far fa-check-circle"></i>
-                        </div> -->
-                        <div class="form-input">
-                            <label for="fn">First Name</label>
-                            <input type="text" id="fn" name="first_name" value="{{old('first_name')}}" placeholder="eg. John" required />
-                        </div>
-                        <div class="form-input">
-                            <label for="ln">Last Name</label>
-                            <input type="text" id="ln" name="last_name" value="{{old('last_name')}}" placeholder="eg. Doe" required />
-                        </div>
                         <div class="form-input">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="example@exp.com" required />
@@ -83,15 +72,7 @@
                             <label for="pass">Password</label>
                             <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="Password" required minlength="3"/>
                         </div>
-                        <label for="rule">Account Rule</label>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="teacher" name="rule" value="teacher" class="custom-control-input" required />
-                            <label class="custom-control-label radio" for="teacher">Teacher</label>
-                            <input type="radio" id="student" name="rule" value="student" class="custom-control-input" required />
-                            <label class="custom-control-label radio" for="student">Student</label>
-                        </div>
-
-                        <button class="btn" type="submit" name="signin">Create account</button>
+                        <button class="btn" type="submit" name="login">Login</button>
                     </form>
                     <div class="copy-right text-center">
                         <p>
@@ -103,6 +84,7 @@
             </div>
         </div>
     </section>
+    <!-- //sginup-section -->
 
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
