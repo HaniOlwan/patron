@@ -16,7 +16,7 @@ class UserContoller extends Controller
     {
         return view('signup');
     }
-    
+
 
     function store(Request $request)
     {
@@ -45,8 +45,5 @@ class UserContoller extends Controller
         }
     }
 
-    function signin()
-    {
-        return view('signin');
-    }
+   
 }
