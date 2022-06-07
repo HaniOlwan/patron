@@ -6,8 +6,10 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
-class LoginController extends Controller
+
+class SessionController extends Controller
 {
     function login()
     {
@@ -31,5 +33,14 @@ class LoginController extends Controller
         } else {
             return back()->with('error', 'The provided credentials do not match our records.')->onlyInput('email');
         }
+    }
+    
+    function logout()
+    {
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('signin');
     }
 }
