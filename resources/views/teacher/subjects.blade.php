@@ -48,11 +48,11 @@
 
                         <tr>
                             <td scope="row">subject_number</td>
-                            <td scope="col"><a href="view-subject.php?subject_id=$row['id']; ?>">$row['subject_title'];</a></td>
-                            <td scope="col">$row['subject_id']; </td>
-                            <td scope="col">echo $subject_code; ?></td>
-                            <td scope="col"><a href="view-subject.php?subject_id= echo $row['id']; ?>#students"> echo $students_count; ?></a></td>
-                            <td scope="col"><i class="echo $class; "></i>echo $row['status']; ?></td>
+                            <td scope="col"><a href="">title</a></td>
+                            <td scope="col">id</td>
+                            <td scope="col">code</td>
+                            <td scope="col"><a href="view-subject.php?subject_id= echo $row['id']; ?>#students">std count</a></td>
+                            <td scope="col"><i class=""></i>status</td>
                             <td scope="col"><a href="edit-subject.php?subject_id= echo $row['id']; ?>"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col">
                                 <a onclick="return confirm('Are you sure deleting subject  echo  ? \nBy deleting the subject everything related to this subject will be deleted such as topics, questions and quizzes, and you will not be able to recover this data anymore!')" href="subjects.php?delete= echo $row['id']; ?>">
