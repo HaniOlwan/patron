@@ -14,7 +14,7 @@
             </div>
             -->
             <div class="col-sm-12 col-lg-4 text-right">
-                <a href="create-subject.php">Create new subject</a>
+                <a href="/teacher/create-subject">Create new subject</a>
             </div>
         </div>
         <div class="row">

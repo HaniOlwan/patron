@@ -44,4 +44,8 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/teacher/subjects',  function () {
         return view('teacher.subjects');
     });
+
+    Route::get('/teacher/create-subject',  function () {
+        return view('teacher.create-subject');
+    });
 });
