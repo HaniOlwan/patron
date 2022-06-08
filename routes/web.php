@@ -47,5 +47,5 @@ Route::group(['middleware' => ['teacher']], function () {
     });
 
     Route::get('/teacher/create-subject', [SubjectContoller::class, 'index']);
-    Route::post('/teacher/create-subject', [SubjectContoller::class, 'store']);
+    Route::post('/teacher/create-subject', [SubjectContoller::class, 'create']);
 });
