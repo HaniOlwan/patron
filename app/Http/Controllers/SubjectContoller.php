@@ -21,16 +21,14 @@ class SubjectContoller extends Controller
                 'title' => 'required',
                 'subject_id' => 'required',
                 'description' => "required",
-                'code' => "required",
                 'status' => 'required'
             ]);
-            $teacher_id = Auth::user()->id;
 
             $subject = Subject::create([
-                'teacher_id' => $teacher_id,
+                'teacher_id' => Auth::user()->id,
                 'title' => $validatedCredentials["title"],
                 'subject_id' => $validatedCredentials["subject_id"],
-                'code' => $validatedCredentials["description"],
+                'code' => rand(1000, 9999),
                 'description' => $validatedCredentials["description"],
                 'status' => $validatedCredentials["status"],
             ]);

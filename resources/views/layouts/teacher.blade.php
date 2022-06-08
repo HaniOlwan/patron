@@ -93,7 +93,6 @@
                         <div class="hero hero-dashboard">
                             <div class="layout">
                                 @yield('header')
-                               
                             </div>
                         </div>
 
