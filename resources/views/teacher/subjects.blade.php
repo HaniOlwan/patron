@@ -1,18 +1,7 @@
+@extends('layouts.teacher')
+@section('content')
 <div class="cd-content-wrapper">
-    <!-- main content here -->
-    <div class="container-fluid no-gutters">
-        <div class="row no-gutters">
-            <div class="col">
-                <div class="hero hero-subject">
-                    <div class="layout">
-                        <h3>Subjects</h3>
 
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="add row justify-content-end">
             <!--
@@ -34,13 +23,13 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- echo $error; -->
+                    error message
                 </div>
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- error here    -->
+                    success message
                 </div>
                 <table class="table table-striped">
                     <thead>
@@ -75,5 +64,6 @@
             </div>
         </div>
     </div>
-</div> <!-- .cd-content-wrapper -->
-</main> <!-- .cd-main-content -->
+</div>
+
+@endsection

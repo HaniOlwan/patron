@@ -33,6 +33,8 @@ Route::group(['middleware' => ['student']], function () {
     });
 });
 
+
+
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
     Route::get('/teacher',  function () {
@@ -42,5 +44,4 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/teacher/subjects',  function () {
         return view('teacher.subjects');
     });
-
 });
