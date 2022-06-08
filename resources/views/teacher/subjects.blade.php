@@ -1,6 +1,22 @@
 @extends('layouts.teacher')
+@section('title','Subjects')
 @section('content')
 <div class="cd-content-wrapper">
+    @section('header')
+    <div class="container-fluid no-gutters">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="hero hero-subject">
+                    <div class="layout">
+                        <h3>Subjects</h3>
+
+                    </div>
+
+                </div>withTitle
+            </div>
+        </div>
+    </div>
+    @endsection
 
     <div class="container">
         <div class="add row justify-content-end">

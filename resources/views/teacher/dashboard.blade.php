@@ -1,4 +1,10 @@
-@extends('layouts.teacher-layout')
+@extends('layouts.teacher')
+@section('header')
+@if(Auth::user())
+<h3>Hi <span>{{Auth::user()->first_name}}</span></h3>
+<p>we wish you having a good day.</p>
+@endif
+@endsection
 @section('content')
 <div class="container">
     <div class="row">

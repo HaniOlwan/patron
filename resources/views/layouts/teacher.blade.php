@@ -92,10 +92,8 @@
                     <div class="col">
                         <div class="hero hero-dashboard">
                             <div class="layout">
-                                @if(Auth::user())
-                                <h3>Hi <span>{{Auth::user()->first_name}}</span></h3>
-                                <p>we wish you having a good day.</p>
-                                @endif
+                                @yield('header')
+                               
                             </div>
                         </div>
 
