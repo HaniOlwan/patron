@@ -21,21 +21,19 @@ class SubjectContoller extends Controller
                 'title' => 'required',
                 'subject_id' => 'required',
                 'description' => "required",
-                'status' => 'required'
+                'private' => 'required'
             ]);
-
             $subject = Subject::create([
                 'teacher_id' => Auth::user()->id,
                 'title' => $validatedCredentials["title"],
                 'subject_id' => $validatedCredentials["subject_id"],
                 'code' => rand(1000, 9999),
                 'description' => $validatedCredentials["description"],
-                'status' => $validatedCredentials["status"],
+                'private' => $validatedCredentials["private"],
             ]);
-
-            dd("Success");
+            return back()->with('success', 'Subject created successfully.');
         } catch (Exception $e) {
-            dd($e->getMessage());
+            return back()->with('error','Could not create subject.');
         }
     }
 }

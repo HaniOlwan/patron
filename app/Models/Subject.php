@@ -15,6 +15,6 @@ class Subject extends Model
         'subject_id',
         'code',
         'description',
-        'status'
+        'private'
     ];
 }

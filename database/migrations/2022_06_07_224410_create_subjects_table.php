@@ -18,7 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->string('title');
             $table->string('subject_id');
             $table->string('code');
-            $table->string('status');
+            $table->string('private');
             $table->string('description');
             $table->bigInteger('teacher_id')->unsigned()->index()->nullable();
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
