@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SubjectContoller;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,6 @@ Route::group(['middleware' => ['teacher']], function () {
         return view('teacher.subjects');
     });
 
-    Route::get('/teacher/create-subject',  function () {
-        return view('teacher.create-subject');
-    });
+    Route::get('/teacher/create-subject', [SubjectContoller::class, 'index']);
+    Route::post('/teacher/create-subject', [SubjectContoller::class, 'store']);
 });
