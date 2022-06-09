@@ -17,12 +17,10 @@ class SubjectContoller extends Controller
     function create(Request $request)
     {
         try {
-            dd($request->all());
             $validatedCredentials = $request->validate([
                 'title' => 'required',
                 'subject_id' => 'required',
                 'description' => "required",
-                'private' => 'required'
             ]);
             $subject = Subject::create([
                 'teacher_id' => Auth::user()->id,
@@ -30,7 +28,7 @@ class SubjectContoller extends Controller
                 'subject_id' => $validatedCredentials["subject_id"],
                 'code' => rand(1000, 9999),
                 'description' => $validatedCredentials["description"],
-                'private' => $validatedCredentials["private"],
+                'private' => $request->private ? true : false,
             ]);
             return back()->with('success', 'Subject created successfully.');
         } catch (Exception $e) {
