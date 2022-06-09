@@ -43,13 +43,13 @@
                     <div class="form-group row">
                         <label for="Subject-title" class="col-sm-2 col-form-label">Subject title</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="title" value="title" id="Subject-title" required>
+                            <input type="text" class="form-control" name="title" id="Subject-title" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Subject-id" class="col-sm-2 col-form-label">Subject id</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="subject_id" value="id" id="Subject-id" required>
+                            <input type="text" class="form-control" name="subject_id" id="Subject-id" required>
                         </div>
                     </div>
                     <div class="form-group row">

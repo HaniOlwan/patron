@@ -33,7 +33,8 @@ class SubjectContoller extends Controller
             ]);
             return back()->with('success', 'Subject created successfully.');
         } catch (Exception $e) {
-            return back()->with('error','Could not create subject.');
+            dd($e);
+            return back()->with('error', 'Could not create subject.');
         }
     }
 }
