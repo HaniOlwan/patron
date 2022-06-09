@@ -56,9 +56,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count = 1;
+                        @endphp
                         @foreach($subjects as $subject )
                         <tr>
-                            <td scope="row"></td>
+                            <td scope="row">{{$row_count++}}</td>
                             <td scope="col"><a href="view-subject.php?subject_id= echo $row['id']; ?>">{{$subject->title}}</a></td>
                             <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
