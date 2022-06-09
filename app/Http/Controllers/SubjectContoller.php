@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,9 +32,8 @@ class SubjectContoller extends Controller
                 'private' => $request->private ? true : false,
             ]);
             return redirect('/teacher/subjects')->with('success', 'Subject created successfully.');
-        } catch (Exception $e) {
-            dd($e);
-            return redirect('/teacher/subjects')->with('error', 'Could not create subject.');
+        } catch (QueryException $qe) {
+            return redirect('/teacher/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
         }
     }
 }
