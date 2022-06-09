@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SubjectContoller;
+use App\Models\Subject;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +37,15 @@ Route::group(['middleware' => ['student']], function () {
     });
 });
 
+
+
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
     Route::get('/teacher',  function () {
         return view('teacher.dashboard');
     });
+
+    Route::get('/teacher/subjects', [SubjectContoller::class, 'index']);
+    Route::get('/teacher/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
+    Route::post('/teacher/create-subject', [SubjectContoller::class, 'createSubject']);
 });
