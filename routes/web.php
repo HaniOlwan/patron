@@ -3,6 +3,9 @@
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
+use App\Models\Subject;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +46,9 @@ Route::group(['middleware' => ['teacher']], function () {
     });
 
     Route::get('/teacher/subjects',  function () {
-        return view('teacher.subjects');
+        $id = Auth::user()->id;
+        $subjects = User::find($id)->subjects;
+        return view('teacher.subjects', ['subjects' => $subjects]);
     });
 
     Route::get('/teacher/create-subject', [SubjectContoller::class, 'index']);

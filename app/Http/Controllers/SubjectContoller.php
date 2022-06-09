@@ -24,7 +24,7 @@ class SubjectContoller extends Controller
                 'description' => "required",
             ]);
             $subject = Subject::create([
-                'teacher_id' => Auth::user()->id,
+                'user_id' => Auth::user()->id,
                 'title' => $validatedCredentials["title"],
                 'subject_id' => $validatedCredentials["subject_id"],
                 'code' => rand(1000, 9999),

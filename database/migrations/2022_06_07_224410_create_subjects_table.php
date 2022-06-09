@@ -20,8 +20,8 @@ class CreateSubjectsTable extends Migration
             $table->string('code');
             $table->string('private');
             $table->string('description');
-            $table->bigInteger('teacher_id')->unsigned()->index()->nullable();
-            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
