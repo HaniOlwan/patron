@@ -30,10 +30,10 @@ class SubjectContoller extends Controller
                 'description' => $validatedCredentials["description"],
                 'private' => $request->private ? true : false,
             ]);
-            return back()->with('success', 'Subject created successfully.');
+            return redirect('/teacher/subjects')->with('success', 'Subject created successfully.');
         } catch (Exception $e) {
             dd($e);
-            return back()->with('error', 'Could not create subject.');
+            return redirect('/teacher/subjects')->with('error', 'Could not create subject.');
         }
     }
 }

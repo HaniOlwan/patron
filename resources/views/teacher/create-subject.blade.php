@@ -24,22 +24,6 @@
             <div class="col ">
                 <form action="/teacher/create-subject" method="post">
                     @csrf
-                    @if(session()->has('error'))
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ session()->get('error') }}
-                    </div>
-                    @endif
-                    @if(session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ session()->get('success') }}
-                    </div>
-                    @endif
                     <div class="form-group row">
                         <label for="Subject-title" class="col-sm-2 col-form-label">Subject title</label>
                         <div class="col-sm-10">
