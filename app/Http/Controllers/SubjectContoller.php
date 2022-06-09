@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -10,12 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectContoller extends Controller
 {
+
     function index()
+    {
+        $user_id = Auth::user()->id;
+        $subjects = User::find($user_id)->subjects;
+        return view('teacher.subjects', ['subjects' => $subjects]);
+    }
+
+    function viewCreateSubject()
     {
         return view('teacher.create-subject');
     }
 
-    function create(Request $request)
+    function createSubject(Request $request)
     {
         try {
             $validatedCredentials = $request->validate([

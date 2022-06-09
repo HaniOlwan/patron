@@ -45,12 +45,7 @@ Route::group(['middleware' => ['teacher']], function () {
         return view('teacher.dashboard');
     });
 
-    Route::get('/teacher/subjects',  function () {
-        $id = Auth::user()->id;
-        $subjects = User::find($id)->subjects;
-        return view('teacher.subjects', ['subjects' => $subjects]);
-    });
-
-    Route::get('/teacher/create-subject', [SubjectContoller::class, 'index']);
-    Route::post('/teacher/create-subject', [SubjectContoller::class, 'create']);
+    Route::get('/teacher/subjects', [SubjectContoller::class, 'index']);
+    Route::get('/teacher/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
+    Route::post('/teacher/create-subject', [SubjectContoller::class, 'createSubject']);
 });
