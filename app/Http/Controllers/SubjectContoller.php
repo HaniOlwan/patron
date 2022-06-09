@@ -17,6 +17,7 @@ class SubjectContoller extends Controller
     function create(Request $request)
     {
         try {
+            dd($request->all());
             $validatedCredentials = $request->validate([
                 'title' => 'required',
                 'subject_id' => 'required',

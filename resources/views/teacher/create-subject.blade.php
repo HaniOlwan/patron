@@ -62,7 +62,7 @@
                         <label for="Privacy" class="col-sm-2 col-form-label">Privacy</label>
                         <div class="col-sm-10">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" name="private" id="private" checked>
+                                <input type="checkbox" class="custom-control-input" name="private" value="private" id="private" checked>
                                 <label class="custom-control-label" for="private">Private</label>
                                 <span>*Private means students can join subject only via subject join code, else any student can join subject.</span>
                             </div>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group row ">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" name="create" class="btn btn-primary">Create Subject</button>
+                            <button type="submit" class="btn btn-primary">Create Subject</button>
                         </div>
                     </div>
                 </form>
