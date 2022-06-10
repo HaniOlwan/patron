@@ -68,11 +68,32 @@
                             <td scope="col"><a href="view-subject/{{$subject->subject_id}}/students">particapants</a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
                             <td scope="col"><a href="edit-subject/{{$subject->subject_id}}"><i class="fas fa-pencil-alt"></i></a></td>
-                            <td scope="col"><a onclick="return confirm('Are you sure deleting subject ? \nBy deleting the subject everything related to this subject will be deleted such as topics, questions and quizzes, and you will not be able to recover this data anymore!')" href="/subjects/{{$subject->subject_id}}"><i class="fas fa-trash-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt" type="button" data-toggle="modal" data-target="#myModal"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE5CD;</i>
+                </div>
+                <h4 class="modal-title w-100">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>
