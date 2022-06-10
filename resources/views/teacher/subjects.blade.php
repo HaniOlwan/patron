@@ -86,10 +86,43 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger active">Delete</button>
+                <button id="delete_record" type="button" class="btn btn-danger active">Delete</button>
             </div>
         </div>
     </div>
 </div>
+<meta name="_token" content="{{ csrf_token() }}">
+
+
+
+<script>
+    const deleteButton = document.querySelector('#delete_record');
+    const token = document.querySelector('meta[name="_token"]').content;
+
+
+    deleteButton.addEventListener('click', () => {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+        });
+
+        $.ajax({
+            url: '{{ URL::to("/teacher") }}' + subject_id,
+            data: {
+                subject_id
+            },
+            type: 'DELETE',
+            success: function(result) {
+                console.log("Record delete")
+            },
+            error: function(result) {
+                console.log("Some error occured")
+
+            }
+        });
+    })
+</script>
 
 @endsection

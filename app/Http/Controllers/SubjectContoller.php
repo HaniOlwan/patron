@@ -45,4 +45,9 @@ class SubjectContoller extends Controller
             return redirect('/teacher/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
         }
     }
+
+    function deleteSubject()
+    {
+        print_r("Congrats youre in delete");
+    }
 }

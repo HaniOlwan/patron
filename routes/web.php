@@ -48,4 +48,6 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/teacher/subjects', [SubjectContoller::class, 'index']);
     Route::get('/teacher/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
     Route::post('/teacher/create-subject', [SubjectContoller::class, 'createSubject']);
+    Route::delete('/teacher', [SubjectContoller::class, 'deleteSubject']);
+
 });
