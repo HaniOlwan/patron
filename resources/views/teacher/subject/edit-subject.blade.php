@@ -9,12 +9,9 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3>Create Subject</h3>
-
+                        <h3>Edit Subject</h3>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -62,7 +59,7 @@
                     </div>
                     <div class="form-group row ">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-primary">Create Subject</button>
+                            <button type="submit" class="btn btn-primary">Edit Subject</button>
                         </div>
                     </div>
                 </form>

@@ -21,7 +21,7 @@ class SubjectContoller extends Controller
 
     function viewCreateSubject()
     {
-        return view('teacher.create-subject');
+        return view('teacher.subject.create-subject');
     }
 
     function createSubject(Request $request)
