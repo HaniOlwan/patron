@@ -49,4 +49,5 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
     Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
+    Route::put('/subject/{id}', [SubjectContoller::class, 'edit']);
 });
