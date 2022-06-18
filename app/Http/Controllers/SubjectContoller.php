@@ -46,8 +46,11 @@ class SubjectContoller extends Controller
         }
     }
 
-    function deleteSubject()
+    function deleteSubject($id)
     {
-        print_r("Congrats youre in delete");
+        $subject = Subject::query()->whereSubjectId($id)->first();
+        if(!$subject) return response()->json(['success'=>false ], 404);
+        
+        return response()->json(['success'=> $subject->delete()], 200);
     }
 }

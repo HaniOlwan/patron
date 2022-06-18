@@ -68,7 +68,7 @@
                             <td scope="col"><a href="view-subject/{{$subject->subject_id}}/students">particapants</a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
                             <td scope="col"><a href="edit-subject/{{$subject->subject_id}}"><i class="fas fa-pencil-alt"></i></a></td>
-                            <td scope="col"><a><i class="fas fa-trash-alt" type="button" data-toggle="modal" data-target="#myModal"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-subject-id="{{ $subject->subject_id }}"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -86,7 +86,7 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="delete_record" type="button" class="btn btn-danger active">Delete</button>
+                <button type="button" class="btn btn-danger active delete_record">Delete</button>
             </div>
         </div>
     </div>
@@ -96,32 +96,37 @@
 
 
 <script>
-    const deleteButton = document.querySelector('#delete_record');
     const token = document.querySelector('meta[name="_token"]').content;
 
+    const deleteButton = document.querySelector('.delete_record');
 
-    deleteButton.addEventListener('click', () => {
+    const deleteIcon = document.querySelector('.delete_icon');
+    deleteIcon.addEventListener('click', (e) => {
+        var selectedId = e.target.getAttribute('data-subject-id');
+        deleteButton.setAttribute('data-subject-id', selectedId);
+    })
 
+    deleteButton.addEventListener('click', (e) => {
+        const subject_id = e.target.getAttribute('data-subject-id');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': token
             },
         });
 
-        $.ajax({
-            url: '{{ URL::to("/teacher") }}' + subject_id,
-            data: {
-                subject_id
-            },
-            type: 'DELETE',
-            success: function(result) {
-                console.log("Record delete")
-            },
-            error: function(result) {
-                console.log("Some error occured")
+        // $.ajax({
+        //     url: '{{ URL::to("/teacher/subject") }}/' + subject_id,
+        //     type: 'DELETE',
+        //     success: function(result) {
+        //         if (result.success) {
+        //             window.location.reload();
+        //         }
+        //     },
+        //     error: function(result) {
+        //         console.log("Some error occured")
 
-            }
-        });
+        //     }
+        // });
     })
 </script>
 
