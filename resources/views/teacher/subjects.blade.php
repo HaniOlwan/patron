@@ -114,19 +114,19 @@
             },
         });
 
-        // $.ajax({
-        //     url: '{{ URL::to("/teacher/subject") }}/' + subject_id,
-        //     type: 'DELETE',
-        //     success: function(result) {
-        //         if (result.success) {
-        //             window.location.reload();
-        //         }
-        //     },
-        //     error: function(result) {
-        //         console.log("Some error occured")
+        $.ajax({
+            url: '{{ URL::to("/teacher/subject") }}/' + subject_id,
+            type: 'DELETE',
+            success: function(result) {
+                if (result.success) {
+                    window.location.reload();
+                }
+            },
+            error: function(result) {
+                console.log("Some error occured")
 
-        //     }
-        // });
+            }
+        });
     })
 </script>
 

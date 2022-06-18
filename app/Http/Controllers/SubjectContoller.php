@@ -46,7 +46,7 @@ class SubjectContoller extends Controller
         }
     }
 
-    function deleteSubject($id)
+    function destory($id)
     {
         $subject = Subject::query()->whereSubjectId($id)->first();
         if(!$subject) return response()->json(['success'=>false ], 404);
