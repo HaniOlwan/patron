@@ -45,4 +45,12 @@ class SubjectContoller extends Controller
             return redirect('/teacher/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
         }
     }
+
+    function destory($id)
+    {
+        $subject = Subject::query()->whereSubjectId($id)->first();
+        if(!$subject) return response()->json(['success'=>false ], 404);
+        
+        return response()->json(['success'=> $subject->delete()], 200);
+    }
 }

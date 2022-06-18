@@ -39,13 +39,14 @@ Route::group(['middleware' => ['student']], function () {
 
 
 
-Route::group(['middleware' => ['teacher']], function () {
+Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     // all teacher routes goes here
-    Route::get('/teacher',  function () {
+    Route::get('/',  function () {
         return view('teacher.dashboard');
     });
 
-    Route::get('/teacher/subjects', [SubjectContoller::class, 'index']);
-    Route::get('/teacher/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
-    Route::post('/teacher/create-subject', [SubjectContoller::class, 'createSubject']);
+    Route::get('/subjects', [SubjectContoller::class, 'index']);
+    Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
+    Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
+    Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
 });
