@@ -38,12 +38,13 @@ Route::group(['middleware' => ['student']], function () {
 });
 
 
+Route::get('/dashboard',  function () {
+    return view('teacher.dashboard');
+});
 
-Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
+Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
-    Route::get('/',  function () {
-        return view('teacher.dashboard');
-    });
+
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
