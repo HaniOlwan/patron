@@ -51,8 +51,5 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
 
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
-
-
-
-    // Route::patch('/subject/{id}', [SubjectContoller::class, 'update'])->name('subject.update');
+    Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
 });

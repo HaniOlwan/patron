@@ -60,4 +60,22 @@ class SubjectContoller extends Controller
         $subject = Subject::query()->whereSubjectId($request->id)->first();
         return view('teacher.subject.edit-subject', ['subject' => $subject]);
     }
+
+    function update(Request $request)
+    {
+        $validatedCredentials = $request->validate([
+            'title' => 'required',
+            'subject_id' => 'required',
+            'description' => "required",
+        ]);
+
+        Subject::query()->whereSubjectId($request->id)->first()->update(
+            [
+                $validatedCredentials,
+                'private' => $request->private ? true : false,
+            ]
+        );
+
+        return redirect('/teacher/subjects')->with('success', 'Subject created successfully.');
+    }
 }

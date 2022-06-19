@@ -22,8 +22,9 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form action="/teacher/create-subject" method="post">
+                <form action="/teacher/edit-subject/{{ $subject->subject_id }}" method="post">
                     @csrf
+                    @method('PATCH')
                     @if(session()->has('error'))
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
