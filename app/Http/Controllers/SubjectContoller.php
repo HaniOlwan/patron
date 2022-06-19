@@ -16,7 +16,7 @@ class SubjectContoller extends Controller
     {
         $user_id = Auth::user()->id;
         $subjects = User::find($user_id)->subjects;
-        return view('teacher.subjects', ['subjects' => $subjects]);
+        return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
     function viewCreateSubject()
@@ -54,8 +54,10 @@ class SubjectContoller extends Controller
         return response()->json(['success' => $subject->delete()], 200);
     }
 
-    function edit($id)
+
+    function viewEditSubject(Request $request)
     {
-        return null;
+        $subject = Subject::query()->whereSubjectId($request->id)->first();
+        return view('teacher.subject.edit-subject', ['subject' => $subject]);
     }
 }
