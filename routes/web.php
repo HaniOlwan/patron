@@ -45,7 +45,6 @@ Route::get('/dashboard',  function () {
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
 
-
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
     Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
