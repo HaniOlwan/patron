@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="cd-content-wrapper">
-    <!-- main content here -->
     @section('header')
     <div class="container-fluid no-gutters">
         <div class="row no-gutters">

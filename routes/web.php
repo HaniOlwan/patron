@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
@@ -52,4 +53,7 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
+
+    Route::get('/quizzes', [QuizController::class, 'index']);
+
 });
