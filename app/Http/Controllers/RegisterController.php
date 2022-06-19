@@ -33,7 +33,9 @@ class RegisterController extends Controller
                 'password' =>   Hash::make($request->password),
                 'rule' =>   $request->rule,
             ]);
-            
+
+            auth()->login($user);
+
             if ($request->rule === 'teacher') {
                 return redirect()->intended('teacher');
             } else {
