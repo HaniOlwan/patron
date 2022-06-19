@@ -71,7 +71,9 @@ class SubjectContoller extends Controller
 
         Subject::query()->whereSubjectId($request->id)->first()->update(
             [
-                $validatedCredentials,
+                'title' => $validatedCredentials['title'],
+                'subject_id' => $validatedCredentials['subject_id'],
+                'description' => $validatedCredentials['description'],
                 'private' => $request->private ? true : false,
             ]
         );
