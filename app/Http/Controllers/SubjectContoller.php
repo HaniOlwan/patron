@@ -16,12 +16,12 @@ class SubjectContoller extends Controller
     {
         $user_id = Auth::user()->id;
         $subjects = User::find($user_id)->subjects;
-        return view('teacher.subjects', ['subjects' => $subjects]);
+        return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
     function viewCreateSubject()
     {
-        return view('teacher.create-subject');
+        return view('teacher.subject.create-subject');
     }
 
     function createSubject(Request $request)
@@ -49,8 +49,35 @@ class SubjectContoller extends Controller
     function destory($id)
     {
         $subject = Subject::query()->whereSubjectId($id)->first();
-        if(!$subject) return response()->json(['success'=>false ], 404);
-        
-        return response()->json(['success'=> $subject->delete()], 200);
+        if (!$subject) return response()->json(['success' => false], 404);
+
+        return response()->json(['success' => $subject->delete()], 200);
+    }
+
+
+    function viewEditSubject(Request $request)
+    {
+        $subject = Subject::query()->whereSubjectId($request->id)->first();
+        return view('teacher.subject.edit-subject', ['subject' => $subject]);
+    }
+
+    function update(Request $request)
+    {
+        $validatedCredentials = $request->validate([
+            'title' => 'required',
+            'subject_id' => 'required',
+            'description' => "required",
+        ]);
+
+        Subject::query()->whereSubjectId($request->id)->first()->update(
+            [
+                'title' => $validatedCredentials['title'],
+                'subject_id' => $validatedCredentials['subject_id'],
+                'description' => $validatedCredentials['description'],
+                'private' => $request->private ? true : false,
+            ]
+        );
+
+        return redirect('/teacher/subjects')->with('success', 'Subject edited successfully.');
     }
 }
