@@ -14,13 +14,13 @@
 
                     <div class="head">
                         <h3>Subjects</h3>
-                        <a href="subjects.php">View more ></a>
+                        <a href="/subjects">View more ></a>
                     </div>
                     <i class="dash-icon fas fa-book-open"></i>
                 </div>
                 <div class="card-body">
                     <p class="card-text">Here you can create subjects for your students, view and manage all your subjects easly.</p>
-                    <a href="create-subject.php">Create new Subject</a>
+                    <a href="/create-subject">Create new Subject</a>
                 </div>
             </div>
         </div>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="head">
                         <h3>Quizzes</h3>
-                        <a href="view-quizzes.php">View more ></a>
+                        <a href="/quizzes">View more ></a>
                     </div>
                     <i class="dash-icon fas fa-question-circle"></i>
                 </div>
                 <div class="card-body">
                     <p class="card-text">Here you can create unlimited amount of quizzes, and view all your quizzes for all your subjects.</p>
-                    <a href="view-quizzes.php">View all quizzes </a>
+                    <a href="/quizzes">View all quizzes </a>
                 </div>
             </div>
         </div>
@@ -44,13 +44,13 @@
                 <div class="card-header">
                     <div class="head">
                         <h3>Quizzes Results</h3>
-                        <a href="view-results.php">View more ></a>
+                        <a href="/results">View more ></a>
                     </div>
                     <i class="dash-icon fas fa-chart-pie"></i>
                 </div>
                 <div class="card-body">
                     <p class="card-text">Here you will get all the analysis results for all the quizzes you made for all your subjects.</p>
-                    <a href="view-results.php">View results</a>
+                    <a href="/results">View results</a>
                 </div>
             </div>
         </div>

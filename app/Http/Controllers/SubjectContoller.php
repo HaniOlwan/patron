@@ -40,9 +40,9 @@ class SubjectContoller extends Controller
                 'description' => $validatedCredentials["description"],
                 'private' => $request->private ? true : false,
             ]);
-            return redirect('/teacher/subjects')->with('success', 'Subject created successfully.');
+            return redirect('/subjects')->with('success', 'Subject created successfully.');
         } catch (QueryException $qe) {
-            return redirect('/teacher/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
+            return redirect('/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
         }
     }
 
@@ -78,6 +78,6 @@ class SubjectContoller extends Controller
             ]
         );
 
-        return redirect('/teacher/subjects')->with('success', 'Subject edited successfully.');
+        return redirect('/subjects')->with('success', 'Subject edited successfully.');
     }
 }

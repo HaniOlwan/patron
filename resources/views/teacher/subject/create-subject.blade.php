@@ -19,7 +19,7 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form action="/teacher/create-subject" method="post">
+                <form action="/create-subject" method="post">
                     @csrf
                     @if(session()->has('error'))
                     <div class="alert alert-danger" role="alert">

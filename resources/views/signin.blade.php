@@ -7,7 +7,7 @@
             <div class="form-right">
                 <div class="overlay">
                     <div class="grid-info-form">
-                        <h2><a href="index.php">PATRON</a></h2>
+                        <h2><a href="/">PATRON</a></h2>
                         <h3>LOGIN</h3>
                         <p>
                             Patron is an platform that provides integrated,
@@ -45,7 +45,7 @@
                 </form>
                 <div class="copy-right text-center">
                     <p>
-                        © 2020 <a href="index.php" target="_blank">PATRON</a>. All
+                        © 2020 <a href="/" target="_blank">PATRON</a>. All
                         rights reserved
                     </p>
                 </div>

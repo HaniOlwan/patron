@@ -18,7 +18,7 @@
 
     <header class="cd-main-header js-cd-main-header">
         <div class="cd-logo-wrapper">
-            <h1><a href="/" class="cd-logo">PATRON</a></h1>
+            <h1><a href="/dashboard" class="cd-logo">PATRON</a></h1>
         </div>
 
         <div class="cd-search js-cd-search">
@@ -33,7 +33,7 @@
 
             <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
 
-                <a href="teacher-profile.php?id=1">
+                <a href="/profile">
                     <i class="far fa-user-circle"></i>
                     <span>{{Auth::user()->first_name." ".Auth::user()->last_name}}</span>
                 </a>
@@ -55,13 +55,13 @@
             <ul class="cd-side__list js-cd-side__list">
                 <li class="cd-side__label"><span><i class="fas fa-tachometer-alt"></i> Dashboard</span></li>
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/teacher"><i class="fas fa-home"></i> Home</a>
+                    <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
 
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/teacher/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">count</span></a>
+                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">count</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
@@ -71,7 +71,7 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/teacher/quizzez"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
+                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/view-quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
@@ -79,7 +79,7 @@
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/teacher/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
+                    <a href="/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
 
 
                 </li>
@@ -111,7 +111,7 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/menu-aim.js') }}"></script>
     <script src="{{ asset('js/util.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="{{ asset('js/script.js') }}"></script>
 
 </body>
