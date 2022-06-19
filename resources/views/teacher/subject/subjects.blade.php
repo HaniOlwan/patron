@@ -21,7 +21,7 @@
     <div class="container">
         <div class="add row justify-content-end">
             <div class="col-sm-12 col-lg-4 text-right">
-                <a href="/teacher/create-subject">Create new subject</a>
+                <a href="/create-subject">Create new subject</a>
             </div>
         </div>
         <div class="row">
@@ -67,7 +67,7 @@
                             <td scope="col">{{$subject->code}}</td>
                             <td scope="col"><a href="view-subject/{{$subject->subject_id}}/students">particapants</a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
-                            <td scope="col"><a href="/teacher/edit-subject/{{$subject->subject_id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a href="/edit-subject/{{$subject->subject_id}}"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-subject-id="{{ $subject->subject_id }}"></i></a></td>
                         </tr>
                         @endforeach
@@ -115,7 +115,7 @@
         });
 
         $.ajax({
-            url: '{{ URL::to("/teacher/subject") }}/' + subject_id,
+            url: '{{ URL::to("/subject") }}/' + subject_id,
             type: 'DELETE',
             success: function(result) {
                 if (result.success) {
