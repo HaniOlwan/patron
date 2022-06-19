@@ -76,6 +76,6 @@ class SubjectContoller extends Controller
             ]
         );
 
-        return redirect('/teacher/subjects')->with('success', 'Subject created successfully.');
+        return redirect('/teacher/subjects')->with('success', 'Subject edited successfully.');
     }
 }
