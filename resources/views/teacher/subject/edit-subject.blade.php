@@ -10,6 +10,9 @@
                 <div class="hero hero-subject">
                     <div class="layout">
                         <h3>Edit Subject</h3>
+                        <h1>
+                                   
+                                </h1>
                     </div>
                 </div>
             </div>
@@ -51,7 +54,8 @@
                         <label for="Privacy" class="col-sm-2 col-form-label">Privacy</label>
                         <div class="col-sm-10">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" name="private" value="private" id="private">
+                               
+                                <input type="checkbox" class="custom-control-input" name="private" value="private" id="private" {{ $subject->private == 1 ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="private">Private</label>
                                 <span>*Private means students can join subject only via subject join code, else any student can join subject.</span>
                             </div>
