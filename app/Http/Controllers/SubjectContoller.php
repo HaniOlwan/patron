@@ -80,4 +80,10 @@ class SubjectContoller extends Controller
 
         return redirect('/subjects')->with('success', 'Subject edited successfully.');
     }
+
+    function viewSubject($id)
+    {
+        $subject = Subject::query()->whereSubjectId($id)->first();
+        return view('teacher.subject.view-subject', ['subject' => $subject]);
+    }
 }
