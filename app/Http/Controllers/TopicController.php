@@ -20,14 +20,15 @@ class TopicController extends Controller
             $validatedCredentials = $request->validate([
                 'title' => 'required',
             ]);
-            Topic::create([
-                'title' => $validatedCredentials,
+
+            $topic = Topic::create([
+                'title' => $validatedCredentials['title'],
                 'teacher_id' => $request->user()->id,
-                'subject_id' => $subject->subject_id
+                'subject_id' => $subject->id
             ]);
             return redirect('/subjects')->with('success', 'Topic created successfully.');
         } catch (Exception $e) {
-            return redirect('/subjects')->with('error', 'Could not create topic.');
+            return back()->with('error', 'Could not create topic.');
         }
     }
 }
