@@ -80,4 +80,9 @@ class SubjectContoller extends Controller
 
         return redirect('/subjects')->with('success', 'Subject edited successfully.');
     }
+
+    function viewSubject()
+    {
+        return view('teacher.subject.view-subject');
+    }
 }

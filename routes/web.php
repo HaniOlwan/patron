@@ -51,8 +51,10 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
 
+    Route::get('/subject/{id}', [SubjectContoller::class, 'viewSubject']);
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
+
 
     Route::get('/quizzes', [QuizController::class, 'index']);
 

@@ -62,7 +62,7 @@
                         @foreach($subjects as $subject )
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
-                            <td scope="col"><a href="view-subject/{{$subject->subject_id}}">{{$subject->title}}</a></td>
+                            <td scope="col"><a href="subject/{{$subject->subject_id}}">{{$subject->title}}</a></td>
                             <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
                             <td scope="col"><a href="view-subject/{{$subject->subject_id}}/students">particapants</a></td>
