@@ -65,7 +65,7 @@
         </div>
         <div class="add row">
             <div class="col text-right ">
-                <a href="edit-subject/{{ $subject->subject_id }}">Edit subject</a>
+                <a href="/edit-subject/{{ $subject->subject_id }}">Edit subject</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-subject-id="{{ $subject->subject_id }}">Delete Subject</a>
                 <a href="subject/{id}/question-bank">Manage Question Bank</a>
                 <a href="create-quiz">Create new Quiz</a>
