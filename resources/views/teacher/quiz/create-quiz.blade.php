@@ -44,16 +44,16 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-10">
+                            <!-- Loop through topics -->
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input" value=" echo $topic_id . ',' . $i; ?>" id=" echo $topic_id; ?>">
                                 <label class="custom-control-label" for=" echo $topic_id; ?>"></label>
                                 <input type="number" name="questions_count_ echo $i; ?>" placeholder="of  echo $count; ?>" class="form-control" id=" echo $topic_id; ?>">
-
                             </div>
                         </div>
                         <div class="alert alert-danger" role="alert" style="margin: 0 auto; margin-bottom: 20px ">
-                            {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first. '; ?>
-                            <a href="add-topic.php?subject_id= echo $subject_id; ?>">Add Topic</a>
+                            {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.' 
+                            <a href="/topic/{{ $subject->subject_id }}">Add Topic</a>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -58,7 +58,7 @@ Route::group(['middleware' => ['teacher']], function () {
 
 
     Route::get('/quizzes', [QuizController::class, 'index']);
-    Route::get('/subject/{id}/create-quiz', [QuizController::class, 'create']);
+    Route::get('/subject/{subject:subject_id}/create-quiz', [QuizController::class, 'create']);
 
     Route::get('/topic/{subject:subject_id}', [TopicController::class, 'index']);
     Route::post('/topic/{subject:subject_id}', [TopicController::class, 'create']);

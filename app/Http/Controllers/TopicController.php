@@ -14,16 +14,17 @@ class TopicController extends Controller
         return view('teacher.topic.create-topic', compact('subject'));
     }
 
-    function create(Request $request)
+    function create(Request $request, Subject $subject)
     {
         try {
             $validatedCredentials = $request->validate([
                 'title' => 'required',
             ]);
             Topic::create([
-                'title' => $validatedCredentials['title']
+                'title' => $validatedCredentials,
+                'teacher_id' => $request->user()->id,
+                'subject_id' => $subject->subject_id
             ]);
-
             return redirect('/subjects')->with('success', 'Topic created successfully.');
         } catch (Exception $e) {
             return redirect('/subjects')->with('error', 'Could not create topic.');

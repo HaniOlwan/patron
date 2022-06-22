@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -11,9 +12,10 @@ class QuizController extends Controller
     {
         return view('teacher.quiz.quizzes');
     }
-    function create($id)
-    {   
-        $subject = Subject::query()->whereSubjectId($id)->first();
-        return view('teacher.quiz.create-quiz', ['subject' => $subject]);
+
+    function create(Subject $subject)
+    {
+        return $subject->topic;
+            return view('teacher.quiz.create-quiz', compact('subject'));
     }
 }
