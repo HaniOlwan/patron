@@ -45,8 +45,8 @@
         </div>
         <div class="add row">
             <div class="col text-right">
-                <a href="edit-topic.php?topic_id= $topic_id;&subject_id= $subject_id;">Edit topic</a>
-                <a onclick="" href="question-bank.php?subject_id= $subject_id;&delete_topic= $topic_id;">Delete Topic</a>
+                <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
+                <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}">Delete Topic</a>
                 <a href="add-question.php?subject_id= $subject_id;&topic_id= $topic_id;">Add new question</a>
             </div>
         </div>
@@ -85,7 +85,7 @@
                             <th scope="col"> $row3['answer3'];</th>
                             <th scope="col"> $row3['answer4'];</th>
                             <th scope="col"><a href="edit-question.php?question_id= $question_id;&topic_id= $topic_id;"><i class="fas fa-pencil-alt"></i></a></th>
-                            <th scope="col"><a href="view-topic.php?subject_id= $subject_id;&topic_id= $topic_id;&delete_question= $question_id;"><i class="fas fa-trash-alt"></i></a></th>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,4 +100,54 @@
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
+<!-- Delete Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Do you really want to delete this Topic? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger active delete_record">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<meta name="_token" content="{{ csrf_token() }}">
+
+
+
+<script>
+    const token = document.querySelector('meta[name="_token"]').content;
+
+    const deleteButton = document.querySelector('.delete_record');
+
+    const deleteIcon = document.querySelector('.delete_icon');
+    deleteIcon.addEventListener('click', (e) => {
+        var selectedId = e.target.getAttribute('data-topic-id');
+        deleteButton.setAttribute('data-topic-id', selectedId);
+    })
+
+    deleteButton.addEventListener('click', (e) => {
+        const topic_id = e.target.getAttribute('data-topic-id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+        });
+        $.ajax({
+            url: '{{ URL::to("/topic") }}/' + topic_id,
+            type: 'DELETE',
+            success: function(result) {
+                if (result.success) {
+                    history.back()
+                }
+            },
+            error: function(result) {
+                console.log("Some error occured")
+            }
+        });
+    })
+</script>
 @endsection
