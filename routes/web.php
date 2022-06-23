@@ -70,6 +70,8 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
     Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
     Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
+    Route::get('/view-topic/{topic:id}', [TopicController::class, 'viewTopic']);
+
 
 
 });

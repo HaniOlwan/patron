@@ -14,6 +14,12 @@ class TopicController extends Controller
         return view('teacher.topic.create-topic', compact('subject'));
     }
 
+    function viewTopic(Topic $topic)
+    {
+
+        return view('teacher.topic.view-topic', ['topic' => $topic, 'subject' => $topic->subject]);
+    }
+
     function create(Request $request, Subject $subject)
     {
         try {
