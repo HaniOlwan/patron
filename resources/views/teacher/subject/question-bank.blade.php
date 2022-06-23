@@ -72,7 +72,7 @@
                         <tr>
                             <th scope="row">{{ $row_count++ }}</th>
                             <th scope="col"><a href="/view-topic/{{ $topic->id }}}">{{ $topic->title }}</a></th>
-                            <th scope="col"> echo $questions_count</th>
+                            <th scope="col">{{ $topic->question->count() }}</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
                         </tr>
@@ -101,26 +101,29 @@
                             <th scope="col">#</th>
                             <th scope="col">Topic</th>
                             <th scope="col">Question</th>
-                            <th scope="col">Answer 1</th>
-                            <th scope="col">Answer 2</th>
-                            <th scope="col">Answer 3</th>
-                            <th scope="col">Answer 4</th>
+                            <th scope="col">Ansr 1</th>
+                            <th scope="col">Ansr 2</th>
+                            <th scope="col">Ansr 3</th>
+                            <th scope="col">Ansr 4</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        @foreach($questions as $question)
                         <tr>
                             <th scope="row"> question no</th>
-                            <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id"> topic_title</a></th>
-                            <th scope="col"> question</th>
-                            <th scope="col"> ['answer1']</th>
-                            <th scope="col"> ['answer2']</th>
-                            <th scope="col"> ['answer3']</th>
-                            <th scope="col"> ['answer4']</th>
+                            <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $question->topic->title }}</a></th>
+                            <th scope="col">{{ $question->title }}</th>
+                            <th scope="col">{{ $question->first_answer }}</th>
+                            <th scope="col">{{ $question->second_answer }}</th>
+                            <th scope="col">{{ $question->third_answer }}</th>
+                            <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="edit-question.php?question_id= echo $question_id"><i class="fas fa-pencil-alt"></i></a></th>
                             <th scope="col"><a><i class="fas fa-trash-alt "></i></a></th>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
