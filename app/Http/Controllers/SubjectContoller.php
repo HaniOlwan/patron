@@ -86,4 +86,8 @@ class SubjectContoller extends Controller
         $subject = Subject::query()->whereSubjectId($id)->first();
         return view('teacher.subject.view-subject', ['subject' => $subject]);
     }
+
+    function questionBank(Subject $subject){
+        return view('teacher.subject.question-bank');
+    }
 }

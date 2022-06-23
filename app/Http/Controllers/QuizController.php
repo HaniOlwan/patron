@@ -13,9 +13,14 @@ class QuizController extends Controller
         return view('teacher.quiz.quizzes');
     }
 
-    function create(Subject $subject)
+    function viewCreatePage(Subject $subject)
     {
-        return $subject->topic;
-            return view('teacher.quiz.create-quiz', compact('subject'));
+        $topics = $subject->topic;
+        return view('teacher.quiz.create-quiz', ['subject' => $subject, 'topics' => $topics]);
+    }
+
+    function create(Request $request)
+    {
+        return $request;
     }
 }

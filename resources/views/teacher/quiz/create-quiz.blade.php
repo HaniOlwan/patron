@@ -20,7 +20,8 @@
         <div class="create row">
             <div class="col ">
                 <form method="post">
-                        <!-- <div class="alert alert-danger" role="alert">
+                    @csrf
+                    <!-- <div class="alert alert-danger" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -44,17 +45,20 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-10">
-                            <!-- Loop through topics -->
+                            @foreach($topics as $topic)
                             <div class="topic custom-control custom-checkbox">
-                                <input type="checkbox" name="selected_topic[]" class="custom-control-input" value=" echo $topic_id . ',' . $i; ?>" id=" echo $topic_id; ?>">
-                                <label class="custom-control-label" for=" echo $topic_id; ?>"></label>
-                                <input type="number" name="questions_count_ echo $i; ?>" placeholder="of  echo $count; ?>" class="form-control" id=" echo $topic_id; ?>">
+                                <input type="checkbox" name="selected_topic[]" class="custom-control-input" value="{{ $topic->id }}" id="{{ $topic->id }}">
+                                <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
+                                <input type="number" name="questions_count" placeholder="0" class="form-control" id="{{ $topic->id }}">
                             </div>
+                            @endforeach
                         </div>
+                        @if(!$topics)
                         <div class="alert alert-danger" role="alert" style="margin: 0 auto; margin-bottom: 20px ">
-                            {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.' 
+                            {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.'
                             <a href="/topic/{{ $subject->subject_id }}">Add Topic</a>
                         </div>
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
