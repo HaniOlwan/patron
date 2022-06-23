@@ -127,7 +127,7 @@
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="/question/{{ $question->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
-                            <th scope="col"><a><i class="fas fa-trash-alt "></i></a></th>
+                            <td scope="col"><a><i class="fas fa-trash-alt question_delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-question-id="{{ $question->id }}"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -175,6 +175,35 @@
         });
         $.ajax({
             url: '{{ URL::to("/topic") }}/' + topic_id,
+            type: 'DELETE',
+            success: function(result) {
+                if (result.success) {
+                    window.location.reload();
+                }
+            },
+            error: function(result) {
+                console.log("Some error occured")
+            }
+        });
+    })
+
+
+    const questionIcon = document.querySelector('.question_delete_icon');
+    questionIcon.addEventListener('click', (e) => {
+        var selectedId = e.target.getAttribute('data-question-id');
+        deleteButton.setAttribute('data-question-id', selectedId);
+    })
+
+    deleteButton.addEventListener('click', (e) => {
+        const question_id = e.target.getAttribute('data-question-id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+        });
+
+        $.ajax({
+            url: '{{ URL::to("/question") }}/' + question_id,
             type: 'DELETE',
             success: function(result) {
                 if (result.success) {
