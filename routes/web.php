@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
+use App\Http\Controllers\TopicController;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +57,29 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
 
+    Route::get('/question-bank/{subject:subject_id}', [SubjectContoller::class, 'questionBank']);
+
+
 
     Route::get('/quizzes', [QuizController::class, 'index']);
+    Route::get('/subject/{subject:subject_id}/create-quiz', [QuizController::class, 'viewCreatePage']);
+    Route::post('/subject/{subject:subject_id}/create-quiz', [QuizController::class, 'create']);
+
+
+    Route::get('/topic/{subject:subject_id}', [TopicController::class, 'index']);
+    Route::post('/topic/{subject:subject_id}', [TopicController::class, 'create']);
+    Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
+    Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
+    Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
+    Route::get('/view-topic/{topic:id}', [TopicController::class, 'viewTopic']);
+
+
+    Route::get('/{topic:id}/create-question', [QuestionController::class, 'index']);
+    Route::post('/{topic:id}/create-question', [QuestionController::class, 'create']);
+    Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
+    Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
+    Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
+
+
 
 });

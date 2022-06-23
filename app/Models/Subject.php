@@ -10,16 +10,21 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'title',
         'subject_id',
         'code',
         'description',
-        'private'
+        'private',
+        'user_id',
     ];
 
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Topic()
+    {
+        return $this->hasMany(Topic::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Subject;
 use App\Models\User;
 use Exception;
@@ -85,5 +86,12 @@ class SubjectContoller extends Controller
     {
         $subject = Subject::query()->whereSubjectId($id)->first();
         return view('teacher.subject.view-subject', ['subject' => $subject]);
+    }
+
+    function questionBank(Subject $subject)
+    {
+        $topics = $subject->topic;
+        $questions = Question::all();
+        return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics, 'questions' => $questions]);
     }
 }
