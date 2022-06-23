@@ -87,7 +87,9 @@ class SubjectContoller extends Controller
         return view('teacher.subject.view-subject', ['subject' => $subject]);
     }
 
-    function questionBank(Subject $subject){
-        return view('teacher.subject.question-bank');
+    function questionBank(Subject $subject)
+    {
+        $topics = $subject->topic;
+        return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics]);
     }
 }

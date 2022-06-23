@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use App\Models\Topic;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TopicController extends Controller
 {
@@ -27,8 +27,30 @@ class TopicController extends Controller
                 'subject_id' => $subject->id
             ]);
             return redirect('/subjects')->with('success', 'Topic created successfully.');
-        } catch (Exception $e) {
+        } catch (ValidationException $e) {
             return back()->with('error', 'Could not create topic.');
+        }
+    }
+
+    function viewEditTopic(Topic $topic)
+    {
+        $subject = $topic->subject;
+        return view('teacher.topic.edit-topic', ['subject' => $subject, 'topic' => $topic]);
+    }
+
+    function update(Topic $topic, Request $request)
+    {
+        try {
+            $validatedCredentials = $request->validate([
+                'title' => 'required',
+            ]);
+            $topic->update([
+                'title' => $validatedCredentials['title']
+            ]);
+            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('success', 'Topic edited successfully.');
+        } catch (ValidationException $e) {
+            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('error', 'Could not update topic.');
+
         }
     }
 }

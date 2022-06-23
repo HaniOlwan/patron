@@ -30,24 +30,30 @@
             </div>
 -->
             <div class="col text-right">
-                <a href="add-topic.php?subject_id= echo $id">Add new topic</a>
-                <a href="create-quiz.php?subject_id= echo $id">Create new Quiz</a>
+                <a href="/topic/{{ $subject->subject_id }}">Add new topic</a>
+                <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <h3>All Topics</h3>
-                <!-- <div class="alert alert-danger" role="alert">
+                    @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        {{ session()->get('error')}}
                     </div>
+                    @endif
+                    @if(session()->has('success'))
                     <div class="alert alert-success" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div> -->
+                        {{session()->get('success')}}
+                    </div>
+                    @endif
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -59,13 +65,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count=1
+                        @endphp
+                        @foreach($topics as $topic)
                         <tr>
-                            <th scope="row"> echo $topic_number</th>
-                            <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id"> echo $topic_title</a></th>
+                            <th scope="row">{{ $row_count++ }}</th>
+                            <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $topic->title }}</a></th>
                             <th scope="col"> echo $questions_count</th>
-                            <th scope="col"><a href="edit-topic.php?topic_id= echo $topic_id&subject_id= echo $id"><i class="fas fa-pencil-alt"></i></a></th>
+                            <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <th scope="col"><a onclick="return confirm('Are you sure deleting topic ? \nBy deleting the topic everything related to this topic will be deleted such as questions, students answers and analysis for this topic, and you will not be able to recover this data anymore!')" href="question-bank.php?subject_id= echo $id&delete_topic= echo $topic_id"><i class="fas fa-trash-alt"></i></a></th>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
