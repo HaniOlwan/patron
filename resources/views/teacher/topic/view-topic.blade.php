@@ -47,7 +47,7 @@
             <div class="col text-right">
                 <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
                 <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}">Delete Topic</a>
-                <a href="add-question.php?subject_id= $subject_id;&topic_id= $topic_id;">Add new question</a>
+                <a href="/{{ $subject->subject_id }}/create-question/">Add new question</a>
             </div>
         </div>
         <div class="row">

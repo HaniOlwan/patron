@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -73,5 +74,6 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/view-topic/{topic:id}', [TopicController::class, 'viewTopic']);
 
 
-
+    Route::get('/{subject:subject_id}/create-question', [QuestionController::class, 'index']);
+    Route::post('/create-question', [QuestionController::class, 'create']);
 });
