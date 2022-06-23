@@ -77,5 +77,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/{topic:id}/create-question', [QuestionController::class, 'index']);
     Route::post('/{topic:id}/create-question', [QuestionController::class, 'create']);
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
+    Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
+
 
 });

@@ -85,16 +85,22 @@
         <div class="row">
             <div class="col">
                 <h3>All Questions</h3>
-                <!-- <div class="alert alert-danger" role="alert">
+                @if(session()->has('error'))
+                <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    {{ session()->get('error') }}
                 </div>
+                @endif
+                @if(session()->has('success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div> -->
+                    {{ session()->get('success') }}
+                </div>
+                @endif
                 <table class="table table-striped">
                     <thead>
                         <tr>

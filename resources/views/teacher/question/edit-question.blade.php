@@ -20,8 +20,9 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form action="/{{ $question->topic->id }}/create-question" method="post">
+                <form action="/question/{{ $question->id }}/edit" method="post">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group row">
                         <label for="Question" class="col-sm-2 col-form-label">Question</label>
                         <div class="col-sm-10">
