@@ -19,4 +19,10 @@ class Topic extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function Question()
+    {
+        return $this->hasMany(Question::class);
+    }
+
 }

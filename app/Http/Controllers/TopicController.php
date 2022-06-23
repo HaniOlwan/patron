@@ -16,8 +16,9 @@ class TopicController extends Controller
 
     function viewTopic(Topic $topic)
     {
-
-        return view('teacher.topic.view-topic', ['topic' => $topic, 'subject' => $topic->subject]);
+        $subject = $topic->subject;
+        // return $topic->question->count();
+        return view('teacher.topic.view-topic', ['topic' => $topic, 'subject' => $subject]);
     }
 
     function create(Request $request, Subject $subject)

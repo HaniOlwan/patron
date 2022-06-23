@@ -74,6 +74,6 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/view-topic/{topic:id}', [TopicController::class, 'viewTopic']);
 
 
-    Route::get('/{subject:subject_id}/create-question', [QuestionController::class, 'index']);
-    Route::post('/create-question', [QuestionController::class, 'create']);
+    Route::get('/{topic:id}/create-question', [QuestionController::class, 'index']);
+    Route::post('/{topic:id}/create-question', [QuestionController::class, 'create']);
 });

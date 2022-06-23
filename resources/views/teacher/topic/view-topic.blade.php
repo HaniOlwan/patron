@@ -10,7 +10,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3><span> $subject_title;</span></h3>
+                        <h3><span>{{ $subject->title }}</span></h3>
                     </div>
 
                 </div>
@@ -33,10 +33,9 @@
                                 <td>Subject</td>
                                 <td>{{ $subject->title }}</td>
                             </tr>
-
                             <tr>
                                 <td class="last">Number of questions</td>
-                                <td class="last"> $questions_count;</td>
+                                <td class="last">{{ $topic->question->count() }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -47,7 +46,7 @@
             <div class="col text-right">
                 <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
                 <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}">Delete Topic</a>
-                <a href="/{{ $subject->subject_id }}/create-question/">Add new question</a>
+                <a href="/{{ $topic->id }}/create-question/">Add new question</a>
             </div>
         </div>
         <div class="row">
@@ -77,16 +76,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count=1;
+                        @endphp
+                        @foreach($topic->question as $question)
                         <tr>
-                            <th scope="row">no</th>
-                            <th scope="col"> ['question']</th>
-                            <th scope="col"> $row3['answer1'];</th>
-                            <th scope="col"> $row3['answer2'];</th>
-                            <th scope="col"> $row3['answer3'];</th>
-                            <th scope="col"> $row3['answer4'];</th>
+                            <th scope="row">{{ $row_count++ }}</th>
+                            <th scope="col">{{ $question->title }}</th>
+                            <th scope="col">{{ $question->first_answer }}</th>
+                            <th scope="col">{{ $question->second_answer }}</th>
+                            <th scope="col">{{ $question->third_answer }}</th>
+                            <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="edit-question.php?question_id= $question_id;&topic_id= $topic_id;"><i class="fas fa-pencil-alt"></i></a></th>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
