@@ -41,7 +41,11 @@ class QuestionController extends Controller
             return redirect('/view-topic' . "/" . $topic->id)->with('success', 'Topic edited successfully.');
         } catch (ValidationException $e) {
             return redirect('/view-topic' . "/" . $topic->id)->with('error', 'Could not create question.');
-
         }
+    }
+
+    function viewEditQuestion(Question $question)
+    {
+        return view('teacher.question.edit-question', compact('question'));
     }
 }

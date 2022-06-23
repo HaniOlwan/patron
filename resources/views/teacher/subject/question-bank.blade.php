@@ -120,7 +120,7 @@
                             <th scope="col">{{ $question->second_answer }}</th>
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
-                            <th scope="col"><a href="edit-question.php?question_id= echo $question_id"><i class="fas fa-pencil-alt"></i></a></th>
+                            <th scope="col"><a href="/question/{{ $question->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <th scope="col"><a><i class="fas fa-trash-alt "></i></a></th>
                         </tr>
                         @endforeach
