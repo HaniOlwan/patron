@@ -21,7 +21,6 @@
                 <form method="post">
                     @csrf
                     @method('PATCH')
-
                     <div class="form-group row">
                         <label for="topic" class="col-sm-2 col-form-label">Topic title</label>
                         <div class="col-sm-10">

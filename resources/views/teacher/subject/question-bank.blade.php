@@ -38,22 +38,22 @@
         <div class="row">
             <div class="col">
                 <h3>All Topics</h3>
-                    @if(session()->has('error'))
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ session()->get('error')}}
-                    </div>
-                    @endif
-                    @if(session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{session()->get('success')}}
-                    </div>
-                    @endif
+                @if(session()->has('topic_error'))
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ session()->get('topic_error')}}
+                </div>
+                @endif
+                @if(session()->has('topic_success'))
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{session()->get('topic_success')}}
+                </div>
+                @endif
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -74,7 +74,7 @@
                             <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $topic->title }}</a></th>
                             <th scope="col"> echo $questions_count</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
-                            <th scope="col"><a onclick="return confirm('Are you sure deleting topic ? \nBy deleting the topic everything related to this topic will be deleted such as questions, students answers and analysis for this topic, and you will not be able to recover this data anymore!')" href="question-bank.php?subject_id= echo $id&delete_topic= echo $topic_id"><i class="fas fa-trash-alt"></i></a></th>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -119,7 +119,7 @@
                             <th scope="col"> ['answer3']</th>
                             <th scope="col"> ['answer4']</th>
                             <th scope="col"><a href="edit-question.php?question_id= echo $question_id"><i class="fas fa-pencil-alt"></i></a></th>
-                            <th scope="col"><a onclick="return confirm('Are you sure deleting question ? \nBy deleting the question everything related to this question will be deleted such as students answers and analysis for this question, and you will not be able to recover this data anymore!')" href="question-bank.php?subject_id= echo $id&delete_question= echo $question_id"><i class="fas fa-trash-alt"></i></a></th>
+                            <th scope="col"><a><i class="fas fa-trash-alt "></i></a></th>
                         </tr>
                     </tbody>
                 </table>
@@ -128,5 +128,55 @@
     </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
+<!-- Delete Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Do you really want to delete this subject? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger active delete_record">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<meta name="_token" content="{{ csrf_token() }}">
+
+
+
+<script>
+    const token = document.querySelector('meta[name="_token"]').content;
+
+    const deleteButton = document.querySelector('.delete_record');
+
+    const deleteIcon = document.querySelector('.delete_icon');
+    deleteIcon.addEventListener('click', (e) => {
+        var selectedId = e.target.getAttribute('data-topic-id');
+        deleteButton.setAttribute('data-topic-id', selectedId);
+    })
+
+    deleteButton.addEventListener('click', (e) => {
+        const topic_id = e.target.getAttribute('data-topic-id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+        });
+        $.ajax({
+            url: '{{ URL::to("/topic") }}/' + topic_id,
+            type: 'DELETE',
+            success: function(result) {
+                if (result.success) {
+                    window.location.reload();
+                }
+            },
+            error: function(result) {
+                console.log("Some error occured")
+            }
+        });
+    })
+</script>
 
 @endsection

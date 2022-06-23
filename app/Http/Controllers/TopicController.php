@@ -47,10 +47,15 @@ class TopicController extends Controller
             $topic->update([
                 'title' => $validatedCredentials['title']
             ]);
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('success', 'Topic edited successfully.');
+            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('topic_success', 'Topic edited successfully.');
         } catch (ValidationException $e) {
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('error', 'Could not update topic.');
-
+            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('topic_error', 'Could not update topic.');
         }
+    }
+
+    function destroy(Topic $topic)
+    {
+        if (!$topic) return response()->json(['success' => false], 404);
+        return response()->json(['success' => $topic->delete()], 200);
     }
 }

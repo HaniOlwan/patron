@@ -69,5 +69,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/topic/{subject:subject_id}', [TopicController::class, 'create']);
     Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
     Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
+    Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
+
 
 });
