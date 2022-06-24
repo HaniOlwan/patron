@@ -125,39 +125,5 @@
     </div>
 </div>
 <meta name="_token" content="{{ csrf_token() }}">
-
-
-
-<script>
-    const token = document.querySelector('meta[name="_token"]').content;
-
-    const deleteButton = document.querySelector('.delete_record');
-
-    const deleteIcon = document.querySelector('.delete_icon');
-    deleteIcon.addEventListener('click', (e) => {
-        var selectedId = e.target.getAttribute('data-topic-id');
-        deleteButton.setAttribute('data-topic-id', selectedId);
-    })
-
-    deleteButton.addEventListener('click', (e) => {
-        const topic_id = e.target.getAttribute('data-topic-id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-        $.ajax({
-            url: '{{ URL::to("/topic") }}/' + topic_id,
-            type: 'DELETE',
-            success: function(result) {
-                if (result.success) {
-                    history.back()
-                }
-            },
-            error: function(result) {
-                console.log("Some error occured")
-            }
-        });
-    })
-</script>
+<script src="{{ asset('js/deleteItem.js') }}"></script>
 @endsection
