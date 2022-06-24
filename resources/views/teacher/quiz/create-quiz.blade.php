@@ -49,7 +49,7 @@
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input" value="{{ $topic->id }}" id="{{ $topic->id }}">
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
-                                <input type="number" name="questions_count" placeholder="0" class="form-control" id="{{ $topic->id }}">
+                                <input type="number" name="questions_count" placeholder="0" class="form-control" id="{{ $topic->id }}" min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
                         </div>
@@ -63,31 +63,31 @@
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="start_date" value=" echo $start_date; ?>" class="form-control" id="date">
+                            <input type="date" name="start_date" value="" class="form-control" id="date">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="time" class="col-sm-2 col-form-label">Start time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="start_time" value=" echo $start_time; ?>" class="form-control" id="time">
+                            <input type="time" name="start_time" value="" class="form-control" id="time">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-date" class="col-sm-2 col-form-label">Deadline date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="exp_date" value=" echo $exp_date; ?>" class="form-control" id="exp-date">
+                            <input type="date" name="exp_date" value="" class="form-control" id="exp-date">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-time" class="col-sm-2 col-form-label">Deadline time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="exp_time" value=" echo $exp_time; ?>" class="form-control" id="exp-time">
+                            <input type="time" name="exp_time" value="" class="form-control" id="exp-time">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="duration" class="col-sm-2 col-form-label">Select duration <span class="minutes">&#40;minutes&#41;</span></label>
                         <div class="col-sm-10">
-                            <input type="number" name="duration" value=" echo $duration; ?>" class="form-control" id="duration">
+                            <input type="number" name="duration" value="" class="form-control" id="duration">
 
                         </div>
                     </div>

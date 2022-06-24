@@ -93,7 +93,7 @@
                             <th scope="col">{{ $question->second_answer }}</th>
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
-                            <th scope="col"><a href="edit-question.php?question_id= $question_id;&topic_id= $topic_id;"><i class="fas fa-pencil-alt"></i></a></th>
+                            <th scope="col"><a href="/question/{{ $question->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $question->id }}" data-url="question"></i></a></td>
                         </tr>
                         @endforeach
