@@ -74,7 +74,7 @@
                             <th scope="col"><a href="/view-topic/{{ $topic->id }}}">{{ $topic->title }}</a></th>
                             <th scope="col">{{ $topic->question->count() }}</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_btn" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->subject_id }}"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -127,7 +127,7 @@
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="/question/{{ $question->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
-                            <td scope="col"><a><i class="fas fa-trash-alt question_delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-question-id="{{ $question->id }}"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $question->id }}" data-url="question"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -142,79 +142,15 @@
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Do you really want to delete this subject? This process cannot be undone.</p>
+                <p>Do you really want to delete this record? This process cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger active delete_record">Delete</button>
+                <button type="button" class="btn btn-danger active delete_modal">Delete</button>
             </div>
         </div>
     </div>
 </div>
 <meta name="_token" content="{{ csrf_token() }}">
-
-
-
-<script>
-    const token = document.querySelector('meta[name="_token"]').content;
-
-    const deleteButton = document.querySelector('.delete_record');
-
-    const deleteIcon = document.querySelector('.delete_icon');
-    deleteIcon.addEventListener('click', (e) => {
-        var selectedId = e.target.getAttribute('data-topic-id');
-        deleteButton.setAttribute('data-topic-id', selectedId);
-    })
-
-    deleteButton.addEventListener('click', (e) => {
-        const topic_id = e.target.getAttribute('data-topic-id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-        $.ajax({
-            url: '{{ URL::to("/topic") }}/' + topic_id,
-            type: 'DELETE',
-            success: function(result) {
-                if (result.success) {
-                    window.location.reload();
-                }
-            },
-            error: function(result) {
-                console.log("Some error occured")
-            }
-        });
-    })
-
-
-    const questionIcon = document.querySelector('.question_delete_icon');
-    questionIcon.addEventListener('click', (e) => {
-        var selectedId = e.target.getAttribute('data-question-id');
-        deleteButton.setAttribute('data-question-id', selectedId);
-    })
-
-    deleteButton.addEventListener('click', (e) => {
-        const question_id = e.target.getAttribute('data-question-id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-
-        $.ajax({
-            url: '{{ URL::to("/question") }}/' + question_id,
-            type: 'DELETE',
-            success: function(result) {
-                if (result.success) {
-                    window.location.reload();
-                }
-            },
-            error: function(result) {
-                console.log("Some error occured")
-            }
-        });
-    })
-</script>
-
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 @endsection

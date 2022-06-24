@@ -80,6 +80,4 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
 
-
-
 });

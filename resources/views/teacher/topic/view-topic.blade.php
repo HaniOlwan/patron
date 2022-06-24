@@ -45,7 +45,7 @@
         <div class="add row">
             <div class="col text-right">
                 <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
-                <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}">Delete Topic</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->subject_id }}">Delete Topic</a>
                 <a href="/{{ $topic->id }}/create-question/">Add new question</a>
             </div>
         </div>
@@ -94,7 +94,7 @@
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="edit-question.php?question_id= $question_id;&topic_id= $topic_id;"><i class="fas fa-pencil-alt"></i></a></th>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $question->id }}" data-url="question"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -119,45 +119,11 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger active delete_record">Delete</button>
+                <button type="button" class="btn btn-danger active delete_modal">Delete</button>
             </div>
         </div>
     </div>
 </div>
 <meta name="_token" content="{{ csrf_token() }}">
-
-
-
-<script>
-    const token = document.querySelector('meta[name="_token"]').content;
-
-    const deleteButton = document.querySelector('.delete_record');
-
-    const deleteIcon = document.querySelector('.delete_icon');
-    deleteIcon.addEventListener('click', (e) => {
-        var selectedId = e.target.getAttribute('data-topic-id');
-        deleteButton.setAttribute('data-topic-id', selectedId);
-    })
-
-    deleteButton.addEventListener('click', (e) => {
-        const topic_id = e.target.getAttribute('data-topic-id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-        $.ajax({
-            url: '{{ URL::to("/topic") }}/' + topic_id,
-            type: 'DELETE',
-            success: function(result) {
-                if (result.success) {
-                    history.back()
-                }
-            },
-            error: function(result) {
-                console.log("Some error occured")
-            }
-        });
-    })
-</script>
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 @endsection

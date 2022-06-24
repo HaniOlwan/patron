@@ -66,7 +66,7 @@
         <div class="add row">
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->subject_id }}">Edit subject</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-subject-id="{{ $subject->subject_id }}">Delete Subject</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject"">Delete Subject</a>
                 <a href="/question-bank/{{ $subject->subject_id }}">Manage Question Bank</a>
                 <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
             </div>
@@ -147,46 +147,11 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger active delete_modal_btn">Delete</button>
+                <button type="button" class="btn btn-danger active delete_modal">Delete</button>
             </div>
         </div>
     </div>
 </div>
 <meta name="_token" content="{{ csrf_token() }}">
-
-
-<script>
-    const token = document.querySelector('meta[name="_token"]').content;
-
-    const deleteBtn = document.querySelector('.delete_btn');
-    const modalDeleteBtn = document.querySelector('.delete_modal_btn');
-
-    deleteBtn.addEventListener('click', (e) => {
-        let selectedId = e.target.getAttribute('data-subject-id');
-        modalDeleteBtn.setAttribute('data-subject-id', selectedId);
-    })
-
-    modalDeleteBtn.addEventListener('click', () => {
-        let subject_id = modalDeleteBtn.getAttribute('data-subject-id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-        $.ajax({
-            url: '{{ URL::to("/subject") }}/' + subject_id,
-            type: 'DELETE',
-            success: function(result) {
-                if (result.success) {
-                    window.location.href="/subjects";
-                }
-            },
-            error: function(result) {
-                console.log("Some error occured")
-
-            }
-        });
-    })
-</script>
-
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 @endsection
