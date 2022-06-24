@@ -9,7 +9,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3><span> echo $subject_title</span><br>Questions Bank</h3>
+                        <h3><span>{{ $subject->title }}</span><br>Questions Bank</h3>
 
                     </div>
 

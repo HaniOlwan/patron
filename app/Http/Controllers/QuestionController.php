@@ -38,7 +38,7 @@ class QuestionController extends Controller
                 'forth_answer' => $validatedCredentials['answer4'],
                 'correct_answer' => $validatedCredentials['correct_answer'],
             ]);
-            return redirect('/view-topic' . "/" . $topic->id)->with('success', 'Topic edited successfully.');
+            return redirect('/view-topic' . "/" . $topic->id)->with('success', 'Question created successfully.');
         } catch (ValidationException $e) {
             return redirect('/view-topic' . "/" . $topic->id)->with('error', 'Could not create question.');
         }
