@@ -12,7 +12,6 @@ deleteIcon.addEventListener('click', (e) => {
 deleteBtn.addEventListener('click', (e) => {
     const item_id = e.target.getAttribute('data-id');
     const item_url = e.target.getAttribute('data-url');
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': token
@@ -24,7 +23,11 @@ deleteBtn.addEventListener('click', (e) => {
         type: 'DELETE',
         success: function (result) {
             if (result.success) {
-                window.location.reload();
+                if (item_url === 'subject') {
+                    history.back()
+                } else {
+                    window.location.reload();
+                }
             }
         },
         error: function (result) {

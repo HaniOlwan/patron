@@ -66,7 +66,7 @@
         <div class="add row">
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->subject_id }}">Edit subject</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject">Delete Subject</a>
+                <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject">Delete Subject</a>
                 <a href="/question-bank/{{ $subject->subject_id }}">Manage Question Bank</a>
                 <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
             </div>
@@ -147,7 +147,7 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger active delete_modal_btn">Delete</button>
+                <button type="button" class="btn btn-danger active delete_record">Delete</button>
             </div>
         </div>
     </div>
