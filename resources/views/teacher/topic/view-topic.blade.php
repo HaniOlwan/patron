@@ -45,7 +45,7 @@
         <div class="add row">
             <div class="col text-right">
                 <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
-                <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}">Delete Topic</a>
+                <a href="" class="delete_icon" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="jiogrjiogw">Delete Topic</a>
                 <a href="/{{ $topic->id }}/create-question/">Add new question</a>
             </div>
         </div>
@@ -94,7 +94,7 @@
                             <th scope="col">{{ $question->third_answer }}</th>
                             <th scope="col">{{ $question->forth_answer }}</th>
                             <th scope="col"><a href="edit-question.php?question_id= $question_id;&topic_id= $topic_id;"><i class="fas fa-pencil-alt"></i></a></th>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-topic-id="{{ $topic->id }}"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -125,5 +125,5 @@
     </div>
 </div>
 <meta name="_token" content="{{ csrf_token() }}">
-<script src="{{ asset('js/deleteItem.js') }}"></script>
+<script src="{{ asset('js/deleteFunction.js') }}"></script>
 @endsection
