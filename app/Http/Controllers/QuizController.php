@@ -31,7 +31,6 @@ class QuizController extends Controller
                 'title' => 'required',
                 'subjectId' => 'required',
             ]);
-
             Quiz::create(
                 [
                     'title' => $validatedCredentials['title'],
@@ -45,8 +44,9 @@ class QuizController extends Controller
                     'user_id' => Auth::user()->id,
                 ]
             );
+            return response()->json(["success" => 'Quiz created successfully', "status" => 201]);
         } catch (Exception $e) {
-            return $e->getMessage();
+            return response()->json(["error" => 'Make sure your input is correct', 400]);
         }
     }
 }

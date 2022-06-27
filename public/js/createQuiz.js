@@ -47,10 +47,14 @@ form.addEventListener('submit', (e) => {
         type: "POST",
         data: data,
         success: function (response) {
-            window.location.href = "/question-bank/" + data.subjectId
+            if (response.status === 400) {
+                window.location.href = "/subject/" + data.subjectId + "/create-quiz"
+            } else if (response.status === 201) {
+                window.location.href = "/question-bank/" + data.subjectId
+            }
         },
         error: function (response) {
-            window.location.href = "/subject/" + data.subjectId + "/create-quiz"
+            return response;
         }
     })
 
