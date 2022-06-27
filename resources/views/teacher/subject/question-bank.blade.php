@@ -38,20 +38,20 @@
         <div class="row">
             <div class="col">
                 <h3>All Topics</h3>
-                @if(session()->has('topic_error'))
+                @if(session()->has('error'))
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('topic_error')}}
+                    {{ session()->get('error')}}
                 </div>
                 @endif
-                @if(session()->has('topic_success'))
+                @if(session()->has('success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{session()->get('topic_success')}}
+                    {{session()->get('success')}}
                 </div>
                 @endif
                 <table class="table table-striped">

@@ -19,7 +19,8 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form action="/subject/{{ $subject->id }}/create-quiz" method="POST" class="quiz_form">
+            <!-- action="/subject/{{ $subject->id }}/create-quiz" method="POST" -->
+                <form class="quiz_form">
                     @csrf
                     <!-- <div class="alert alert-danger" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -97,7 +98,7 @@
                             <button type="submit" class="btn btn-primary">Create Quiz</button>
                         </div>
                     </div>
-                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject->subject_id }}">
+                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject->id }}">
                 </form>
             </div>
         </div>

@@ -57,7 +57,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
 
-    Route::get('/question-bank/{subject:subject_id}', [SubjectContoller::class, 'questionBank']);
+    Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
 
 
 
