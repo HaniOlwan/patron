@@ -24,8 +24,18 @@ class Quiz extends Model
         'user_id',
     ];
 
+    function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     function Subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    function Topic()
+    {
+        return $this->belongsToMany(Topic::class);
     }
 }

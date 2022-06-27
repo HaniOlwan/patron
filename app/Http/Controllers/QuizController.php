@@ -50,4 +50,9 @@ class QuizController extends Controller
             return response()->json(["error" => 'Make sure your input is correct', 400]);
         }
     }
+
+    function viewQuiz(Quiz $quiz)
+    {
+        return view('teacher.quiz.view-quiz', compact('quiz'));
+    }
 }
