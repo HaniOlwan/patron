@@ -19,7 +19,7 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form method="post">
+                <form class="quiz_form">
                     @csrf
                     <!-- <div class="alert alert-danger" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -47,9 +47,9 @@
                         <div class="col-lg-4 col-sm-10">
                             @foreach($topics as $topic)
                             <div class="topic custom-control custom-checkbox">
-                                <input type="checkbox" name="selected_topic[]" class="custom-control-input" value="{{ $topic->id }}" id="{{ $topic->id }}">
+                                <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}">
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
-                                <input type="number" name="questions_count" placeholder="0" class="form-control" id="{{ $topic->id }}" min="0" max="{{ $topic->question->count() }}">
+                                <input type="number" value="0" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
                         </div>
@@ -94,10 +94,10 @@
 
                     <div class="form-group row ">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" name="create_quiz" class="btn btn-primary">Create Quiz</button>
+                            <button type="submit" class="btn btn-primary">Create Quiz</button>
                         </div>
                     </div>
-
+                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject->subject_id }}">
                 </form>
             </div>
         </div>
@@ -105,4 +105,65 @@
     </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
+<meta name="_token" content="{{ csrf_token() }}">
+
+<script>
+    const token = document.querySelector('meta[name="_token"]').content;
+    const form = document.querySelector('.quiz_form');
+    const questionInputs = document.querySelectorAll('.questions_count')
+    const selectedQuestions = document.querySelectorAll('.selected_questions')
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get question count 
+        let count = 0;
+        let questions = [];
+        for (let index = 0; index < selectedQuestions.length; index++) {
+            let id = selectedQuestions[index].value;
+            let value = questionInputs[index].value;
+            if (selectedQuestions[index].checked) {
+                count += Number(questionInputs[index].value);
+                questions.push({
+                    id,
+                    value
+                })
+            }
+        }
+        
+        questions.push({
+            "total": count
+        });
+
+        const data = {
+            'title': form.title.value,
+            'questions_count': questions,
+            'start_date': form.start_date.value,
+            'start_time': form.start_time.value,
+            'exp_date': form.exp_date.value,
+            'exp_time': form.exp_time.value,
+            'subjectId': form.subjectId.value,
+            'duration': form.duration.value,
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+        })
+
+        $.ajax({
+            url: "/subject/" + data.subjectId + "/create-quiz",
+            type: "POST",
+            data: data,
+            success: function(result) {
+                console.log(result);
+            },
+            error: function(result) {
+                console.log(result);
+            }
+        })
+
+    });
+</script>
 @endsection
