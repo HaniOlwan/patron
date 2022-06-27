@@ -19,7 +19,7 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form class="quiz_form">
+                <form action="/subject/{{ $subject->id }}/create-quiz" method="POST" class="quiz_form">
                     @csrf
                     <!-- <div class="alert alert-danger" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
