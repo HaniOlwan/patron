@@ -67,7 +67,7 @@
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->subject_id }}">Edit subject</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject"">Delete Subject</a>
-                <a href="/question-bank/{{ $subject->subject_id }}">Manage Question Bank</a>
+                <a href="/question-bank/{{ $subject->id}}">Manage Question Bank</a>
                 <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>

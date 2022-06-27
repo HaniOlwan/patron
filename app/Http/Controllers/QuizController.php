@@ -14,7 +14,8 @@ class QuizController extends Controller
 {
     function index()
     {
-        return view('teacher.quiz.quizzes');
+        $quizzes = Auth::user()->quizs;
+        return view('teacher.quiz.quizzes', compact('quizzes'));
     }
 
     function viewCreatePage(Subject $subject)

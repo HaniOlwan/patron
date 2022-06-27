@@ -23,4 +23,9 @@ class Quiz extends Model
         'mark',
         'user_id',
     ];
+
+    function Subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }
