@@ -22,18 +22,8 @@
         <div class="create row">
             <div class="col ">
                 <form method="post">
-                    <!-- 
-                        <div class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
-
+                    @csrf
+                    @method('PATCH')
                     <div class="form-group row">
                         <label for="quiz-title" class="col-sm-2 col-form-label">Quiz title</label>
                         <div class="col-sm-10">
@@ -47,18 +37,20 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-10">
+                            @if(count($topics) !== 0)
                             @foreach($topics as $topic)
                             <div class="topic custom-control custom-checkbox">
-                                <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}">
+                                <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}" {{ ($topic->id) ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
-                                <input type="number" value="0" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
+                                <input type="number" value="{{$topic->pivot['topic_questions']}}" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
+                            @endif
                         </div>
-                        @if(!$topics)
+                        @if(count($topics) == 0)
                         <div class="alert alert-danger" role="alert" style="margin: 0 auto; margin-bottom: 20px ">
                             {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.'
-                            <a href="/topic/{{ $subject->subject_id }}">Add Topic</a>
+                            <a href="/topic/{{ $subject->id }}">Add Topic</a>
                         </div>
                         @endif
                     </div>

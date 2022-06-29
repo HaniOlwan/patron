@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\Subject;
-use App\Models\Topic;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 
 class QuizController extends Controller
@@ -66,8 +65,9 @@ class QuizController extends Controller
 
     function viewEditQuiz(Quiz $quiz)
     {
-        return view('teacher.quiz.edit-quiz', compact('quiz'));
+        return view('teacher.quiz.edit-quiz', ['quiz' => $quiz, 'topics' => $quiz->topics, 'subject' => $quiz->subject]);
     }
+
     function destroy(Quiz $quiz)
     {
         if (!$quiz) return response()->json(['success' => false], 404);

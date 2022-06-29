@@ -29,7 +29,7 @@ class Quiz extends Model
         return $this->belongsTo(User::class);
     }
 
-    function Subject()
+    function subject()
     {
         return $this->belongsTo(Subject::class);
     }
