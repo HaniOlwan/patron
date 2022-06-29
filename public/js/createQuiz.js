@@ -10,24 +10,20 @@ form.addEventListener('submit', (e) => {
     let count = 0;
     let questions = [];
     for (let index = 0; index < selectedQuestions.length; index++) {
-        let id = selectedQuestions[index].value;
+        let topicId = selectedQuestions[index].value;
         let value = questionInputs[index].value;
         if (selectedQuestions[index].checked) {
             count += Number(questionInputs[index].value);
             questions.push({
-                id,
+                topicId,
                 value
             })
         }
     }
-
-    questions.push({
-        "total": count
-    });
-
     const data = {
         'title': form.title.value,
         'questions_count': count,
+        'questions': questions,
         'start_date': form.start_date.value,
         'start_time': form.start_time.value,
         'exp_date': form.exp_date.value,
@@ -48,9 +44,15 @@ form.addEventListener('submit', (e) => {
         data: data,
         success: function (response) {
             if (response.status === 201) {
+                console.log("Success")
+                console.log(response)
+
                 window.location.href = "/question-bank/" + data.subjectId;
             } else {
-                alert("Please fill out all inputs")
+                console.log("Error")
+                console.log(response)
+
+                // alert("Please fill out all inputs")
             }
         },
         error: function (response) {

@@ -38,7 +38,13 @@
                             <tr>
                                 <td>topics of quiz</td>
                                 <td>
-                                    <a style="text-transform: capitalize" href="view-topic.php?topic_id= echo $topic_id; ?>&subject_id= echo $subject_id; ?>"> echo $topic_title; ?> echo ' &#40;'; ?> echo $questions_count; ?> echo '&#41;'; ?> echo '<br>'; ?></a>
+                                    @if(count($quiz->topics) ==! 0)
+                                    @foreach($quiz->topics as $topic)
+                                    <a style="text-transform: capitalize" href="view-topic">{{$topic->title}} {{$topic['pivot']['topic_questions']}}</a><br>
+                                    @endforeach
+                                    @else
+                                    <a style="text-transform: capitalize" href="">0</a><br>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>

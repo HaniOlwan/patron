@@ -26,40 +26,48 @@ class QuizController extends Controller
 
     function create(Request $request)
     {
-        try {
 
+        try {
             $validatedCredentials = $request->validate([
                 'title' => 'required',
                 'subjectId' => 'required',
             ]);
-            Quiz::create(
+            $quiz = Quiz::create(
                 [
                     'title' => $validatedCredentials['title'],
                     'subject_id' => $validatedCredentials['subjectId'],
-                    'start_date' => $request->start_date,
-                    'start_time' => $request->start_date,
-                    'deadline_date' => $request->start_date,
-                    'deadline_time' => $request->start_date,
-                    'duration' => $request->duration,
-                    'mark' => $request->questions_count,
+                    'start_date' => $request['start_date'],
+                    'start_time' => $request['start_time'],
+                    'deadline_date' => $request['exp_date'],
+                    'deadline_time' => $request['exp_time'],
+                    'duration' => $request['duration'],
+                    'mark' => $request['questions_count'],
                     'user_id' => Auth::user()->id,
                 ]
             );
+            foreach ($request['questions'] as $question) {
+                $quiz->topics()->attach($quiz, [
+                    'quiz_id' => $quiz->id,
+                    'topic_id' => $question['topicId'],
+                    'topic_questions' => $question['value']
+                ]);
+            }
             return response()->json(["success" => 'Quiz created successfully', "status" => 201]);
         } catch (Exception $e) {
+            return $e->getMessage();
             return response()->json(["error" => 'Make sure your input is correct', 400]);
         }
     }
 
     function viewQuiz(Quiz $quiz)
     {
-        return $quiz->topic;
+        // $topic = $quiz->topics;
+        // return $topic[0];
         return view('teacher.quiz.view-quiz', compact('quiz'));
     }
 
     function viewEditQuiz(Quiz $quiz)
     {
-        return $quiz->topic;
         return view('teacher.quiz.edit-quiz', compact('quiz'));
     }
 }

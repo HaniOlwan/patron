@@ -27,6 +27,6 @@ class Topic extends Model
 
     public function quizzes()
     {
-        return $this->belongsToMany('Quiz', 'quiz_topic', 'topic_id', 'quiz_id');
+        return $this->belongsToMany('Quiz', 'quiz_topic', 'topic_id', 'quiz_id')->withPivot('topic_questions');
     }
 }

@@ -17,9 +17,9 @@ class CreateQuizTopicTable extends Migration
             $table->id();
             $table->foreignId('quiz_id')->unsigned()->index();
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
-
             $table->foreignId('topic_id')->unsigned()->index();
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->string('topic_questions');
         });
     }
 

@@ -34,8 +34,8 @@ class Quiz extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    function Topic()
+    function topics()
     {
-        return $this->belongsToMany(Topic::class);
+        return $this->belongsToMany(Topic::class, 'quiz_topic', 'quiz_id', 'topic_id')->withPivot('topic_questions');
     }
 }

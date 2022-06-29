@@ -37,7 +37,7 @@ class RegisterController extends Controller
             auth()->login($user);
 
             if ($request->rule === 'teacher') {
-                return redirect()->intended('teacher');
+                return redirect()->intended('dashboard');
             } else {
                 return redirect()->intended('student');
             }

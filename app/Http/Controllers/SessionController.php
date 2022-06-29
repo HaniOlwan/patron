@@ -27,8 +27,7 @@ class SessionController extends Controller
             $request->session()->regenerate(); //prevent session faxation attack
             $rule = User::where('email', $validatedUser['email'])->pluck('rule')->first();
             if ($rule === 'teacher') {
-                return redirect()->intended('teacher');
-                // also send quizz and subject counts for teacher
+                return redirect()->intended('dashboard');
             }
             return redirect()->intended('student');
         } else {
