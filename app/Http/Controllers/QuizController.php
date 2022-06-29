@@ -25,7 +25,6 @@ class QuizController extends Controller
 
     function create(Request $request)
     {
-
         try {
             $validatedCredentials = $request->validate([
                 'title' => 'required',
@@ -67,6 +66,13 @@ class QuizController extends Controller
     {
         return view('teacher.quiz.edit-quiz', ['quiz' => $quiz, 'topics' => $quiz->topics, 'subject' => $quiz->subject]);
     }
+
+    function update(Request $request)
+    {
+        return $request;
+       
+    }
+    
 
     function destroy(Quiz $quiz)
     {

@@ -50,14 +50,12 @@
                             </tr>
                             <tr>
                                 <td># Number of quizzes</td>
-                                <td>{{ $subject->quiz->count() }}</td>
+                                <td>{{ $subject->quizzes->count() }}</td>
                             </tr>
                             <tr>
                                 <td class="last">Created in</td>
                                 <td class="last">{{ $subject->created_at }}</td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -68,7 +66,7 @@
                 <a href="/edit-subject/{{ $subject->id }}">Edit subject</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject"">Delete Subject</a>
                 <a href=" /question-bank/{{ $subject->id}}">Manage Question Bank</a>
-                <a href="/subject/{{ $subject->id }}/create-quiz">Create new Quiz</a>
+                <a href="/quiz/{{ $subject->id }}">Create new Quiz</a>
             </div>
         </div>
         <div class="row">
@@ -98,7 +96,8 @@
                         @php
                         $row_count =1;
                         @endphp
-                        @foreach($subject->quiz as $quiz)
+                        @if(count($subject->quizzes) != 0)
+                        @foreach($subject->quizzes as $quiz)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a href="quiz-details.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>">{{ $quiz->title }}</a></td>
@@ -108,6 +107,7 @@
                             <td scope="col"><a><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

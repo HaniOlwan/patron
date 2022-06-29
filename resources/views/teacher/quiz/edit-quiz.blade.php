@@ -21,16 +21,22 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form method="post">
+                <form class="quiz_form">
                     @csrf
-                    @method('PATCH')
+                    @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session()->get('error') }}
+                    </div>
+                    @endif
                     <div class="form-group row">
                         <label for="quiz-title" class="col-sm-2 col-form-label">Quiz title</label>
                         <div class="col-sm-10">
                             <input type="text" name="title" value="{{ $quiz->title }}" class="form-control" id="quiz-title" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="Select-topics" class="col-sm-2 col-form-label">Select topics </label>
                         <span class="select-topics">&#40;select which topics are included in the quiz and amount of questions from each topic&#41;</span>
@@ -87,16 +93,16 @@
 
                     <div class="form-group row ">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" name="edit_quiz" class="btn btn-primary">Edit Quiz</button>
+                            <button type="submit" class="btn btn-primary">Edit Quiz</button>
                         </div>
                     </div>
-
+                    <input type="hidden" name="quizId" value="{{ $quiz->id }}">
                 </form>
             </div>
         </div>
-
     </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
-
+<meta name="_token" content="{{ csrf_token() }}">
+<script src="{{ asset('js/editQuiz.js') }}"></script>
 @endsection

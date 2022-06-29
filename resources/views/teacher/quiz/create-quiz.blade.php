@@ -83,7 +83,7 @@
 
                     <div class="form-group row ">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-primary">Create Quiz</button>
+                            <button type="submit" class="btn btn-primary submit_btn" data-op="create-quiz">Create Quiz</button>
                         </div>
                     </div>
                     <input type="hidden" name="subjectId" value="{{ $topics[0]->subject->id }}">
