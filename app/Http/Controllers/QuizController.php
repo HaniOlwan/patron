@@ -61,13 +61,16 @@ class QuizController extends Controller
 
     function viewQuiz(Quiz $quiz)
     {
-        // $topic = $quiz->topics;
-        // return $topic[0];
         return view('teacher.quiz.view-quiz', compact('quiz'));
     }
 
     function viewEditQuiz(Quiz $quiz)
     {
         return view('teacher.quiz.edit-quiz', compact('quiz'));
+    }
+    function destroy(Quiz $quiz)
+    {
+        if (!$quiz) return response()->json(['success' => false], 404);
+        return response()->json(['success' => $quiz->delete()], 200);
     }
 }

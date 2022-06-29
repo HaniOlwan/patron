@@ -40,7 +40,7 @@
                                 <td>
                                     @if(count($quiz->topics) ==! 0)
                                     @foreach($quiz->topics as $topic)
-                                    <a style="text-transform: capitalize" href="view-topic">{{$topic->title}} {{$topic['pivot']['topic_questions']}}</a><br>
+                                    <a style="text-transform: capitalize" href="/view-topic/{{ $topic->id }}">{{$topic->title}} {{$topic['pivot']['topic_questions']}}</a><br>
                                     @endforeach
                                     @else
                                     <a style="text-transform: capitalize" href="">0</a><br>

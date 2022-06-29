@@ -73,7 +73,7 @@
                             <td scope="col"><a href="quiz-sample.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>" target="_blank"><i class="far fa-file-alt"></i></a></td>
                             <td scope="col"><a href="analysis-result.html"><i class="fas fa-chart-pie"></i></a></td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}/edit-quiz"><i class="fas fa-pencil-alt"></i></a></td>
-                            <td scope="col"><a onclick="return confirm('Are you sure deleting quiz  echo $quiz_title; ?> ? \nBy deleting the quiz everything related to this quiz will be deleted such as students answers and analysis, and you will not be able to recover this data anymore!')" href="view-quizzes.php?delete_quiz= echo $quiz_id; ?>"><i class="fas fa-trash-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -83,5 +83,20 @@
     </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
-
+<!-- Delete Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Do you really want to delete this Topic? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger active delete_modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<meta name="_token" content="{{ csrf_token() }}">
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 @endsection
