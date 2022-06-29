@@ -9,7 +9,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3> echo $quiz_title; ?></h3>
+                        <h3>{{ $quiz->title }}</h3>
                     </div>
 
                 </div>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'title',
         'teacher_id',
@@ -25,9 +25,8 @@ class Topic extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function Quiz()
+    public function quizzes()
     {
-        return $this->hasMany(Quiz::class);
+        return $this->belongsToMany('Quiz', 'quiz_topic', 'topic_id', 'quiz_id');
     }
-
 }

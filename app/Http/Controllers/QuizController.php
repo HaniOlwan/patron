@@ -40,7 +40,7 @@ class QuizController extends Controller
                     'start_time' => $request->start_date,
                     'deadline_date' => $request->start_date,
                     'deadline_time' => $request->start_date,
-                    'duration' => $request->start_date,
+                    'duration' => $request->duration,
                     'mark' => $request->questions_count,
                     'user_id' => Auth::user()->id,
                 ]
@@ -53,6 +53,13 @@ class QuizController extends Controller
 
     function viewQuiz(Quiz $quiz)
     {
+        return $quiz->topic;
         return view('teacher.quiz.view-quiz', compact('quiz'));
+    }
+
+    function viewEditQuiz(Quiz $quiz)
+    {
+        return $quiz->topic;
+        return view('teacher.quiz.edit-quiz', compact('quiz'));
     }
 }

@@ -66,7 +66,7 @@
                     </thead>
                     <tbody>
                         @php
-                        $row_count=1
+                        $row_count=1;
                         @endphp
                         @foreach($topics as $topic)
                         <tr>
@@ -116,10 +116,12 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @php
+                        $row_countt=1;
+                        @endphp
                         @foreach($questions as $question)
                         <tr>
-                            <th scope="row"> question no</th>
+                            <th scope="row">{{ $row_countt++ }}</th>
                             <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $question->topic->title }}</a></th>
                             <th scope="col">{{ $question->title }}</th>
                             <th scope="col">{{ $question->first_answer }}</th>

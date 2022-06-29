@@ -82,10 +82,9 @@ class SubjectContoller extends Controller
         return redirect('/subjects')->with('success', 'Subject edited successfully.');
     }
 
-    function viewSubject($id)
+    function viewSubject(Subject $subject)
     {
-        $subject = Subject::query()->whereSubjectId($id)->first();
-        return view('teacher.subject.view-subject', ['subject' => $subject]);
+        return view('teacher.subject.view-subject', compact('subject'));
     }
 
     function questionBank(Subject $subject)

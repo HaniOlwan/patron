@@ -72,7 +72,7 @@
                             <td scope="col"><a href="quiz-details.php?quiz_id= echo $quiz_id; ?>&subject_id= echo $subject_id; ?>#students"> </a></td>
                             <td scope="col"><a href="quiz-sample.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>" target="_blank"><i class="far fa-file-alt"></i></a></td>
                             <td scope="col"><a href="analysis-result.html"><i class="fas fa-chart-pie"></i></a></td>
-                            <td scope="col"><a href="edit-quiz.php?quiz_id= echo $quiz_id; ?>&subject_id= echo $subject_id; ?>"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a href="/quiz/{{ $quiz->id }}/edit-quiz"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a onclick="return confirm('Are you sure deleting quiz  echo $quiz_title; ?> ? \nBy deleting the quiz everything related to this quiz will be deleted such as students answers and analysis, and you will not be able to recover this data anymore!')" href="view-quizzes.php?delete_quiz= echo $quiz_id; ?>"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         @endforeach

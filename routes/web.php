@@ -53,7 +53,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
 
-    Route::get('/subject/{id}', [SubjectContoller::class, 'viewSubject']);
+    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
 
@@ -65,11 +65,13 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/subject/{subject}/create-quiz', [QuizController::class, 'viewCreatePage']);
     Route::post('/subject/{subject}/create-quiz', [QuizController::class, 'create']);
     Route::get('/quiz/{quiz}', [QuizController::class, 'viewQuiz']);
+    Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);
 
 
 
-    Route::get('/topic/{subject:subject_id}', [TopicController::class, 'index']);
-    Route::post('/topic/{subject:subject_id}', [TopicController::class, 'create']);
+
+    Route::get('/topic/{subject}', [TopicController::class, 'index']);
+    Route::post('/topic/{subject}', [TopicController::class, 'create']);
     Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
     Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
     Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
