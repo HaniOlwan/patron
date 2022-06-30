@@ -1,11 +1,11 @@
 const token = document.querySelector('meta[name="_token"]').content;
-const form = document.querySelector('.quiz_form');
+const form = document.querySelector('.topic_form');
 const questionInputs = document.querySelectorAll('.questions_count')
 const selectedQuestions = document.querySelectorAll('.selected_questions')
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-
+    const quizId = form.quizId.value;
     // Get question count 
     let count = 0;
     let questions = [];
@@ -20,17 +20,6 @@ form.addEventListener('submit', (e) => {
             })
         }
     }
-    const data = {
-        'title': form.title.value,
-        'questions': questions,
-        'start_date': form.start_date.value,
-        'start_time': form.start_time.value,
-        'exp_date': form.exp_date.value,
-        'exp_time': form.exp_time.value,
-        'subjectId': form.subjectId.value,
-        'duration': form.duration.value,
-        'mark': count,
-    }
 
     $.ajaxSetup({
         headers: {
@@ -39,16 +28,16 @@ form.addEventListener('submit', (e) => {
     })
 
     $.ajax({
-        url: "/quiz/" + data.subjectId + "/" + "create-quiz",
+        url: "/quiz/" + quizId + "/select-topic",
         type: "POST",
-        data: data,
+
+        data: { "data": questions },
+
         success: function (response) {
             if (response.status === 201) {
-                console.log(response)
-                window.location.href = "/question-bank/" + data.subjectId;
-            } else {
-                console.log(response)
-                // alert("Please fill out all inputs")
+                window.location.href = "/quiz/" + quizId + " /edit-quiz"
+            } else if (response.status === 400) {
+                alert("Please fill out number inputs")
             }
         },
         error: function (response) {

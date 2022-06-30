@@ -48,7 +48,7 @@
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}" {{ ($topic->id) ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
-                                <input type="number" value="{{$topic->pivot['topic_questions']}}" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
+                                <input type="number" value="{{ $topic->pivot['topic_questions']}}" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
                             @endif
@@ -56,7 +56,7 @@
                         @if(count($topics) == 0)
                         <div class="alert alert-danger" role="alert" style="margin: 0 auto; margin-bottom: 20px ">
                             {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.'
-                            <a href="/topic/{{ $subject->id }}">Add Topic</a>
+                            <a href="/quiz/{{ $quiz->id }}/select-topic">Select Topic</a>
                         </div>
                         @endif
                     </div>

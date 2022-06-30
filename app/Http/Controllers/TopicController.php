@@ -64,4 +64,6 @@ class TopicController extends Controller
         if (!$topic) return response()->json(['success' => false], 404);
         return response()->json(['success' => $topic->delete()], 200);
     }
+
+   
 }

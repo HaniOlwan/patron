@@ -31,7 +31,7 @@
 -->
             <div class="col text-right">
                 <a href="/topic/{{ $subject->id }}">Add new topic</a>
-                <a href="/subject/{{ $subject->id }}/create-quiz">Create new Quiz</a>
+                <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>
 

@@ -65,7 +65,7 @@
                         <tr>
                             <td scope="col">{{ $row_count++ }}</td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}">{{ $quiz->title }}</a></td>
-                            <td scope="col"><a href="view-subject.php?subject_id= echo $subject_id; ?>">{{ $quiz->subject->title }}</a></td>
+                            <td scope="col"><a href="/subject/{{ $quiz->subject->id }}">{{ $quiz->subject->title }}</a></td>
                             <td scope="col">{{ $quiz->deadline_date }}</td>
                             <td scope="col">{{ $quiz->deadline_time }}</td>
                             <td scope="col">{{ $quiz->duration }}</td>

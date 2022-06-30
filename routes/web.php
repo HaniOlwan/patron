@@ -68,10 +68,12 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);
     Route::patch('/quiz/{quiz}/edit-quiz', [QuizController::class, 'update']);
 
+    Route::get('/quiz/{quiz}/select-topic', [QuizController::class, 'viewSelectPage']);
+    Route::post('/quiz/{quiz}/select-topic', [QuizController::class, 'selectTopic']);
+
+
+
     Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
-
-
-
 
 
     Route::get('/topic/{subject}', [TopicController::class, 'index']);

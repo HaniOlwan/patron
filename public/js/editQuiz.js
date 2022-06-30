@@ -47,7 +47,7 @@ form.addEventListener('submit', (e) => {
             if (response.status === 201) {
                 console.log("Success")
                 console.log(response)
-                history.go(-2);
+                // history.go(-2);
             } else {
                 console.log("Error")
                 console.log(response)

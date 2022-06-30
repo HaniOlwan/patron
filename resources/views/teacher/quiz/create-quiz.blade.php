@@ -86,7 +86,7 @@
                             <button type="submit" class="btn btn-primary submit_btn" data-op="create-quiz">Create Quiz</button>
                         </div>
                     </div>
-                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject->id }}">
+                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject_id }}">
                 </form>
             </div>
         </div>

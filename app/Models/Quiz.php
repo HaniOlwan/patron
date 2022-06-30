@@ -38,4 +38,6 @@ class Quiz extends Model
     {
         return $this->belongsToMany(Topic::class, 'quiz_topic', 'quiz_id', 'topic_id')->withPivot('topic_questions');
     }
+
+  
 }
