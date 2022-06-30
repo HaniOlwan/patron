@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'title',
         'teacher_id',
         'subject_id'
     ];
 
-    public function Subject()
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
@@ -25,4 +25,8 @@ class Topic extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function quizzes()
+    {
+        return $this->belongsToMany('Quiz', 'quiz_topic', 'topic_id', 'quiz_id')->withPivot('topic_questions');
+    }
 }

@@ -56,12 +56,11 @@
                 <li class="cd-side__label"><span><i class="fas fa-tachometer-alt"></i> Dashboard</span></li>
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
                     <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
-
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">count</span></a>
+                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">{{ Auth::user()->subjects->count() }}</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
@@ -71,10 +70,10 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
+                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ Auth::user()->quizs->count() }}</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/view-quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
                     </ul>
                 </li>
 

@@ -23,8 +23,14 @@ class Subject extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Topic()
+    public function topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
     }
 }

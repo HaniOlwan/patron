@@ -40,6 +40,7 @@ class QuestionController extends Controller
             ]);
             return redirect('/view-topic' . "/" . $topic->id)->with('success', 'Question created successfully.');
         } catch (ValidationException $e) {
+            return dd($e);
             return redirect('/view-topic' . "/" . $topic->id)->with('error', 'Could not create question.');
         }
     }
@@ -71,9 +72,9 @@ class QuestionController extends Controller
                 'forth_answer' => $validatedCredentials['answer4'],
                 'correct_answer' => $validatedCredentials['correct_answer'],
             ]);
-            return redirect('/question-bank' . "/" . $question->topic->subject->subject_id)->with('success', 'Question edited successfully.');
+            return redirect('/question-bank' . "/" . $question->topic->subject->id)->with('question_success', 'Question edited successfully.');
         } catch (ValidationException $e) {
-            return redirect('/question-bank' . "/" . $question->topic->subject->subject_id)->with('error', 'Could not update question.');
+            return redirect('/question-bank' . "/" . $question->topic->subject->id)->with('question_error', 'Could not update question.');
         }
     }
 

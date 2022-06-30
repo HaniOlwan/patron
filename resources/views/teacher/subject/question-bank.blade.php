@@ -30,8 +30,8 @@
             </div>
 -->
             <div class="col text-right">
-                <a href="/topic/{{ $subject->subject_id }}">Add new topic</a>
-                <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
+                <a href="/topic/{{ $subject->id }}">Add new topic</a>
+                <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                     </thead>
                     <tbody>
                         @php
-                        $row_count=1
+                        $row_count=1;
                         @endphp
                         @foreach($topics as $topic)
                         <tr>
@@ -74,7 +74,7 @@
                             <th scope="col"><a href="/view-topic/{{ $topic->id }}}">{{ $topic->title }}</a></th>
                             <th scope="col">{{ $topic->question->count() }}</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_btn" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->subject_id }}"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_btn" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->id }}"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -85,20 +85,20 @@
         <div class="row">
             <div class="col">
                 <h3>All Questions</h3>
-                @if(session()->has('error'))
+                @if(session()->has('question_error'))
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('error') }}
+                    {{ session()->get('quesiton_error') }}
                 </div>
                 @endif
-                @if(session()->has('success'))
+                @if(session()->has('question_success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('success') }}
+                    {{ session()->get('question_success') }}
                 </div>
                 @endif
                 <table class="table table-striped">
@@ -116,10 +116,12 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @php
+                        $row_countt=1;
+                        @endphp
                         @foreach($questions as $question)
                         <tr>
-                            <th scope="row"> question no</th>
+                            <th scope="row">{{ $row_countt++ }}</th>
                             <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $question->topic->title }}</a></th>
                             <th scope="col">{{ $question->title }}</th>
                             <th scope="col">{{ $question->first_answer }}</th>

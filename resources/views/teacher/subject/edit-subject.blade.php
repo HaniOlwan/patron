@@ -22,7 +22,7 @@
     <div class="container">
         <div class="create row">
             <div class="col ">
-                <form action="/edit-subject/{{ $subject->subject_id }}" method="post">
+                <form action="/edit-subject/{{ $subject->id }}" method="post">
                     @csrf
                     @method('PATCH')
                     @if(session()->has('error'))
@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="Subject-id" class="col-sm-2 col-form-label">Subject id</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="subject_id" id="Subject-id" value="{{ $subject->subject_id }}" required>
+                            <input type="text" class="form-control" name="subject_id" id="Subject-id" value="{{ $subject->id }}" required>
                         </div>
                     </div>
                     <div class="form-group row">

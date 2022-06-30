@@ -32,7 +32,7 @@ class TopicController extends Controller
                 'teacher_id' => $request->user()->id,
                 'subject_id' => $subject->id
             ]);
-            return redirect('/question-bank' . '/' . $subject->subject_id)->with('topic_success', 'Topic created successfully.');
+            return redirect('/question-bank' . '/' . $subject->id)->with('topic_success', 'Topic created successfully.');
         } catch (ValidationException $e) {
             return back()->with('topic_error', 'Could not create topic.');
         }
@@ -53,9 +53,9 @@ class TopicController extends Controller
             $topic->update([
                 'title' => $validatedCredentials['title']
             ]);
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('topic_success', 'Topic edited successfully.');
+            return redirect('/question-bank' . "/" . $topic->subject->id)->with('success', 'Topic edited successfully.');
         } catch (ValidationException $e) {
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('topic_error', 'Could not update topic.');
+            return redirect('/question-bank' . "/" . $topic->subject->id)->with('error', 'Could not update topic.');
         }
     }
 
@@ -64,4 +64,6 @@ class TopicController extends Controller
         if (!$topic) return response()->json(['success' => false], 404);
         return response()->json(['success' => $topic->delete()], 200);
     }
+
+   
 }

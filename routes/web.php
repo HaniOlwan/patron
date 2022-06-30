@@ -53,31 +53,40 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
 
-    Route::get('/subject/{id}', [SubjectContoller::class, 'viewSubject']);
+    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
     Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
     Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
 
-    Route::get('/question-bank/{subject:subject_id}', [SubjectContoller::class, 'questionBank']);
+    Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
 
 
 
     Route::get('/quizzes', [QuizController::class, 'index']);
-    Route::get('/subject/{subject:subject_id}/create-quiz', [QuizController::class, 'viewCreatePage']);
-    Route::post('/subject/{subject:subject_id}/create-quiz', [QuizController::class, 'create']);
+    Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'viewCreatePage']);
+    Route::post('/quiz/{subject}/create-quiz', [QuizController::class, 'create']);
+    Route::get('/quiz/{quiz}', [QuizController::class, 'viewQuiz']);
+    Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);
+    Route::patch('/quiz/{quiz}/edit-quiz', [QuizController::class, 'update']);
+
+    Route::get('/quiz/{quiz}/select-topic', [QuizController::class, 'viewSelectPage']);
+    Route::post('/quiz/{quiz}/select-topic', [QuizController::class, 'selectTopic']);
 
 
-    Route::get('/topic/{subject:subject_id}', [TopicController::class, 'index']);
-    Route::post('/topic/{subject:subject_id}', [TopicController::class, 'create']);
+
+    Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
+
+
+    Route::get('/topic/{subject}', [TopicController::class, 'index']);
+    Route::post('/topic/{subject}', [TopicController::class, 'create']);
     Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
     Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
-    Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
-    Route::get('/view-topic/{topic:id}', [TopicController::class, 'viewTopic']);
+    Route::get('/view-topic/{topic}', [TopicController::class, 'viewTopic']);
+    Route::delete('/topic/{topic}', [TopicController::class, 'destroy']);
 
 
-    Route::get('/{topic:id}/create-question', [QuestionController::class, 'index']);
-    Route::post('/{topic:id}/create-question', [QuestionController::class, 'create']);
+    Route::get('/{topic}/create-question', [QuestionController::class, 'index']);
+    Route::post('/{topic}/create-question', [QuestionController::class, 'create']);
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
-
 });

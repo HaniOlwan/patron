@@ -25,4 +25,9 @@ class Question extends Model
     {
         return $this->belongsTo(Topic::class);
     }
+
+    function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
 }

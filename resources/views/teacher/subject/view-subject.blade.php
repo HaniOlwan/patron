@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>Subject id</td>
-                                <td>{{ $subject->subject_id }}</td>
+                                <td>{{ $subject->id }}</td>
                             </tr>
                             <tr>
                                 <td>Instructor name</td>
@@ -50,14 +50,12 @@
                             </tr>
                             <tr>
                                 <td># Number of quizzes</td>
-                                <td>echo $quizzes_count; ?></td>
+                                <td>{{ $subject->quizzes->count() }}</td>
                             </tr>
                             <tr>
                                 <td class="last">Created in</td>
                                 <td class="last">{{ $subject->created_at }}</td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -65,15 +63,15 @@
         </div>
         <div class="add row">
             <div class="col text-right ">
-                <a href="/edit-subject/{{ $subject->subject_id }}">Edit subject</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject"">Delete Subject</a>
-                <a href="/question-bank/{{ $subject->subject_id }}">Manage Question Bank</a>
-                <a href="/subject/{{ $subject->subject_id }}/create-quiz">Create new Quiz</a>
+                <a href="/edit-subject/{{ $subject->id }}">Edit subject</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"">Delete Subject</a>
+                <a href="/question-bank/{{ $subject->id}}">Manage Question Bank</a>
+                <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="alert alert-danger" role="alert">
+                <!-- <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -82,7 +80,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+                </div> -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -95,14 +93,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count =1;
+                        @endphp
+                        @foreach($subject->quizzes as $quiz)
                         <tr>
-                            <td scope="row"> echo $quiz_number; ?></td>
-                            <td scope="col"><a href="quiz-details.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>"> echo $row4['quiz_title']; ?></a></td>
-                            <td scope="col"> echo $questions_count; ?></td>
-                            <td scope="col"><a href="quiz-details.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>#students"> echo $students_count; ?></a></td>
-                            <td scope="col"><a href="edit-quiz.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>"><i class="fas fa-pencil-alt"></i></a></td>
-                            <!-- <td scope="col"><a onclick="return confirm('Are you sure deleting quiz  echo $row4['quiz_title']; ?> ? \nBy deleting the quiz everything related to this quiz will be deleted such as students answers and analysis, and you will not be able to recover this data anymore!')" href="view-subject.php?subject_id= echo $subject_id; ?>&delete_quiz= echo $quiz_id; ?>"><i class="fas fa-trash-alt"></i></a></td> -->
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col"><a href="">{{ $quiz->title }}</a></td>
+                            <td scope="col">{{$quiz->questions->count()}}</td>
+                            <td scope="col"><a href="">Students count</a></td>
+                            <td scope="col"><a href=""><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

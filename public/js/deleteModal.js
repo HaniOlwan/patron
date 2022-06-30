@@ -56,7 +56,6 @@ if (modaleDelete) {
             },
             error: function (result) {
                 console.log("Some error occured")
-
             }
         });
     })
