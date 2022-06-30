@@ -45,7 +45,7 @@
         <div class="add row">
             <div class="col text-right">
                 <a href="/topic/{{ $topic->id }}/edit">Edit topic</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->subject_id }}">Delete Topic</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->id }}">Delete Topic</a>
                 <a href="/{{ $topic->id }}/create-question/">Add new question</a>
             </div>
         </div>

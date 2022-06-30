@@ -53,9 +53,9 @@ class TopicController extends Controller
             $topic->update([
                 'title' => $validatedCredentials['title']
             ]);
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('success', 'Topic edited successfully.');
+            return redirect('/question-bank' . "/" . $topic->subject->id)->with('success', 'Topic edited successfully.');
         } catch (ValidationException $e) {
-            return redirect('/question-bank' . "/" . $topic->subject->subject_id)->with('error', 'Could not update topic.');
+            return redirect('/question-bank' . "/" . $topic->subject->id)->with('error', 'Could not update topic.');
         }
     }
 

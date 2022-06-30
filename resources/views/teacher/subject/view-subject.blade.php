@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>Subject id</td>
-                                <td>{{ $subject->subject_id }}</td>
+                                <td>{{ $subject->id }}</td>
                             </tr>
                             <tr>
                                 <td>Instructor name</td>
@@ -64,7 +64,7 @@
         <div class="add row">
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->id }}">Edit subject</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->subject_id }}" data-url="subject"">Delete Subject</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"">Delete Subject</a>
                 <a href="/question-bank/{{ $subject->id}}">Manage Question Bank</a>
                 <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>

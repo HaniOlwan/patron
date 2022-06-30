@@ -72,9 +72,9 @@ class QuestionController extends Controller
                 'forth_answer' => $validatedCredentials['answer4'],
                 'correct_answer' => $validatedCredentials['correct_answer'],
             ]);
-            return redirect('/question-bank' . "/" . $question->topic->subject->subject_id)->with('question_success', 'Question edited successfully.');
+            return redirect('/question-bank' . "/" . $question->topic->subject->id)->with('question_success', 'Question edited successfully.');
         } catch (ValidationException $e) {
-            return redirect('/question-bank' . "/" . $question->topic->subject->subject_id)->with('question_error', 'Could not update question.');
+            return redirect('/question-bank' . "/" . $question->topic->subject->id)->with('question_error', 'Could not update question.');
         }
     }
 
