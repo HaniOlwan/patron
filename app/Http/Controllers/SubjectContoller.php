@@ -84,7 +84,6 @@ class SubjectContoller extends Controller
 
     function viewSubject(Subject $subject)
     {
-        // return $subject->quizzes[0];
         return view('teacher.subject.view-subject', compact('subject'));
     }
 

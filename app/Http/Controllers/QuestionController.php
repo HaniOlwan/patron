@@ -40,6 +40,7 @@ class QuestionController extends Controller
             ]);
             return redirect('/view-topic' . "/" . $topic->id)->with('success', 'Question created successfully.');
         } catch (ValidationException $e) {
+            return dd($e);
             return redirect('/view-topic' . "/" . $topic->id)->with('error', 'Could not create question.');
         }
     }

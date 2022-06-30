@@ -41,6 +41,6 @@ class Quiz extends Model
 
     function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasManyThrough(Question::class, Subject::class,'id');
     }
 }

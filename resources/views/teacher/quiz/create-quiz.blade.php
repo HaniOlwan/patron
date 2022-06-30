@@ -34,8 +34,8 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-10">
-                            @if(count($subject->topics)!== 0)
-                            @foreach($topics as $topic)
+                            @if(isset($subject->topics))
+                            @foreach($subject->topics as $topic)
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}">
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>

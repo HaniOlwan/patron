@@ -81,11 +81,11 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/topic/{topic:id}/edit', [TopicController::class, 'viewEditTopic']);
     Route::patch('/topic/{topic:id}/edit', [TopicController::class, 'update']);
     Route::get('/view-topic/{topic}', [TopicController::class, 'viewTopic']);
-    Route::delete('/topic/{topic:id}', [TopicController::class, 'destroy']);
+    Route::delete('/topic/{topic}', [TopicController::class, 'destroy']);
 
 
-    Route::get('/{topic:id}/create-question', [QuestionController::class, 'index']);
-    Route::post('/{topic:id}/create-question', [QuestionController::class, 'create']);
+    Route::get('/{topic}/create-question', [QuestionController::class, 'index']);
+    Route::post('/{topic}/create-question', [QuestionController::class, 'create']);
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
