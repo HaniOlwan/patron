@@ -34,6 +34,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-10">
+                            @if(count($subject->topics)!== 0)
                             @foreach($topics as $topic)
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}">
@@ -41,42 +42,43 @@
                                 <input type="number" value="0" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
+                            @endif
                         </div>
-                        @if(!$topics)
+                        @if(count($subject->topics)==0)
                         <div class="alert alert-danger" role="alert" style="margin: 0 auto; margin-bottom: 20px ">
                             {{$subject->title}} . ' does not have any topics yet, try to add topics and questions first.'
-                            <a href="/topic/{{ $subject->subject_id }}">Add Topic</a>
+                            <a href="/topic/{{ $subject->id }}">Add Topic</a>
                         </div>
                         @endif
                     </div>
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="start_date" value="" class="form-control" id="date">
+                            <input type="date" name="start_date" value="" class="form-control" id="date" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="time" class="col-sm-2 col-form-label">Start time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="start_time" value="" class="form-control" id="time">
+                            <input type="time" name="start_time" value="" class="form-control" id="time" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-date" class="col-sm-2 col-form-label">Deadline date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="exp_date" value="" class="form-control" id="exp-date">
+                            <input type="date" name="exp_date" value="" class="form-control" id="exp-date" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-time" class="col-sm-2 col-form-label">Deadline time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="exp_time" value="" class="form-control" id="exp-time">
+                            <input type="time" name="exp_time" value="" class="form-control" id="exp-time" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="duration" class="col-sm-2 col-form-label">Select duration <span class="minutes">&#40;minutes&#41;</span></label>
                         <div class="col-sm-10">
-                            <input type="number" name="duration" value="" class="form-control" id="duration">
+                            <input type="number" name="duration" value="" class="form-control" id="duration" required>
 
                         </div>
                     </div>
@@ -86,7 +88,7 @@
                             <button type="submit" class="btn btn-primary submit_btn" data-op="create-quiz">Create Quiz</button>
                         </div>
                     </div>
-                    <input type="hidden" name="subjectId" value="{{ $topics[0]->subject_id }}">
+                    <input type="hidden" name="subjectId" value="{{ $subject->id }}">
                 </form>
             </div>
         </div>

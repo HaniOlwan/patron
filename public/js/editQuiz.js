@@ -45,14 +45,9 @@ form.addEventListener('submit', (e) => {
         data: data,
         success: function (response) {
             if (response.status === 201) {
-                console.log("Success")
-                console.log(response)
-                // history.go(-2);
+                window.location.href = "/quizzes"
             } else {
-                console.log("Error")
-                console.log(response)
-
-                // alert("Please fill out all inputs")
+                alert("Please fill out all inputs")
             }
         },
         error: function (response) {

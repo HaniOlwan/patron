@@ -79,7 +79,7 @@
         </div>
         <div class="add row">
             <div class="col text-right">
-                <a href="edit-quiz.php?quiz_id= echo $quiz_id; ?>&subject_id= echo $subject_id; ?>">Edit Quiz</a>
+                <a href="/quiz/{{$quiz->id}}/edit-quiz">Edit Quiz</a>
                 <a onclick="return confirm('Are you sure deleting quiz  echo $quiz_title; ?> ? \nBy deleting the quiz everything related to this quiz will be deleted such as students answers and analysis, and you will not be able to recover this data anymore!')" href="view-quizzes.php?delete_quiz= echo $quiz_id; ?>">Delete Quiz</a>
                 <a href="quiz-sample.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>" target="_blank">View Quiz Sample</a>
                 <a href="">View Analysis Result</a>

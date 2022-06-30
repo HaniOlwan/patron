@@ -22,8 +22,7 @@ class QuizController extends Controller
 
     function viewCreatePage(Subject $subject)
     {
-        $topics = $subject->topics;
-        return view('teacher.quiz.create-quiz', ['subject' => $subject, 'topics' => $topics]);
+        return view('teacher.quiz.create-quiz', compact('subject'));
     }
 
     function create(Request $request)
@@ -129,14 +128,10 @@ class QuizController extends Controller
     {
 
         foreach ($request->data as $question) {
-            if (!$quiz->topics->contains($question['topicId'])) {
-                $quiz->topics()->attach($quiz, [
-                    'topic_id' => $question['topicId'],
-                    'topic_questions' => $question['value']
-                ]); // add new record
-            } else {
-                return response()->json(['success' => false], 400);
-            }
+            $quiz->topics()->attach($quiz, [
+                'topic_id' => $question['topicId'],
+                'topic_questions' => $question['value']
+            ]); // add new record
         }
         return response()->json(['success' => "Topic added to quiz"], 201);
 

@@ -32,9 +32,9 @@ class TopicController extends Controller
                 'teacher_id' => $request->user()->id,
                 'subject_id' => $subject->id
             ]);
-            return redirect('/question-bank' . '/' . $subject->id)->with('success', 'Topic created successfully.');
+            return redirect('/question-bank' . '/' . $subject->id)->with('topic_success', 'Topic created successfully.');
         } catch (ValidationException $e) {
-            return back()->with('error', 'Could not create topic.');
+            return back()->with('topic_error', 'Could not create topic.');
         }
     }
 

@@ -23,8 +23,8 @@ class CreateQuestionsTable extends Migration
             $table->string('third_answer');
             $table->string('forth_answer');
             $table->string('correct_answer');
-            $table->bigInteger('subject_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->bigInteger('quiz_id')->unsigned()->index()->nullable();
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->bigInteger('teacher_id')->unsigned()->index()->nullable();
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

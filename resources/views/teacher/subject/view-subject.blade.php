@@ -101,7 +101,7 @@
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a href="quiz-details.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>">{{ $quiz->title }}</a></td>
-                            <td scope="col"> echo $questions_count; ?></td>
+                            <td scope="col">{{$quiz->questions}}</td>
                             <td scope="col"><a href="quiz-details.php?quiz_id= echo $row4['id']; ?>&subject_id= echo $subject_id; ?>#students">Students count</a></td>
                             <td scope="col"><a href=""><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a><i class="fas fa-trash-alt"></i></a></td>

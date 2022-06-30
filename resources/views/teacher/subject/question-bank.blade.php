@@ -38,20 +38,20 @@
         <div class="row">
             <div class="col">
                 <h3>All Topics</h3>
-                @if(session()->has('error'))
+                @if(session()->has('topic_error'))
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('error')}}
+                    {{ session()->get('topic_error')}}
                 </div>
                 @endif
-                @if(session()->has('success'))
+                @if(session()->has('topic_success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{session()->get('success')}}
+                    {{session()->get('topic_success')}}
                 </div>
                 @endif
                 <table class="table table-striped">
@@ -85,20 +85,20 @@
         <div class="row">
             <div class="col">
                 <h3>All Questions</h3>
-                @if(session()->has('error'))
+                @if(session()->has('question_error'))
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('error') }}
+                    {{ session()->get('quesiton_error') }}
                 </div>
                 @endif
-                @if(session()->has('success'))
+                @if(session()->has('question_success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    {{ session()->get('success') }}
+                    {{ session()->get('question_success') }}
                 </div>
                 @endif
                 <table class="table table-striped">

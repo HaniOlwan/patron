@@ -73,7 +73,7 @@
                     <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ Auth::user()->quizs->count() }}</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/view-quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
                     </ul>
                 </li>
 

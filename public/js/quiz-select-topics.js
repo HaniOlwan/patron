@@ -34,11 +34,7 @@ form.addEventListener('submit', (e) => {
         data: { "data": questions },
 
         success: function (response) {
-            if (response.status === 201) {
-                window.location.href = "/quiz/" + quizId + " /edit-quiz"
-            } else if (response.status === 400) {
-                alert("Please fill out number inputs")
-            }
+            window.location.href = "/quiz/" + quizId + " /edit-quiz"
         },
         error: function (response) {
             return response;
