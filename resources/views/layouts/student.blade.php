@@ -18,7 +18,7 @@
 
     <header class="cd-main-header js-cd-main-header">
         <div class="cd-logo-wrapper">
-            <h1><a href="/dashboard" class="cd-logo">PATRON</a></h1>
+            <h1><a href="/student" class="cd-logo">PATRON</a></h1>
         </div>
 
         <div class="cd-search js-cd-search">
@@ -33,7 +33,7 @@
 
             <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
 
-                <a href="/profile">
+                <a href="/student/profile">
                     <i class="far fa-user-circle"></i>
                     <span>{{ Auth::user()->first_name." ".Auth::user()->last_name }}</span>
                 </a>
@@ -60,20 +60,20 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">count</span></a>
+                    <a href="/student/subjects"><i class="fas fa-book-open"></i> Subjects<span class="cd-count">count</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
-                        <li class="cd-side__sub-item"><a href="/join-subject"><i class="fas fa-plus-circle"></i> Join subject</a></li>
+                        <li class="cd-side__sub-item"><a href="/student/subjects"><i class="fas fa-server"></i> View subjects</a></li>
+                        <li class="cd-side__sub-item"><a href="/student/join-subject"><i class="fas fa-plus-circle"></i> Join subject</a></li>
                     </ul>
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
+                    <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/student/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
                     </ul>
                 </li>
             </ul>

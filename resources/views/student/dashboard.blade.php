@@ -23,13 +23,13 @@
                     <div class="card-header">
                         <div class="head">
                             <h3>Join Subject</h3>
-                            <a href="join-subject.php">Join Subject ></a>
+                            <a href="/student/join-subject">Join Subject ></a>
                         </div>
                         <i class="dash-icon fas fa-plus-circle"></i>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Here you can join any subject by searching its name or id, enter its join code if it's a private subject.</p>
-                        <a href="join-subject.php">Join new Subject</a>
+                        <a href="/student/join-subject">Join new Subject</a>
                     </div>
                 </div>
             </div>
@@ -38,13 +38,13 @@
                     <div class="card-header">
                         <div class="head">
                             <h3>Subjects</h3>
-                            <a href="std-subjects.php">View more ></a>
+                            <a href="/student/subjects">View more ></a>
                         </div>
                         <i class="dash-icon fas fa-book-open"></i>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Here you can view all the subjects that you had joined and view any subject details.</p>
-                        <a href="join-subject.php">Join new subject</a>
+                        <a href="/student/join-subject">Join new subject</a>
                     </div>
                 </div>
             </div>
@@ -53,13 +53,13 @@
                     <div class="card-header">
                         <div class="head">
                             <h3>Quizzes</h3>
-                            <a href="std-quizzes.php">View more ></a>
+                            <a href="/student/quizzes">View more ></a>
                         </div>
                         <i class="dash-icon fas fa-question-circle"></i>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Here you can view all quizzes for all subjects you had joined, to attened any quiz in it's time.</p>
-                        <a href="std-quizzes.php">View quizzes</a>
+                        <a href="/student/quizzes">View quizzes</a>
                     </div>
                 </div>
             </div>

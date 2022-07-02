@@ -43,6 +43,21 @@ Route::get('/',  function () {
 });
 
 
+Route::group(['prefix' => '/student', 'middleware' => ['student']], function () {
+    // all students routes goes here
+    Route::get(
+        '/',
+        function () {
+            return view('student.dashboard');
+        }
+    );
+
+    Route::get('/subjects',  function () {
+        return view('student.subjects');
+    });
+});
+
+
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
     Route::get('/subjects', [SubjectContoller::class, 'index']);
@@ -89,12 +104,4 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/change-password', [UserContoller::class, 'viewPassword']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
-});
-
-
-Route::group(['middleware' => ['student']], function () {
-    // all students routes goes here
-    // Route::get('/',  function () {
-    //     return view('student.dashboard');
-    // });
 });
