@@ -68,7 +68,7 @@
                     </div>
                     <div class="card-body settings">
                         <a href="/edit-profile"><i class="fas fa-user-edit"></i>Edit profile</a>
-                        <a href="change-password.php?id= echo teacher_id; ?>"><i class="fas fa-undo-alt"></i>Change password</a>
+                        <a href="/change-password"><i class="fas fa-undo-alt"></i>Change password</a>
                         <a onclick="return confirm('Are you sure deleting account ? \nBy deleting the account all the subjects and quizzes you had created will be removed, and you will not be able to recover this data anymore!')" href="teacher-profile.php?id= echo teacher_id; ?>&delete_user= echo teacher_id; ?>"><i class="fas fa-times-circle"></i>Delete account</a>
                     </div>
                 </div>

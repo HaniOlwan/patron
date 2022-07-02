@@ -95,6 +95,10 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/profile', [UserContoller::class, 'profile']);
     Route::get('/edit-profile', [UserContoller::class, 'viewEditProfile']);
     Route::patch('/edit-profile', [UserContoller::class, 'update']);
+    Route::get('/change-password', [UserContoller::class, 'viewPassword']);
+    Route::post('/change-password', [UserContoller::class, 'updatePassword']);
+
+
 
 
 
