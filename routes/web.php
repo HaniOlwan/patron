@@ -22,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/signup', [RegisterController::class, 'signup']);
 Route::post('/signup', [RegisterController::class, 'store']);
@@ -34,21 +31,20 @@ Route::post('/signin', [SessionController::class, 'authenticate']);
 
 Route::get('/logout', [SessionController::class, 'logout']);
 
-Route::group(['middleware' => ['student']], function () {
-    // all students routes goes here
-    Route::get('/student',  function () {
-        return view('student');
-    });
-});
 
 
-Route::get('/dashboard',  function () {
-    return view('teacher.dashboard');
+Route::get('/',  function () {
+    $userStatus = Auth::user()->rule;
+    if ($userStatus == 'teacher') {
+        return view('teacher.dashboard');
+    } else {
+        return view('student.dashboard');
+    }
 });
+
 
 Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
-
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
@@ -68,8 +64,6 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::get('/quiz/{quiz}/select-topic', [QuizController::class, 'viewSelectPage']);
     Route::post('/quiz/{quiz}/select-topic', [QuizController::class, 'selectTopic']);
-
-
 
     Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
 
@@ -95,5 +89,12 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/change-password', [UserContoller::class, 'viewPassword']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+});
 
+
+Route::group(['middleware' => ['student']], function () {
+    // all students routes goes here
+    // Route::get('/',  function () {
+    //     return view('student.dashboard');
+    // });
 });

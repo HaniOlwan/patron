@@ -37,9 +37,9 @@ class RegisterController extends Controller
             auth()->login($user);
 
             if ($request->rule === 'teacher') {
-                return redirect()->intended('dashboard');
+                return redirect('/');
             } else {
-                return redirect()->intended('student');
+                return redirect('/');
             }
         } catch (Exception $e) {
             return back()->withInput($request->all)->with('error', 'User already exists!');
