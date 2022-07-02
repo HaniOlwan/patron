@@ -22,7 +22,7 @@
                 </form>
             </div>
             <div class="col ">
-                <a href="join-subject.php">Join new subject</a>
+                <a href="/student/join-subject">Join new subject</a>
             </div>
         </div>
         <div class="row">

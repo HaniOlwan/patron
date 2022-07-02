@@ -99,4 +99,9 @@ class SubjectContoller extends Controller
     {
         return view('student.subjects');
     }
+
+    function viewJoinSubject()
+    {
+        return view('student.join-subject');
+    }
 }
