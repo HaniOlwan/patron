@@ -97,9 +97,6 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::patch('/edit-profile', [UserContoller::class, 'update']);
     Route::get('/change-password', [UserContoller::class, 'viewPassword']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
-
-
-
-
+    Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 
 });

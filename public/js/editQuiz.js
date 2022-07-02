@@ -31,7 +31,6 @@ form.addEventListener('submit', (e) => {
         'quizId': form.quizId.value,
         'duration': form.duration.value,
     }
-    console.log(data)
 
     $.ajaxSetup({
         headers: {

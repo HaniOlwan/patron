@@ -69,7 +69,7 @@
                     <div class="card-body settings">
                         <a href="/edit-profile"><i class="fas fa-user-edit"></i>Edit profile</a>
                         <a href="/change-password"><i class="fas fa-undo-alt"></i>Change password</a>
-                        <a onclick="return confirm('Are you sure deleting account ? \nBy deleting the account all the subjects and quizzes you had created will be removed, and you will not be able to recover this data anymore!')" href="teacher-profile.php?id= echo teacher_id; ?>&delete_user= echo teacher_id; ?>"><i class="fas fa-times-circle"></i>Delete account</a>
+                        <a class="delete-user-button" href=""><i class="fas fa-times-circle"></i>Delete account</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                     <div class="card-body statistics">
                         <a class="statistics" href="/quizzes"><i class="fas fa-question-circle"></i> Created &#40;{{ $teacher->quizzes->count() }}&#41; Quizzes </a>
                         <a class="statistics" href="/subjects"><i class="fas fa-book-open"></i> Created &#40;{{ $teacher->subjects->count() }}&#41; Subjects </a>
-                            <!-- <div class="alert alert-danger" role="alert">
+                        <!-- <div class="alert alert-danger" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -131,12 +131,36 @@
             </div>
         </div>
     </div>
-
-
-
+    <meta name="_token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 <script>
+    const deleteUser = document.querySelector('.delete-user-button');
+    const token = document.querySelector('meta[name="_token"]').content;
+
+    deleteUser.addEventListener('click', (e) => {
+        const result = confirm('Are you sure you want to delete your account?');
+        if (result) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+            })
+            $.ajax({
+                url: "/delete-account",
+                type: "DELETE",
+                success: function(response) {
+                    window.location.href = "/signin";
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            })
+        } else {
+            e.preventDefault()
+        }
+    })
+
     (".card-body").niceScroll(".card-text", {
         cursorcolor: "#ff7d66",
         cursorwidth: "3px",

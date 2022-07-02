@@ -65,4 +65,13 @@ class UserContoller extends Controller
             return redirect()->back()->withInput()->with('error', 'Make sure your input is correct.');
         }
     }
+
+    function destroy()
+    {
+        $teacher = User::find(Auth::user()->id);
+        Auth::logout();
+        if ($teacher->delete()) {
+            return redirect('signin');
+        }
+    }
 }
