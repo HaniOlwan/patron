@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UserContoller;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -89,4 +90,13 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
+
+
+    Route::get('/profile', [UserContoller::class, 'profile']);
+    Route::get('/edit-profile', [UserContoller::class, 'viewEditProfile']);
+    Route::patch('/edit-profile', [UserContoller::class, 'update']);
+    Route::get('/change-password', [UserContoller::class, 'viewPassword']);
+    Route::post('/change-password', [UserContoller::class, 'updatePassword']);
+    Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+
 });

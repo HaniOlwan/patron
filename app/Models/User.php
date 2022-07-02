@@ -23,6 +23,11 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'gender',
+        'specialization',
+        'image',
+        'phone',
+        'bio',
         'rule',
     ];
 
@@ -45,13 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Subjects()
+    public function subjects()
     {
         return $this->hasMany(Subject::class);
     }
 
-    public function Quizs()
+    public function quizzes()
     {
-        return $this->hasMany(Quiz::class);
+        return $this->hasMany(Quiz::class,'user_id');
     }
 }

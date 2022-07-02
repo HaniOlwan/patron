@@ -70,7 +70,7 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ Auth::user()->quizs->count() }}</span></a>
+                    <a href="/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ Auth::user()->quizzes->count() }}</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
