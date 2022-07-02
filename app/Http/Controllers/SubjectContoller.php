@@ -15,7 +15,7 @@ class SubjectContoller extends Controller
 
     function index()
     {
-        $subjects= Auth::user()->subjects;
+        $subjects = Auth::user()->subjects;
         return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
@@ -92,5 +92,11 @@ class SubjectContoller extends Controller
         $topics = $subject->topics;
         $questions = Question::all();
         return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics, 'questions' => $questions]);
+    }
+
+
+    function viewSubjectsPage()
+    {
+        return view('student.subjects');
     }
 }
