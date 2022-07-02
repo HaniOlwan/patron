@@ -16,7 +16,7 @@ class QuizController extends Controller
 {
     function index()
     {
-        $quizzes = Auth::user()->quizs;
+        $quizzes = Auth::user()->quizzes;
         return view('teacher.quiz.quizzes', compact('quizzes'));
     }
 
