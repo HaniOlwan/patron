@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <label for="quiz-title" class="col-sm-2 col-form-label">Quiz title</label>
                         <div class="col-sm-10">
-                            <input type="text" name="title" value="" class="form-control" id="quiz-title" required>
+                            <input type="text" name="title" value="{{ old('title') }}" class="form-control" id="quiz-title" required>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                             <div class="topic custom-control custom-checkbox">
                                 <input type="checkbox" name="selected_topic[]" class="custom-control-input selected_questions" value="{{ $topic->id }}" id="{{ $topic->id }}">
                                 <label class="custom-control-label" for="{{ $topic->id }}">{{ $topic->title }}</label>
-                                <input type="number" value="0" placeholder="0" class="form-control questions_count " min="0" max="{{ $topic->question->count() }}">
+                                <input type="number" value="0" placeholder="0" class="form-control questions_count" min="0" max="{{ $topic->question->count() }}">
                             </div>
                             @endforeach
                             @endif
@@ -54,31 +54,31 @@
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="start_date" value="" class="form-control" id="date" required>
+                            <input type="date" name="start_date" value="{{ old('start_date') }}" class="form-control" id="date" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="time" class="col-sm-2 col-form-label">Start time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="start_time" value="" class="form-control" id="time" required>
+                            <input type="time" name="start_time" value="{{ old('start_time') }}" class="form-control" id="time" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-date" class="col-sm-2 col-form-label">Deadline date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="exp_date" value="" class="form-control" id="exp-date" required>
+                            <input type="date" name="exp_date" value="{{ old('exp_date') }}"  class="form-control" id="exp-date" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-time" class="col-sm-2 col-form-label">Deadline time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="exp_time" value="" class="form-control" id="exp-time" required>
+                            <input type="time" name="exp_time" value="{{ old('exp_time') }}" class="form-control" id="exp-time" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="duration" class="col-sm-2 col-form-label">Select duration <span class="minutes">&#40;minutes&#41;</span></label>
                         <div class="col-sm-10">
-                            <input type="number" name="duration" value="" class="form-control" id="duration" required>
+                            <input type="number" name="duration" value="{{ old('duration') }}" class="form-control" id="duration" required>
 
                         </div>
                     </div>

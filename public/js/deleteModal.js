@@ -19,7 +19,6 @@ const deleteIcon = document.querySelector('.delete_icon');
 if (deleteIcon) {
     deleteIcon.addEventListener('click', (e) => {
         var subjectId = e.target.getAttribute('subject-id');
-
         modaleDelete.setAttribute('subject-id', subjectId);
         var selectedId = e.target.getAttribute('data-id');
         modaleDelete.setAttribute('data-id', selectedId);

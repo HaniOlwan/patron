@@ -58,9 +58,9 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
     Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
 
-    
+
     Route::get('/quizzes', [QuizController::class, 'index']);
-    Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'viewCreatePage']);
+    Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'createPage']);
     Route::post('/quiz/{subject}/create-quiz', [QuizController::class, 'create']);
     Route::get('/quiz/{quiz}', [QuizController::class, 'viewQuiz']);
     Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);
