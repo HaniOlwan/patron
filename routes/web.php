@@ -50,13 +50,13 @@ Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
-    Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
-    Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
+    Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
+    Route::post('/create-subject', [SubjectContoller::class, 'create']);
     Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
-
     Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
-    Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
-    Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
+    
+    Route::get('/edit-subject/{subject}', [SubjectContoller::class, 'updatePage']);
+    Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
 
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
 

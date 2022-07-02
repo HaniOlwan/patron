@@ -20,12 +20,12 @@ class SubjectContoller extends Controller
         return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
-    function viewCreateSubject()
+    function createPage()
     {
         return view('teacher.subject.create-subject');
     }
 
-    function createSubject(Request $request)
+    function create(Request $request)
     {
         try {
             $validatedCredentials = $request->validate([
@@ -56,30 +56,33 @@ class SubjectContoller extends Controller
     }
 
 
-    function viewEditSubject(Request $request)
+    function updatePage(Subject $subject)
     {
-        $subject = Subject::query()->whereSubjectId($request->id)->first();
-        return view('teacher.subject.edit-subject', ['subject' => $subject]);
+        return view('teacher.subject.edit-subject', compact('subject'));
     }
 
-    function update(Request $request)
+    function update(Request $request, Subject $subject)
     {
-        $validatedCredentials = $request->validate([
-            'title' => 'required',
-            'subject_id' => 'required',
-            'description' => "required",
-        ]);
+        try {
+            $validatedCredentials = $request->validate([
+                'title' => 'required',
+                'subject_id' => 'required',
+                'description' => "required",
+            ]);
 
-        Subject::query()->whereSubjectId($request->id)->first()->update(
-            [
-                'title' => $validatedCredentials['title'],
-                'subject_id' => $validatedCredentials['subject_id'],
-                'description' => $validatedCredentials['description'],
-                'private' => $request->private ? true : false,
-            ]
-        );
+            $subject->update(
+                [
+                    'title' => $validatedCredentials['title'],
+                    'subject_id' => $validatedCredentials['subject_id'],
+                    'description' => $validatedCredentials['description'],
+                    'private' => $request->private ? true : false,
+                ]
+            );
 
-        return redirect('/subjects')->with('success', 'Subject edited successfully.');
+            return redirect('/edit-subject' . "/" . $subject->id)->with('success', 'Subject edited successfully.');
+        } catch (Exception $e) {
+            return redirect('/edit-subject' . "/" . $subject->id)->with('error', 'Subject edited successfully.');
+        }
     }
 
     function viewSubject(Subject $subject)

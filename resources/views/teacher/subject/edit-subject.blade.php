@@ -11,8 +11,8 @@
                     <div class="layout">
                         <h3>Edit Subject</h3>
                         <h1>
-                                   
-                                </h1>
+
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -33,6 +33,14 @@
                         {{ session()->get('error') }}
                     </div>
                     @endif
+                    @if(session()->has('success'))
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{session()->get('success')}}
+                    </div>
+                    @endif
                     <div class="form-group row">
                         <label for="Subject-title" class="col-sm-2 col-form-label">Subject title</label>
                         <div class="col-sm-10">
@@ -42,7 +50,7 @@
                     <div class="form-group row">
                         <label for="Subject-id" class="col-sm-2 col-form-label">Subject id</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="subject_id" id="Subject-id" value="{{ $subject->id }}" required>
+                            <input type="text" class="form-control" name="subject_id" id="Subject-id" value="{{ $subject->subject_id }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -55,7 +63,7 @@
                         <label for="Privacy" class="col-sm-2 col-form-label">Privacy</label>
                         <div class="col-sm-10">
                             <div class="custom-control custom-switch">
-                               
+
                                 <input type="checkbox" class="custom-control-input" name="private" value="private" id="private" {{ $subject->private == 1 ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="private">Private</label>
                                 <span>*Private means students can join subject only via subject join code, else any student can join subject.</span>

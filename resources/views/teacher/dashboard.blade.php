@@ -2,7 +2,7 @@
 @section('header')
 @if(Auth::user())
 <h3>Hi <span>{{Auth::user()->first_name}}</span></h3>
-<p>we wish you having a good day.</p>
+<p>we wish you are having a good day.</p>
 @endif
 @endsection
 @section('content')
@@ -22,7 +22,7 @@
                     <p class="card-text">Here you can create subjects for your students, view and manage all your subjects easly.</p>
                     <a href="/create-subject">Create new Subject</a>
                 </div>
-            </div>
+            </div>  
         </div>
         <div class="dash-cards col-lg-4">
             <div class="card dash-card bg-light mb-3">
