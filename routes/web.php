@@ -51,17 +51,14 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
-    Route::post('/create-subject', [SubjectContoller::class, 'create']);
-    Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
+    Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
     Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
-    
     Route::get('/edit-subject/{subject}', [SubjectContoller::class, 'updatePage']);
+    Route::post('/create-subject', [SubjectContoller::class, 'create']);
+    Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
     Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
 
-    Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
-
-
-
+    
     Route::get('/quizzes', [QuizController::class, 'index']);
     Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'viewCreatePage']);
     Route::post('/quiz/{subject}/create-quiz', [QuizController::class, 'create']);

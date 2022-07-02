@@ -15,8 +15,7 @@ class SubjectContoller extends Controller
 
     function index()
     {
-        $user_id = Auth::user()->id;
-        $subjects = User::find($user_id)->subjects;
+        $subjects= Auth::user()->subjects;
         return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
@@ -43,15 +42,13 @@ class SubjectContoller extends Controller
             ]);
             return redirect('/subjects')->with('success', 'Subject created successfully.');
         } catch (QueryException $qe) {
-            return redirect('/create-subject')->with('error', 'Subject name or id is already exists in your subjects');
+            return redirect('/create-subject')->with('error', 'Subject name or id is already exists in your subjects')->withInput();
         }
     }
 
-    function destory($id)
+    function destory(Subject $subject)
     {
-        $subject = Subject::query()->whereSubjectId($id)->first();
         if (!$subject) return response()->json(['success' => false], 404);
-
         return response()->json(['success' => $subject->delete()], 200);
     }
 
