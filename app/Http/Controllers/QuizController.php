@@ -20,7 +20,7 @@ class QuizController extends Controller
         return view('teacher.quiz.quizzes', compact('quizzes'));
     }
 
-    function viewCreatePage(Subject $subject)
+    function createPage(Subject $subject)
     {
         return view('teacher.quiz.create-quiz', compact('subject'));
     }
@@ -61,8 +61,7 @@ class QuizController extends Controller
             }
             return response()->json(["success" => 'Quiz created successfully', "status" => 201]);
         } catch (Exception $e) {
-            return $e;
-            return response()->json(["error" => 'Make sure your input is correct', 400]);
+            return response()->json(["error" => 'Make sure your input is correct', 400])->withInput();
         }
     }
 

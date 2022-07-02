@@ -50,20 +50,17 @@ Route::group(['middleware' => ['teacher']], function () {
     // all teacher routes goes here
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
-    Route::get('/create-subject', [SubjectContoller::class, 'viewCreateSubject']);
-    Route::post('/create-subject', [SubjectContoller::class, 'createSubject']);
-    Route::delete('/subject/{id}', [SubjectContoller::class, 'destory']);
-
-    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
-    Route::get('/edit-subject/{id}', [SubjectContoller::class, 'viewEditSubject']);
-    Route::patch('/edit-subject/{id}', [SubjectContoller::class, 'update']);
-
+    Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
-
+    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
+    Route::get('/edit-subject/{subject}', [SubjectContoller::class, 'updatePage']);
+    Route::post('/create-subject', [SubjectContoller::class, 'create']);
+    Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
+    Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
 
 
     Route::get('/quizzes', [QuizController::class, 'index']);
-    Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'viewCreatePage']);
+    Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'createPage']);
     Route::post('/quiz/{subject}/create-quiz', [QuizController::class, 'create']);
     Route::get('/quiz/{quiz}', [QuizController::class, 'viewQuiz']);
     Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);

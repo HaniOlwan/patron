@@ -19,7 +19,6 @@ const deleteIcon = document.querySelector('.delete_icon');
 if (deleteIcon) {
     deleteIcon.addEventListener('click', (e) => {
         var subjectId = e.target.getAttribute('subject-id');
-      
         modaleDelete.setAttribute('subject-id', subjectId);
         var selectedId = e.target.getAttribute('data-id');
         modaleDelete.setAttribute('data-id', selectedId);
@@ -46,10 +45,13 @@ if (modaleDelete) {
             success: function (result) {
                 if (result.success) {
                     if (item_url === 'subject') {
-                        window.location.href='/subjects';
+                        window.location.href = '/subjects';
                     } else if (item_url === 'topic') {
-                        window.location.href = "/question-bank/" + subjectId
-                    } else {
+                        window.location.href = "/question-bank/" + subjectId;
+                    } else if (item_url === 'quiz') {
+                        window.location.href = "/quizzes/";
+                    }
+                    else {
                         window.location.reload();
                     }
                 }

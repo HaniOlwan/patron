@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>Subject id</td>
-                                <td>{{ $subject->id }}</td>
+                                <td>{{ $subject->subject_id }}</td>
                             </tr>
                             <tr>
                                 <td>Instructor name</td>

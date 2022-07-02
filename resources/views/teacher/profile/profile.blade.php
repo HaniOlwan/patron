@@ -33,6 +33,12 @@
             </button>
             {{ session()->get('error') }}
         </div>
+        @else
+        <div class="alert" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         @endif
         <div class="row">
             <div class="dash-cards col">
@@ -120,7 +126,7 @@
                                     <td scope="col">count</td>
                                     <td scope="col">{{ $subject->quizzes->count() }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "Private": "Public"}}</td>
-                                    <td scope="col"><a onclick=""><i class="fas fa-trash-alt"></i></a></td>
+                                    <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -132,35 +138,24 @@
         </div>
     </div>
     <meta name="_token" content="{{ csrf_token() }}">
+    <div id="myModal" class="modal">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Do you really want to delete this record? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger active delete_modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
+<script src="{{ asset('js/deleteUser.js') }}"></script>
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 <script>
-    const deleteUser = document.querySelector('.delete-user-button');
-    const token = document.querySelector('meta[name="_token"]').content;
-
-    deleteUser.addEventListener('click', (e) => {
-        const result = confirm('Are you sure you want to delete your account?');
-        if (result) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': token
-                },
-            })
-            $.ajax({
-                url: "/delete-account",
-                type: "DELETE",
-                success: function(response) {
-                    window.location.href = "/signin";
-                },
-                error: function(response) {
-                    console.log(response);
-                }
-            })
-        } else {
-            e.preventDefault()
-        }
-    })
-
     (".card-body").niceScroll(".card-text", {
         cursorcolor: "#ff7d66",
         cursorwidth: "3px",
@@ -168,5 +163,4 @@
         cursorborderradius: "3px",
     });
 </script>
-
 @endsection
