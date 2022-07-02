@@ -104,4 +104,14 @@ class SubjectContoller extends Controller
     {
         return view('student.join-subject');
     }
+
+    function search(Request $request)
+    {
+        session()->flashInput($request->input());
+        $search = $request->input('query');
+        $subjects = Subject::query()
+            ->where('subject_id', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")->get();
+        return view('student.join-subject', compact('subjects'));
+    }
 }

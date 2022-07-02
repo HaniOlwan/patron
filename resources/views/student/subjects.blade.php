@@ -18,10 +18,11 @@
         <div class="add row">
             <div class="col">
                 <form class="form-inline my-2 my-lg-0">
+                    @csrf
                     <input class="form-control mr-sm-2" type="search" placeholder="Search for subject ..." aria-label="Search">
                 </form>
             </div>
-            <div class="col ">
+            <div class="row">
                 <a href="/student/join-subject">Join new subject</a>
             </div>
         </div>

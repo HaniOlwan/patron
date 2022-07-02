@@ -17,11 +17,11 @@
     <div class="container">
         <div class="add row">
             <div class="col">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search for subject name or id" aria-label="Search" id="search">
+                <form action="{{ route('search') }}" method="GET" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search for subject name or id" aria-label="Search" id="search" value="{{ old('query') }}">
+                    <button type="button" class="btn btn-secondary">Search</button>
                 </form>
             </div>
-
         </div>
         <div class="row">
             <div class="col">
@@ -50,10 +50,23 @@
                             <th scope="col">Option</th>
                         </tr>
                     </thead>
-
-                    <tbody id="result">
-
-
+                    <tbody>
+                        @php
+                        $row_count = 1;
+                        @endphp
+                        @if($subjects)
+                        @foreach($subjects as $subject)
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col"><a href="/student/view-subject/{{ $subject->id  }}">{{ $subject->title }}</a></td>
+                            <td scope="col">{{ $subject->subject_id }}</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->user->id }}">{{ $subject->user->first_name." ".$subject->user->last_name }}</a></td>
+                            <td scope="col">{{ $subject->private }}</td>
+                            <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
+                            <td scope="col"><a class="join" href="">Join</a></td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -63,93 +76,4 @@
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
-
-
-
-<script>
-    $(document).ready(function() {
-
-        $('#public_join').click(function(event) {
-            event.preventDefault();
-        });
-        $('#private_join').click(function(event) {
-            event.preventDefault();
-        });
-        $('#search').submit(function(event) {
-            event.preventDefault();
-        });
-    });
-</script>
-
-<script>
-    $('#search').keyup(function() {
-        var q = $('#search').val();
-        if (q.length >= 2) {
-            $.ajax({
-                url: 'search.php',
-                type: 'GET',
-                data: {
-                    text: q
-                }
-            }).done(function(response) {
-                $('#result').html(response);
-            }).fail(function() {
-                console.log("error");
-            })
-        } else {
-            $('#result').html("");
-        }
-    })
-</script>
-
-<script>
-    function public_join(subject_id, teacher_id) {
-        $.ajax({
-            url: 'join.php',
-            type: 'GET',
-            data: {
-                s_id: subject_id,
-                t_id: teacher_id
-            }
-        }).done(function(response) {
-            $('#msg').html(response);
-            if (response == 'Subject joined successfully, system will redirect you to subject in few seconds') {
-                window.location.href = "http://localhost/patron/student/std-view-subject.php?subject_id=" + subject_id;
-            }
-            if (response == 'You already joined this subject, system will redirect you to subject in few seconds') {
-                window.location.href = "http://localhost/patron/student/std-view-subject.php?subject_id=" + subject_id;
-            }
-        }).fail(function() {
-            console.log("error");
-        })
-    }
-</script>
-
-<script>
-    function private_join(subject_id, teacher_id) {
-        var code = prompt("Please enter subject join code:");
-        if (code !== null) {
-            $.ajax({
-                url: 'private-join.php',
-                type: 'GET',
-                data: {
-                    subject_id: subject_id,
-                    teacher_id: teacher_id,
-                    join_code: code
-                }
-            }).done(function(response) {
-                $('#msg').html(response);
-                if (response == 'Subject joined successfully, system will redirect you to subject in few seconds') {
-                    window.location.href = "http://localhost/patron/student/std-view-subject.php?subject_id=" + subject_id;
-                }
-                if (response == 'You already joined this subject, system will redirect you to subject in few seconds') {
-                    window.location.href = "http://localhost/patron/student/std-view-subject.php?subject_id=" + subject_id;
-                }
-            }).fail(function() {
-                console.log("error");
-            })
-        }
-    }
-</script>
-
-@endsection()
+@endsection
