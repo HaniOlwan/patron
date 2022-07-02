@@ -63,7 +63,7 @@
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
                             <td scope="col"><a href="subject/{{$subject->id}}">{{$subject->title}}</a></td>
-                            <td scope="col">{{$subject->id}}</td>
+                            <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
                             <td scope="col"><a href="view-subject/{{$subject->id}}/students">particapants</a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
