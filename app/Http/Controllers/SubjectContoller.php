@@ -124,16 +124,11 @@ class SubjectContoller extends Controller
     function registerSubject(Request $request, Subject $subject)
     {
         $code = $request->code;
-        $student = Auth::user();
-        $teacher = $subject->teacher;
-        return $teacher;
         if ($code == $subject->code) {
-            $teacher->subjects();
-            $subject->teacher()->attach($subject, [
+            $subject->student()->attach($subject, [
                 'student_id' => Auth::user()->id,
                 'subject_id' => $subject->id,
             ]);
-
             return response()->json([
                 'message' => "Joined subject successfully",
                 'status' => 201

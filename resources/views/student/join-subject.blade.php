@@ -105,8 +105,7 @@
                 if (response.status === 400) {
                     alertMsg.textContent = response.message;
                 } else {
-                    console.log(response)
-                    // window.location.href = "/student/view-subject/" + subjectId;
+                    window.location.href = "/student/view-subject/" + subjectId;
                 }
             },
             error: function(result) {
