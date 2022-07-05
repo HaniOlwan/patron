@@ -107,11 +107,41 @@ class SubjectContoller extends Controller
 
     function search(Request $request)
     {
-        session()->flashInput($request->input());
+        session()->flashInput($request->input()); // save old search input
         $search = $request->input('query');
         $subjects = Subject::query()
             ->where('subject_id', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")->get();
+            ->orWhere('title', 'LIKE', "%{$search}%")->get();
         return view('student.join-subject', compact('subjects'));
+    }
+
+    function viewSubjectStudent(Subject $subject)
+    {
+        return view('student.view-subject', compact('subject'));
+    }
+
+
+    function registerSubject(Request $request, Subject $subject)
+    {
+        $code = $request->code;
+        $student = Auth::user();
+        $teacher = $subject->teacher;
+        return $teacher;
+        if ($code == $subject->code) {
+            $teacher->subjects();
+            $subject->teacher()->attach($subject, [
+                'student_id' => Auth::user()->id,
+                'subject_id' => $subject->id,
+            ]);
+
+            return response()->json([
+                'message' => "Joined subject successfully",
+                'status' => 201
+            ]);
+        }
+        return response()->json([
+            'message' => "Incorrect subject code",
+            'status' => 400
+        ]);
     }
 }

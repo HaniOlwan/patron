@@ -66,7 +66,7 @@
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a href="/student/view-subject/{{ $subject->id  }}">{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->user->id }}">{{ $subject->user->first_name." ".$subject->user->last_name }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                             <td scope="col">{{ $subject->private }}</td>
                             <td scope="col"><a class="drop" onclick="return confirm('Are you sure deleting subject  echo $subject_title; ?> ? \nBy deleting the subject everything related to this subject will be deleted such as quizzes you had attended, and you will not be able to recover this data anymore!')" href="std-subjects.php?delete= echo $subject_id; ?>">Drop</a></td>
                         </tr>

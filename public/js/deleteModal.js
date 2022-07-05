@@ -32,7 +32,6 @@ if (modaleDelete) {
         const item_id = e.target.getAttribute('data-id');
         const item_url = e.target.getAttribute('data-url');
         const subjectId = e.target.getAttribute('subject-id');
-        console.log(item_id, item_url, subjectId)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': token

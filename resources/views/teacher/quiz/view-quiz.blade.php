@@ -32,7 +32,7 @@
 
                             <tr>
                                 <td>Instructor name</td>
-                                <td style="text-transform: capitalize">{{ $quiz->user->first_name." ".$quiz->user->last_name }}</td>
+                                <td style="text-transform: capitalize">{{ $quiz->teacher->first_name." ".$quiz->teacher->last_name }}</td>
                             </tr>
 
                             <tr>

@@ -34,7 +34,7 @@
                             </tr>
                             <tr>
                                 <td>Instructor name</td>
-                                <td>{{ ucfirst($subject->user->first_name." ".$subject->user->last_name)}}</td>
+                                <td>{{ ucfirst($subject->teacher->first_name." ".$subject->teacher->last_name)}}</td>
                             </tr>
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
