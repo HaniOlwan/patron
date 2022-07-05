@@ -125,7 +125,7 @@ class SubjectContoller extends Controller
     {
         if ($request->status === 'private') {
             if ($request->code == $subject->code) {
-                $subject->student()->attach($subject, [
+                $subject->student()->sync($subject, [
                     'student_id' => Auth::user()->id,
                     'subject_id' => $subject->id,
                 ]);
