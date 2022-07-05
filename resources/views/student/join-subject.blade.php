@@ -61,11 +61,9 @@
                             <td scope="col"><a href="/student/view-subject/{{ $subject->id  }}">{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
                             <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
-                            <td scope="col">{{ $subject->private }}</td>
+                            <td scope="col">{{ $subject->student->count() }}</td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                            <td scope="col">
-                                <a class="join" href="" subject-id="{{ $subject->id }}">Join</a>
-                            </td>
+                            <td scope="col"><a href="" class="join" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
                         </tr>
                         @endforeach
                         @endif
@@ -78,41 +76,6 @@
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
-<script>
-    const token = document.querySelector('meta[name="_token"]').content;
-    const joinBtn = document.querySelector('.join');
-
-    const alertMsg = document.querySelector('.display_text');
-
-    joinBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const subjectId = e.target.getAttribute('subject-id');
-        const subjectCode = prompt("Enter subject code", "");
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': token
-            },
-        });
-
-        $.ajax({
-            url: '/student/join-subject/' + subjectId,
-            type: 'POST',
-            data: {
-                code: subjectCode
-            },
-            success: function(response) {
-                if (response.status === 400) {
-                    alertMsg.textContent = response.message;
-                } else {
-                    window.location.href = "/student/view-subject/" + subjectId;
-                }
-            },
-            error: function(result) {
-                console.log(result)
-            }
-        });
-    })
-</script>
+<script src="{{ asset('js/joinSubject.js') }}"></script>
 
 @endsection

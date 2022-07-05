@@ -123,8 +123,22 @@ class SubjectContoller extends Controller
 
     function registerSubject(Request $request, Subject $subject)
     {
-        $code = $request->code;
-        if ($code == $subject->code) {
+        if ($request->status === 'private') {
+            if ($request->code == $subject->code) {
+                $subject->student()->attach($subject, [
+                    'student_id' => Auth::user()->id,
+                    'subject_id' => $subject->id,
+                ]);
+                return response()->json([
+                    'message' => "Joined subject successfully",
+                    'status' => 201
+                ]);
+            }
+            return response()->json([
+                'message' => "Incorrect subject code",
+                'status' => 400
+            ]);
+        } else {
             $subject->student()->attach($subject, [
                 'student_id' => Auth::user()->id,
                 'subject_id' => $subject->id,
@@ -134,9 +148,5 @@ class SubjectContoller extends Controller
                 'status' => 201
             ]);
         }
-        return response()->json([
-            'message' => "Incorrect subject code",
-            'status' => 400
-        ]);
     }
 }
