@@ -60,7 +60,7 @@
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a>{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                             <td scope="col">{{ $subject->students->count() }}</td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
                             @if(studentJoinedSubject(Auth::user()->id, $subject->id))
