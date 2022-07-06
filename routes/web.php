@@ -61,6 +61,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
 
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
+    Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
+
 });
 
 

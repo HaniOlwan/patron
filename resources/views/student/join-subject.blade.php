@@ -63,7 +63,11 @@
                             <td scope="col" style="text-transform: capitalize"><a href="/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                             <td scope="col">{{ $subject->students->count() }}</td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
+                            @if(studentJoinedSubject(Auth::user()->id, $subject->id))
+                            <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
+                            @else
                             <td scope="col"><a href="" class="join" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
+                            @endif
                         </tr>
                         @endforeach
                         @endif
@@ -77,5 +81,7 @@
 </main> <!-- .cd-main-content -->
 
 <script src="{{ asset('js/joinSubject.js') }}"></script>
+<script src="{{ asset('js/dropSubject.js') }}"></script>
+
 
 @endsection

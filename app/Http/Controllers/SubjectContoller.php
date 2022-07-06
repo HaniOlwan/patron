@@ -102,8 +102,7 @@ class SubjectContoller extends Controller
 
     function viewJoinSubject()
     {
-        $subjectsStudents = SubjectStudent::all();
-        return view('student.join-subject', compact('subjectsStudents'));
+        return view('student.join-subject');
     }
 
     function search(Request $request)
@@ -114,7 +113,7 @@ class SubjectContoller extends Controller
             ->where('subject_id', 'LIKE', "%{$search}%")
             ->orWhere('title', 'LIKE', "%{$search}%")->get();
         $subjectStudents = SubjectStudent::all();
-        return view('student.join-subject', ['subjects' => $subjects, 'subjectStudents' => $subjectStudents]);
+        return view('student.join-subject', compact('subjects'));
     }
 
     function viewSubjectStudent(Subject $subject)
@@ -141,7 +140,7 @@ class SubjectContoller extends Controller
                 'status' => 400
             ]);
         } else {
-            $subject->student()->attach($subject, [
+            $subject->students()->attach($subject, [
                 'student_id' => Auth::user()->id,
                 'subject_id' => $subject->id,
             ]);
@@ -150,5 +149,20 @@ class SubjectContoller extends Controller
                 'status' => 201
             ]);
         }
+    }
+
+    function dropSubject(Subject $subject)
+    {
+        $result = $subject->students()->detach(Auth::user()->id);
+        if ($result) {
+            return response()->json([
+                'message' => "Subject dropped.",
+                'status' => 201
+            ]);
+        }
+        return response()->json([
+            'message' => "Something went wrong.",
+            'status' => 400
+        ]);
     }
 }
