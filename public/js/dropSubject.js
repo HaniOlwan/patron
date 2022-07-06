@@ -14,8 +14,9 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
             type: 'GET',
             success: function (response) {
                 if (response.status === 400) {
-                    alertMsg.textContent = response.message;
+                    console.log(response)
                 } else {
+                    console.log(response)
                     window.location.reload();
                 }
             },

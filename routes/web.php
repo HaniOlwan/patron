@@ -58,6 +58,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
     Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
+    Route::get('/teacher/{user}', [UserContoller::class, 'viewTeacherProfile']);
+
 
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
@@ -68,6 +70,7 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
     Route::get('/edit-profile', [UserContoller::class, 'viewEditStudentProfile']);
     Route::patch('/edit-profile', [UserContoller::class, 'updateStudent']);
+
 
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 });

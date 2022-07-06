@@ -114,4 +114,8 @@ class UserContoller extends Controller
         }
     }
 
+    function viewTeacherProfile(User $user)
+    {
+        return view('student.teacher-profile', ['teacher' => $user]);
+    }
 }
