@@ -55,8 +55,13 @@ class User extends Authenticatable
         return $this->hasMany(Subject::class);
     }
 
+    public function joinedSubjects()
+    {
+        return $this->belongsToMany(Subject::class, 'subject_student', 'student_id', 'subject_id');
+    }
+
     public function quizzes()
     {
-        return $this->hasMany(Quiz::class,'user_id');
+        return $this->hasMany(Quiz::class, 'user_id');
     }
 }

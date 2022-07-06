@@ -7,8 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserContoller;
-use App\Models\Subject;
-use App\Models\User;
+use App\Models\SubjectStudent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -55,6 +54,14 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/subjects',  function () {
         return view('student.subjects');
     });
+
+    Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
+    Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
+    Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
+
+    Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
+    Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
+
 });
 
 

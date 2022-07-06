@@ -9,6 +9,9 @@ class Subject extends Model
 {
     use HasFactory;
 
+    const TYPE_TEACHER = 'teacher';
+    const TYPE_STUDENT = 'student';
+
     protected $fillable = [
         'title',
         'subject_id',
@@ -18,9 +21,14 @@ class Subject extends Model
         'user_id',
     ];
 
-    public function User()
+    public function teacher()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id')->where('rule', self::TYPE_TEACHER);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class,'subject_student','subject_id','student_id')->where('rule', self::TYPE_STUDENT);
     }
 
     public function topics()

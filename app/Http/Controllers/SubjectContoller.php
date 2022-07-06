@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
-use App\Models\User;
+use App\Models\SubjectStudent;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class SubjectContoller extends Controller
 
     function index()
     {
-        $subjects= Auth::user()->subjects;
+        $subjects = Auth::user()->subjects;
         return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
@@ -92,5 +92,79 @@ class SubjectContoller extends Controller
         $topics = $subject->topics;
         $questions = Question::all();
         return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics, 'questions' => $questions]);
+    }
+
+
+    function viewSubjectsPage()
+    {
+        return view('student.subjects');
+    }
+
+    function viewJoinSubject()
+    {
+        return view('student.join-subject');
+    }
+
+    function search(Request $request)
+    {
+        session()->flashInput($request->input()); // save old search input
+        $search = $request->input('query');
+        $subjects = [];
+        if ($search) {
+            $subjects = Subject::query()
+                ->where('subject_id', 'LIKE', "%{$search}%")
+                ->orWhere('title', 'LIKE', "%{$search}%")->get();
+        }
+        return view('student.join-subject', compact('subjects'));
+    }
+
+    function viewSubjectStudent(Subject $subject)
+    {
+        return view('student.view-subject', compact('subject'));
+    }
+
+
+    function registerSubject(Request $request, Subject $subject)
+    {
+        $student = Auth::user();
+
+        if ($request->status === 'private') {
+            if ($request->code == $subject->code) {
+                $student->joinedSubjects()->attach($subject, [
+                    'subject_id' => $subject->id,
+                ]);
+                return response()->json([
+                    'message' => "Joined subject successfully",
+                    'status' => 201
+                ]);
+            }
+            return response()->json([
+                'message' => "Incorrect subject code",
+                'status' => 400
+            ]);
+        } else {
+            $student->joinedSubjects()->attach($subject, [
+                'subject_id' => $subject->id,
+            ]);
+            return response()->json([
+                'message' => "Joined subject successfully",
+                'status' => 201
+            ]);
+        }
+    }
+
+    function dropSubject(Subject $subject)
+    {
+        $result = $subject->students()->detach(Auth::user()->id);
+        if ($result) {
+            return response()->json([
+                'message' => "Subject dropped.",
+                'status' => 201
+            ]);
+        }
+        return response()->json([
+            'message' => "Something went wrong.",
+            'status' => 400
+        ]);
     }
 }
