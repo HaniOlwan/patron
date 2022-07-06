@@ -66,6 +66,9 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/change-password', [UserContoller::class, 'viewChangePasswordStudentPage']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
 
+    Route::get('/edit-profile', [UserContoller::class, 'viewEditStudentProfile']);
+    Route::patch('/edit-profile', [UserContoller::class, 'updateStudent']);
+
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 });
 

@@ -81,11 +81,37 @@ class UserContoller extends Controller
     function studentProfile()
     {
         $student = Auth::user();
-        return view('student.profile', compact('student'));
+        return view('student.profile.profile', compact('student'));
     }
 
     function viewChangePasswordStudentPage()
     {
-        return view('student.change-password');
+        return view('student.profile.change-password');
     }
+
+    function viewEditStudentProfile()
+    {
+        $student = Auth::user();
+        return view('student.profile.edit-profile', compact('student'));
+    }
+
+    function updateStudent(Request $request)
+    {
+        $teacher = User::query()->whereId(Auth::user()->id)->first();
+        try {
+            $validatedCredentials = $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'gender' => 'required',
+                'specialization' => 'required',
+                'phone' => 'required',
+                'bio' => 'required',
+            ]);
+            $teacher->update($validatedCredentials);
+            return redirect('/student/edit-profile')->with('success', 'Profile updated successfully');
+        } catch (Exception $e) {
+            return redirect('/student/edit-profile')->with('error', 'Could not update profile');
+        }
+    }
+
 }
