@@ -26,7 +26,7 @@ class Subject extends Model
         return $this->belongsTo(User::class,'user_id')->where('rule', self::TYPE_TEACHER);
     }
 
-    public function student()
+    public function students()
     {
         return $this->belongsToMany(User::class,'subject_student','subject_id','student_id')->where('rule', self::TYPE_STUDENT);
     }

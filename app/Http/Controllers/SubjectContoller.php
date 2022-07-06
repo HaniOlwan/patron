@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
-use App\Models\User;
+use App\Models\SubjectStudent;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -102,7 +102,8 @@ class SubjectContoller extends Controller
 
     function viewJoinSubject()
     {
-        return view('student.join-subject');
+        $subjectsStudents = SubjectStudent::all();
+        return view('student.join-subject', compact('subjectsStudents'));
     }
 
     function search(Request $request)
@@ -112,7 +113,8 @@ class SubjectContoller extends Controller
         $subjects = Subject::query()
             ->where('subject_id', 'LIKE', "%{$search}%")
             ->orWhere('title', 'LIKE', "%{$search}%")->get();
-        return view('student.join-subject', compact('subjects'));
+        $subjectStudents = SubjectStudent::all();
+        return view('student.join-subject', ['subjects' => $subjects, 'subjectStudents' => $subjectStudents]);
     }
 
     function viewSubjectStudent(Subject $subject)

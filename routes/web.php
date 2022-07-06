@@ -7,8 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserContoller;
-use App\Models\Subject;
-use App\Models\User;
+use App\Models\SubjectStudent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
