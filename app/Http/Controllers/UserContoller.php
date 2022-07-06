@@ -68,10 +68,19 @@ class UserContoller extends Controller
 
     function destroy()
     {
-        $teacher = User::find(Auth::user()->id);
-        Auth::logout();
-        if ($teacher->delete()) {
-            return redirect('signin');
-        }
+        $user = User::find(Auth::user()->id);
+        if (!$user) return response()->json(['success' => false], 404);
+        return response()->json([
+            'success' =>
+            $user->delete(),
+            Auth::logout()
+        ], 200);
+    }
+
+
+    function studentProfile()
+    {
+        $student = Auth::user();
+        return view('student.profile', compact('student'));
     }
 }

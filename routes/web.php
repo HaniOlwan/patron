@@ -62,6 +62,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
 
+    Route::get('/profile', [UserContoller::class, 'studentProfile']);
+    Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 });
 
 

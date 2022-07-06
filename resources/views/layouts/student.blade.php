@@ -40,7 +40,7 @@
 
                 <ul class="cd-nav__sub-list">
                     <li class="cd-nav__sub-item">
-                        <a href="/profile"> Profile</a>
+                        <a href="/student/profile"> Profile</a>
                     </li>
                     <li class="cd-nav__sub-item">
                         <a href="/logout">Logout</a>
