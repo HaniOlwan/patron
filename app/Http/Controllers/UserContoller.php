@@ -68,10 +68,50 @@ class UserContoller extends Controller
 
     function destroy()
     {
-        $teacher = User::find(Auth::user()->id);
-        Auth::logout();
-        if ($teacher->delete()) {
-            return redirect('signin');
+        $user = User::find(Auth::user()->id);
+        if (!$user) return response()->json(['success' => false], 404);
+        return response()->json([
+            'success' =>
+            $user->delete(),
+            Auth::logout()
+        ], 200);
+    }
+
+
+    function studentProfile()
+    {
+        $student = Auth::user();
+        return view('student.profile.profile', compact('student'));
+    }
+
+    function viewChangePasswordStudentPage()
+    {
+        return view('student.profile.change-password');
+    }
+
+    function viewEditStudentProfile()
+    {
+        $student = Auth::user();
+        return view('student.profile.edit-profile', compact('student'));
+    }
+
+    function updateStudent(Request $request)
+    {
+        $teacher = User::query()->whereId(Auth::user()->id)->first();
+        try {
+            $validatedCredentials = $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'gender' => 'required',
+                'specialization' => 'required',
+                'phone' => 'required',
+                'bio' => 'required',
+            ]);
+            $teacher->update($validatedCredentials);
+            return redirect('/student/edit-profile')->with('success', 'Profile updated successfully');
+        } catch (Exception $e) {
+            return redirect('/student/edit-profile')->with('error', 'Could not update profile');
         }
     }
+
 }

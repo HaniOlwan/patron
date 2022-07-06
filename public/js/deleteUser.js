@@ -9,7 +9,7 @@ deleteUser.addEventListener('click', (e) => {
             },
         })
         $.ajax({
-            url: "/delete-account",
+            url: "/student/delete-account",
             type: "DELETE",
             success: function (response) {
                 window.location.href = "/signin";
