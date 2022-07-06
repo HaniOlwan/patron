@@ -77,16 +77,9 @@
 
                     </div>
                     <div class="card-body statistics">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
+                            You can join new subjects for this teacher or drop a subject.
                         </div>
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
                         <table class="table table-striped">
                             <thead>
                                 <tr>
