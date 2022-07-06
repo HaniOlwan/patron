@@ -83,4 +83,9 @@ class UserContoller extends Controller
         $student = Auth::user();
         return view('student.profile', compact('student'));
     }
+
+    function viewChangePasswordStudentPage()
+    {
+        return view('student.change-password');
+    }
 }

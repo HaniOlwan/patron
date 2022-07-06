@@ -63,6 +63,9 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
 
     Route::get('/profile', [UserContoller::class, 'studentProfile']);
+    Route::get('/change-password', [UserContoller::class, 'viewChangePasswordStudentPage']);
+    Route::post('/change-password', [UserContoller::class, 'updatePassword']);
+
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 });
 
