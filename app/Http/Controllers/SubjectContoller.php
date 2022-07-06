@@ -109,10 +109,12 @@ class SubjectContoller extends Controller
     {
         session()->flashInput($request->input()); // save old search input
         $search = $request->input('query');
-        $subjects = Subject::query()
-            ->where('subject_id', 'LIKE', "%{$search}%")
-            ->orWhere('title', 'LIKE', "%{$search}%")->get();
-        $subjectStudents = SubjectStudent::all();
+        $subjects = [];
+        if ($search) {
+            $subjects = Subject::query()
+                ->where('subject_id', 'LIKE', "%{$search}%")
+                ->orWhere('title', 'LIKE', "%{$search}%")->get();
+        }
         return view('student.join-subject', compact('subjects'));
     }
 

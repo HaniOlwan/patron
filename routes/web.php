@@ -56,7 +56,6 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     });
 
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
-    Route::get('/join-subject', [SubjectContoller::class, 'viewJoinSubject']);
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
     Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
 
