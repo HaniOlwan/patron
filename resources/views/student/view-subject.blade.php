@@ -93,15 +93,14 @@
                             <td scope="col">{{ $quiz->deadline_time }}</td>
                             <td scope="col">{{ $quiz->questions->count() }}</td>
                             <td scope="col">{{ $quiz->duration }} m</td>
-                            <td scope="col">{{ ($quiz->start_date < Carbon::now()->toDateString()) }} m</td>
 
-                            @if(($quiz->start_date == '00-00-0000') || ($quiz->deadline_date == '00-00-0000'))
-                            <td scope="col">Unavailable</td>
-                            @elseif(($quiz->start_date > Carbon::now()->toDateString()) || ($quiz->start_time > Carbon::now()->toTimeString()))
+                            @if(($quiz->start_date == '0000-00-00') || ($quiz->deadline_date == '0000-00-00'))
                             <td scope="col">Not available yet</td>
-                            @elseif($quiz->start_date < Carbon::now()->toDateString() && $quiz->deadline_date < Carbon::now()->toDateString())
+                            @elseif(($quiz->start_date >= Carbon::now()->toDateString()) && ($quiz->start_time >= Carbon::now()->toTimeString()))
+                            <td scope="col">Not available yet</td>
+                            @elseif(($quiz->deadline_date <= Carbon::now()->toDateString()) && ($quiz->deadline_time < Carbon::now()->toTimeString()))
                                     <td scope="col">Expired</td>
-                                    @elseif($quiz->start_date >= Carbon::now()->toDateString() && $quiz->start_time >= Carbon::now()->toTimeString())
+                                    @else
                                     <td scope="col" style="width: 144px"><a class="attend" href="">Attend quiz</a></td>
                                     @endif
                                     <td scope="col"><a href="view-student-answers.php?quiz_id= echo $quiz_id; ?>">{{ $quiz->mark }}</a></td>
