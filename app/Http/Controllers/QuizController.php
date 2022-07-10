@@ -137,6 +137,10 @@ class QuizController extends Controller
 
     function getAttendQuiz(Quiz $quiz)
     {
-        return $quiz;
+
+        return $quiz->questions;
+        return $quiz->topics->id;
+        $quizzes = Quiz::inRandomOrder()->limit(10)->get();
+        return $quizzes;
     }
 }
