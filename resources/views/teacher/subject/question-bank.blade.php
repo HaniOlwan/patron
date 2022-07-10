@@ -122,7 +122,7 @@
                         @foreach($questions as $question)
                         <tr>
                             <th scope="row">{{ $row_countt++ }}</th>
-                            <th scope="col"><a href="view-topic.php?topic_id= echo $topic_id&subject_id= echo $id">{{ $question->topic->title }}</a></th>
+                            <th scope="col"><a href="/view-topic/{{ $question->topic->id }}">{{ $question->topic->title }}</a></th>
                             <th scope="col">{{ $question->title }}</th>
                             <th scope="col">{{ $question->first_answer }}</th>
                             <th scope="col">{{ $question->second_answer }}</th>

@@ -93,12 +93,16 @@
                             <td scope="col">{{ $quiz->deadline_time }}</td>
                             <td scope="col">{{ $quiz->questions->count() }}</td>
                             <td scope="col">{{ $quiz->duration }} m</td>
+                            <td scope="col">{{ ($quiz->start_date < Carbon::now()->toDateString()) }} m</td>
+
                             @if(($quiz->start_date == '00-00-0000') || ($quiz->deadline_date == '00-00-0000'))
                             <td scope="col">Unavailable</td>
-                            @elseif($quiz->start_date < Carbon::now()) <td scope="col">Not Available yet</td>
-                                @elseif($quiz->deadline_date < Carbon::now()) <td scope="col">Expired</td>
-                                    @else
-                                    <td scope="col" style="width: 144px"><a class="attend" onclick="return confirm('are you sure you want to attend the quiz ?\nInstructions:\n1.Quiz is multiple choice questions, you have to select one answer for the question to move to the next question.\n2.Try to finish answering all questions before the timer ends.\n3.Do NOT reload the quiz page during quiz.\nWarning: By reloading the quiz page you can NOT return to the quiz again, and you will get marks for the only answered questions.')" href="quiz.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>">Attend quiz</a></td>
+                            @elseif(($quiz->start_date > Carbon::now()->toDateString()) || ($quiz->start_time > Carbon::now()->toTimeString()))
+                            <td scope="col">Not available yet</td>
+                            @elseif($quiz->start_date < Carbon::now()->toDateString() && $quiz->deadline_date < Carbon::now()->toDateString())
+                                    <td scope="col">Expired</td>
+                                    @elseif($quiz->start_date >= Carbon::now()->toDateString() && $quiz->start_time >= Carbon::now()->toTimeString())
+                                    <td scope="col" style="width: 144px"><a class="attend" href="">Attend quiz</a></td>
                                     @endif
                                     <td scope="col"><a href="view-student-answers.php?quiz_id= echo $quiz_id; ?>">{{ $quiz->mark }}</a></td>
                         </tr>
