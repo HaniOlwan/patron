@@ -73,7 +73,14 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
 
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+
+    Route::get('/attend-quiz/{id}', [QuizController::class, 'getAttendQuiz']);
+
+
+
+
 });
+
 
 
 Route::group(['middleware' => ['teacher']], function () {

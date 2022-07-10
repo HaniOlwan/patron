@@ -133,25 +133,10 @@ class QuizController extends Controller
             ]); // add new record
         }
         return response()->json(['success' => "Topic added to quiz"], 201);
+    }
 
-        // foreach ($request->data as $question) {
-        //     if ($request == []) {
-        //         $quiz->topics()->detach(); // remove all records
-        //     } else if (!$quiz->topics->contains($question['topicId'])) {
-        //         $quiz->topics()->attach($quiz, [
-        //             'topic_id' => $question['topicId'],
-        //             'topic_questions' => $question['value']
-        //         ]); // add new record
-        //     } else {
-        //         $quiz->topics()->detach($question['topicId'], [
-        //             'topic_questions' => $question['value']
-        //         ]);
-        //         $quiz->topics()->attach($quiz, [
-        //             'topic_id' => $question['topicId'],
-        //             'topic_questions' => $question['value']
-        //         ]);
-        //         // update new record
-        //     }
-        // }
+    function getAttendQuiz(Quiz $quiz)
+    {
+        return $quiz;
     }
 }
