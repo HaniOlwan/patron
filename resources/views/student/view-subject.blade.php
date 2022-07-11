@@ -91,7 +91,7 @@
                             <td scope="col">{{ $quiz->start_time }}</td>
                             <td scope="col">{{ $quiz->deadline_date }}</td>
                             <td scope="col">{{ $quiz->deadline_time }}</td>
-                            <td scope="col">questions count</td>
+                            <td scope="col">{{ $quiz->questions->count() }}</td>
                             <td scope="col">{{ $quiz->duration }} m</td>
 
                             @if(($quiz->start_date == '0000-00-00') || ($quiz->deadline_date == '0000-00-00'))

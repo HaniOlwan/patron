@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
-use App\Models\QuizTopic;
+use App\Models\Question;
 use App\Models\Subject;
-use App\Models\Topic;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Arr;
 use Exception;
+
+
 
 
 class QuizController extends Controller
 {
+
+    protected $prev_id = 0;
     function index()
     {
         $quizzes = Auth::user()->quizzes;
@@ -135,12 +138,22 @@ class QuizController extends Controller
         return response()->json(['success' => "Topic added to quiz"], 201);
     }
 
+
     function getAttendQuiz(Quiz $quiz)
     {
+        return $quiz;
+    }
 
-        return $quiz->questions;
-        return $quiz->topics->id;
-        $quizzes = Quiz::inRandomOrder()->limit(10)->get();
-        return $quizzes;
+    function getPrevQuestionId($nextId)
+    {
+        return $this->prev_id = $nextId;
+    }
+
+    function getQuizPage(Quiz $quiz, Question $question)
+    {
+
+        $next_question = Question::where('id', '>', '0')->orderBy('id')->first();
+        $this->getPrevQuestionId($question->id);
+        return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'count' => $this->prev_id]);
     }
 }
