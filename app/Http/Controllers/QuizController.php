@@ -157,23 +157,12 @@ class QuizController extends Controller
             return redirect()->back();
         }
         try {
-
             $answer = Answer::where('question_id', $question->id)->first();
             session(['question_count' => session('quesiton_count') + 1]);
             return view('student.attend-quiz', [
                 'quiz' => $quiz, 'question' => $question,
-                'answer' => $answer
+                'answer' => $answer,
             ]);
-
-
-            // $answer = Answer::where('question_id', $question->id)->first();
-            // $first_row =  Question::where('id', '>', 0)->orderBy('id')->first();
-            // return $first_row;
-            // $next_question = Question::where('id', '>', $question->id)->orderBy('id')->first();
-            // if ($first_row == $next_question) {
-            // } else {
-            //     return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $first_row, 'answer' => $answer]);
-            // }
         } catch (Exception $e) {
             return $e;
         }

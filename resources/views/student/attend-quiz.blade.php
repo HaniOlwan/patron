@@ -17,7 +17,8 @@
                 <div class="border">
                     <div class="question bg-white p-3 border-bottom">
                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>{{ $quiz->title }}</h4><span>({{ session()->get('question_count') }} of {{ $quiz->questions->count() }})</span>
+                            <h4>{{ $quiz->title }}</h4>
+                            <h3 class="countdown"></h3><span>({{ session()->get('question_count') }} of {{ $quiz->questions->count() }})</span>
                         </div>
                     </div>
                     <div class="question bg-white p-3 border-bottom">
@@ -58,6 +59,28 @@
 
 <!-- <script src="{{ asset('js/nextQuestion.js') }}"></script> -->
 
+<script>
+    function startTimer(duration, display) {
+        var timer = duration,
+            minutes, seconds;
+        setInterval(() => {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+            localStorage.setItem('countdown', timer)
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+    const display = document.querySelector('.countdown');
+    startTimer(localStorage.getItem('countdown') ?? 1600, display); // here put quiz timer
+    console.log(localStorage.getItem('countdown'))
+</script>
 
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
