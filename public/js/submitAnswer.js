@@ -1,12 +1,17 @@
 const next = document.querySelector('.next_btn');
+
 const token = document.querySelector('meta[name="_token"]').content;
 const questionId = document.querySelector('.question_id').value;
 const quizId = document.querySelector('.quiz_id').value;
 const form = document.querySelector('.form');
+
 next.addEventListener('click', (e) => {
     e.preventDefault();
 
-    console.log("Hello There")
+
+
+    console.log("Heelo")
+
     // $.ajaxSetup({
     //     headers: {
     //         'X-CSRF-TOKEN': token

@@ -1,5 +1,5 @@
-body{
-    background-color:#eee;
+body {
+  background-color: #eee;
 }
 
 label.radio {
@@ -8,7 +8,7 @@ label.radio {
 
 label.radio input {
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
   visibility: hidden;
   pointer-events: none;
@@ -26,7 +26,7 @@ label.radio span {
   text-transform: uppercase;
 }
 
-label.radio input:checked + span {
+label.radio input:checked+span {
   border-color: red;
   background-color: red;
   color: #fff;
@@ -44,4 +44,19 @@ label.radio input:checked + span {
 .btn:active {
   outline: 0 !important;
   box-shadow: none !important;
+}
+
+.next_btn a,
+.previous_btn a {
+  color: #fff;
+}
+
+.next_btn :hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.previous_btn :hover {
+  color: #fff;
+  text-decoration: none;
 }

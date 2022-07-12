@@ -9,14 +9,18 @@ use App\Models\Answer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Contracts\Session\Session;
+
 
 
 
 
 class QuizController extends Controller
+
 {
 
-    protected $prev_id = 0;
+    static $questions_count = 0;
+
     function index()
     {
         $quizzes = Auth::user()->quizzes;
@@ -141,12 +145,13 @@ class QuizController extends Controller
 
     function getAttendQuiz(Quiz $quiz)
     {
+        session(['question_count' => 1]);
         session(['isAttendingQuiz' => true]);
         return $quiz;
     }
 
 
-    function getQuizPage(Quiz $quiz, Question $question)
+    function getQuizPage(Quiz $quiz, Question $question, Request $request)
     {
         if (!session()->has('isAttendingQuiz')) {
             return redirect()->back();
@@ -154,12 +159,12 @@ class QuizController extends Controller
         try {
 
             $answer = Answer::where('question_id', $question->id)->first();
+            session(['question_count' => session('quesiton_count') + 1]);
+            return view('student.attend-quiz', [
+                'quiz' => $quiz, 'question' => $question,
+                'answer' => $answer
+            ]);
 
-            return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'answer' => $answer]);
-
-            if (!$answer->count()) {
-                return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'answer' => $answer]);
-            }
 
             // $answer = Answer::where('question_id', $question->id)->first();
             // $first_row =  Question::where('id', '>', 0)->orderBy('id')->first();
@@ -179,7 +184,7 @@ class QuizController extends Controller
     {
         try {
             $answer = Answer::where('question_id', $question->id)->first();
-            if (!$answer->count()) {
+            if ($answer === null) {
                 Answer::create([
                     'student_id' => Auth::user()->id,
                     'quiz_id' => $quiz->id,
@@ -190,12 +195,14 @@ class QuizController extends Controller
             $answer->update([
                 'answer' => $request->answer
             ]);
-            // $next_question_id = Question::where('id', '>', $request->questionId)->orderBy('id')->first();
+            $previous = Question::where('id', '<', $question->id)->max('id');
+            $next = Question::where('id', '>', $question->id)->min('id');
 
-            // if (!$next_question_id->count()) {
-            //     return response()->json(['message' => "hide", 'status' => 400]);
-            // }
-            // return response()->json(['nextQuestion' => $next_question_id], 201);
+            if ($request->next) {
+                return redirect('/student/quiz-page/' . $quiz->id . '/' . $next);
+            } else {
+                return redirect('/student/quiz-page/' . $quiz->id . '/' . $previous);
+            }
         } catch (Exception $e) {
             return $e;
         }

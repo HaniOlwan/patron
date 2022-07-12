@@ -17,7 +17,7 @@
                 <div class="border">
                     <div class="question bg-white p-3 border-bottom">
                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>{{ $quiz->title }}</h4><span>(count of {{ $quiz->questions->count() }})</span>
+                            <h4>{{ $quiz->title }}</h4><span>({{ session()->get('question_count') }} of {{ $quiz->questions->count() }})</span>
                         </div>
                     </div>
                     <div class="question bg-white p-3 border-bottom">
@@ -45,7 +45,9 @@
                             </div>
                     </div>
                     <input name="question_id" class="question_id" type="hidden" value="{{ $question->id }}">
-                    <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"><button class="btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button><button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit">Next<i class="fa fa-angle-right ml-2"></i></button>
+                    <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                        <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
+                        <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next">Next<i class="fa fa-angle-right ml-2"></i></button>
                     </div>
                 </div>
             </div>
@@ -55,6 +57,8 @@
 <meta name="_token" content="{{ csrf_token() }}">
 
 <!-- <script src="{{ asset('js/nextQuestion.js') }}"></script> -->
+
+
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
