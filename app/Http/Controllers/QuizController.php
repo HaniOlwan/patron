@@ -141,19 +141,67 @@ class QuizController extends Controller
 
     function getAttendQuiz(Quiz $quiz)
     {
+        session(['isAttendingQuiz' => true]);
         return $quiz;
     }
 
-    function getPrevQuestionId($nextId)
-    {
-        return $this->prev_id = $nextId;
-    }
 
     function getQuizPage(Quiz $quiz, Question $question)
     {
+        if (!session()->has('isAttendingQuiz')) {
+            return redirect()->back();
+        }
+        try {
 
-        $next_question = Question::where('id', '>', '0')->orderBy('id')->first();
-        $this->getPrevQuestionId($question->id);
-        return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'count' => $this->prev_id]);
+            $answer = Answer::where('question_id', $question->id)->first();
+
+            return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'answer' => $answer]);
+
+            if (!$answer->count()) {
+                return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $question, 'answer' => $answer]);
+            }
+
+            // $answer = Answer::where('question_id', $question->id)->first();
+            // $first_row =  Question::where('id', '>', 0)->orderBy('id')->first();
+            // return $first_row;
+            // $next_question = Question::where('id', '>', $question->id)->orderBy('id')->first();
+            // if ($first_row == $next_question) {
+            // } else {
+            //     return view('student.attend-quiz', ['quiz' => $quiz, 'question' => $first_row, 'answer' => $answer]);
+            // }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+
+    function submitAnswer(Quiz $quiz, Question $question, Request $request)
+    {
+        try {
+            $answer = Answer::where('question_id', $question->id)->first();
+            if (!$answer->count()) {
+                Answer::create([
+                    'student_id' => Auth::user()->id,
+                    'quiz_id' => $quiz->id,
+                    'question_id' => $question->id,
+                    'answer' => $request->answer
+                ]);
+            }
+            $answer->update([
+                'answer' => $request->answer
+            ]);
+            // $next_question_id = Question::where('id', '>', $request->questionId)->orderBy('id')->first();
+
+            // if (!$next_question_id->count()) {
+            //     return response()->json(['message' => "hide", 'status' => 400]);
+            // }
+            // return response()->json(['nextQuestion' => $next_question_id], 201);
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+    function deleteSession()
+    {
+        return session()->forget('isAttendingQuiz');
     }
 }

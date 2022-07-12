@@ -17,7 +17,7 @@
                 <div class="border">
                     <div class="question bg-white p-3 border-bottom">
                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>{{ $quiz->title }}</h4><span>({{ $count }} of {{ $quiz->questions->count() }})</span>
+                            <h4>{{ $quiz->title }}</h4><span>(count of {{ $quiz->questions->count() }})</span>
                         </div>
                     </div>
                     <div class="question bg-white p-3 border-bottom">
@@ -25,30 +25,36 @@
                             <h3 class="text-danger">Q.</h3>
                             <h5 class="mt-1 ml-2">{{ $question->title }}</h5>
                         </div>
-                        <div class="ans ml-2">
-                            <label class="radio"> <input type="radio" name="{{ $question->id }}" value=""> <span>{{ $question->first_answer }}</span>
-                            </label>
-                        </div>
-                        <div class="ans ml-2">
-                            <label class="radio"> <input type="radio" name="{{ $question->id }}" value="second"> <span>{{ $question->second_answer }}</span>
-                            </label>
-                        </div>
-                        <div class="ans ml-2">
-                            <label class="radio"> <input type="radio" name="{{ $question->id }}" value="third"> <span>{{ $question->third_answer }}</span>
-                            </label>
-                        </div>
-                        <div class="ans ml-2">
-                            <label class="radio"> <input type="radio" name="{{ $question->id }}" value="forth"> <span>{{ $question->forth_answer }}</span>
-                            </label>
-                        </div>
+                        <form class="form" action="/student/quiz-page/{{ $quiz->id }}/{{ $question->id }}" method="POST">
+                            @csrf
+                            <div class="ans ml-2">
+                                <label class="radio"> <input id="first_answer" type="radio" name="answer" value="a" {{ $answer ==! null && $answer->answer === 'a' ? 'checked' : '' }}> <span>{{ $question->first_answer }}</span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio"> <input id="second_answer" type="radio" name="answer" value="b" {{ $answer ==! null && $answer->answer === 'b' ? 'checked' : '' }}> <span>{{ $question->second_answer }}</span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio"> <input id="third_answer" type="radio" name="answer" value="c" {{ $answer ==! null && $answer->answer === 'c' ? 'checked' : '' }}> <span>{{ $question->third_answer }}</span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio"> <input id="forth_answer" type="radio" name="answer" value="d" {{ $answer ==! null && $answer->answer === 'd' ? 'checked' : '' }}> <span>{{ $question->forth_answer }}</span>
+                                </label>
+                            </div>
                     </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"><button class="btn btn-primary d-flex align-items-center btn-danger" type="button"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button><button class="btn btn-primary border-success align-items-center btn-success" type="button">Next<i class="fa fa-angle-right ml-2"></i></button></div>
+                    <input name="question_id" class="question_id" type="hidden" value="{{ $question->id }}">
+                    <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"><button class="btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button><button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit">Next<i class="fa fa-angle-right ml-2"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<meta name="_token" content="{{ csrf_token() }}">
 
+<!-- <script src="{{ asset('js/nextQuestion.js') }}"></script> -->
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -58,5 +64,6 @@
 <script src="{{ asset('js/util.js') }}"></script>
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="{{ asset('js/script.js') }}"></script>
+
 
 </html>

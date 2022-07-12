@@ -80,7 +80,7 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/attend-quiz/{quiz}', [QuizController::class, 'getAttendQuiz']);
 
     Route::get('/quiz-page/{quiz}/{question}', [QuizController::class, 'getQuizPage']);
-
+    Route::post('/quiz-page/{quiz}/{question}', [QuizController::class, 'submitAnswer']);
 
 });
 
