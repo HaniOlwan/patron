@@ -82,6 +82,9 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/quiz-page/{quiz}/{question}', [QuizController::class, 'getQuizPage']);
     Route::post('/quiz-page/{quiz}/{question}', [QuizController::class, 'submitAnswer']);
 
+    Route::post('/end-quiz', [QuizController::class, 'deleteSession']);
+
+
 });
 
 

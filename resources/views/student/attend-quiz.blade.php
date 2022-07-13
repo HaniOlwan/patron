@@ -45,42 +45,23 @@
                                 </label>
                             </div>
                     </div>
+
                     <input name="question_id" class="question_id" type="hidden" value="{{ $question->id }}">
                     <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
                         <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
                         <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next">Next<i class="fa fa-angle-right ml-2"></i></button>
                     </div>
+                    </form>
+                    <input type="hidden" class="duration" value="{{ $quiz->duration }}">
+                    <input type="hidden" class="subject_id" value="{{ $quiz->subject->id }}">
                 </div>
             </div>
         </div>
     </div>
+    <meta name="_token" content="{{ csrf_token() }}">
 </body>
-<meta name="_token" content="{{ csrf_token() }}">
 
-<!-- <script src="{{ asset('js/nextQuestion.js') }}"></script> -->
 
-<script>
-    function startTimer(duration, display) {
-        var timer = duration,
-            minutes, seconds;
-        setInterval(() => {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = minutes + ":" + seconds;
-            localStorage.setItem('countdown', timer)
-            if (--timer < 0) {
-                timer = duration;
-            }
-        }, 1000);
-    }
-    const display = document.querySelector('.countdown');
-    startTimer(localStorage.getItem('countdown') ?? 1600, display); // here put quiz timer
-    console.log(localStorage.getItem('countdown'))
-</script>
 
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
@@ -91,6 +72,8 @@
 <script src="{{ asset('js/util.js') }}"></script>
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/quizCountdown.js') }}"></script>
+
 
 
 </html>

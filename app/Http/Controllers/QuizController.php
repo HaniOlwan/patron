@@ -200,4 +200,6 @@ class QuizController extends Controller
     {
         return session()->forget('isAttendingQuiz');
     }
+
+  
 }
