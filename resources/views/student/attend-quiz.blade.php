@@ -51,9 +51,12 @@
                         <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
                         <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next">Next<i class="fa fa-angle-right ml-2"></i></button>
                     </div>
+                    <button class="submit btn btn-primary border-success align-items-center btn-success" type="button" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
+
                     </form>
                     <input type="hidden" class="duration" value="{{ $quiz->duration }}">
                     <input type="hidden" class="subject_id" value="{{ $quiz->subject->id }}">
+                    <input type="hidden" class="quiz_id" value="{{ $quiz->id }}">
                 </div>
             </div>
         </div>
@@ -61,6 +64,12 @@
     <meta name="_token" content="{{ csrf_token() }}">
 </body>
 
+<script>
+    const submit = document.querySelector('.submit')
+    submit.addEventListener('click', (e) => {
+        return submitAnswers();
+    })
+</script>
 
 
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
@@ -72,6 +81,7 @@
 <script src="{{ asset('js/util.js') }}"></script>
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/submitAnswers.js') }}"></script>
 <script src="{{ asset('js/quizCountdown.js') }}"></script>
 
 

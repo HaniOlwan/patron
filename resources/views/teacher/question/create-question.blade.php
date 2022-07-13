@@ -33,7 +33,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control answer" name="answer1" id="Answer-one" required>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="answer1" name="correct_answer" value="1" class="custom-control-input" required>
+                                <input type="radio" id="answer1" name="correct_answer" value="a" class="custom-control-input" required>
                                 <label class="custom-control-label" for="answer1">Correct Answer</label>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control answer" name="answer2" id="Answer-two" required>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="answer2" name="correct_answer" value="2" class="custom-control-input" required>
+                                <input type="radio" id="answer2" name="correct_answer" value="b" class="custom-control-input" required>
                                 <label class="custom-control-label" for="answer2">Correct Answer</label>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control answer" name="answer3" id="Answer-three" required>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="answer3" name="correct_answer" value="3" class="custom-control-input" required>
+                                <input type="radio" id="answer3" name="correct_answer" value="c" class="custom-control-input" required>
                                 <label class="custom-control-label" for="answer3">Correct Answer</label>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control answer" name="answer4" id="Answer-four" required>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="answer4" name="correct_answer" value="4" class="custom-control-input" required>
+                                <input type="radio" id="answer4" name="correct_answer" value="d" class="custom-control-input" required>
                                 <label class="custom-control-label" for="answer4">Correct Answer</label>
                             </div>
                         </div>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\SubjectStudent;
+use App\Models\User;
+
 
 function changeDateFormate($date, $date_format)
 {
@@ -23,4 +25,16 @@ function studentJoinedSubject($studentId, $subjectId)
         }
     }
     return $is_true;
+}
+
+function hasAttended($student, $quiz)
+{
+    $student = User::find($student)->first();
+    foreach ($student->finishedQuizzes as $stdQuiz) {
+        if ($stdQuiz->id == $quiz) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

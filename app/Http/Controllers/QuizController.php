@@ -196,10 +196,30 @@ class QuizController extends Controller
             return $e;
         }
     }
-    function deleteSession()
-    {
-        return session()->forget('isAttendingQuiz');
-    }
 
-  
+    function deleteSession(Request $request)
+
+    {
+        $quiz = Quiz::find($request->quizId)->first();
+
+        $student_answers = Answer::where('student_id', '=', Auth::user()->id)
+            ->where('quiz_id', '=', $request->quizId)->get();
+
+        $score = 0;
+        for ($i = 0; $i < $quiz->questions->count(); $i++) {
+            if ($quiz->questions[$i]['correct_answer'] == $student_answers[$i]['answer']) {
+                $score++;
+            }
+        }
+
+        Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
+            'student_id' => Auth::user()->id,
+            'quiz_id' => $quiz->id,
+            'status' => 'finished',
+            'score' => $score,
+        ]);
+        session()->forget('isAttendingQuiz');
+
+        return redirect('student/view-subject/' . $request->subjectId);
+    }
 }

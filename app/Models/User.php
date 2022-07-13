@@ -50,6 +50,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function subjects()
     {
         return $this->hasMany(Subject::class);
@@ -63,5 +64,15 @@ class User extends Authenticatable
     public function quizzes()
     {
         return $this->hasMany(Quiz::class, 'user_id');
+    }
+
+    public function attendedQuizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id');
+    }
+
+    public function finishedQuizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id')->where('status', 'finished');
     }
 }
