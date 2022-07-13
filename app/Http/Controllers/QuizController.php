@@ -163,7 +163,8 @@ class QuizController extends Controller
             $answer = Answer::where('question_id', $question->id)->first();
             session(['question_count' => session('quesiton_count') + 1]);
             return view('student.attend-quiz', [
-                'quiz' => $quiz, 'question' => $question,
+                'quiz' => $quiz,
+                'question' => $question,
                 'answer' => $answer,
                 'next_question' => $next,
                 'previous_question' => $previous

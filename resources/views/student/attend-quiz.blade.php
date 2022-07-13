@@ -18,7 +18,8 @@
                     <div class="question bg-white p-3 border-bottom">
                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
                             <h4>{{ $quiz->title }}</h4>
-                            <h3 class="countdown"></h3><span>({{ session()->get('question_count') }} of {{ $quiz->questions->count() }})</span>
+                            <h3 class="countdown"></h3>
+                            <span>(<span class="question_count"></span> of {{ $quiz->questions->count() }})</span>
                         </div>
                     </div>
                     <div class="question bg-white p-3 border-bottom">
@@ -49,12 +50,12 @@
                     <input name="question_id" class="question_id" type="hidden" value="{{ $question->id }}">
                     <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
                         @if($previous_question)
-                        <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
+                        <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit" onclick="return dicrement()"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
                         @else
                         <button class="prev_btn btn d-flex align-items-center disabled" type="button"><i class="fa fa-angle-left mt-1 mr-1"></i></button>
                         @endif
                         @if($next_question)
-                        <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next">Next<i class="fa fa-angle-right ml-2"></i></button>
+                        <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next" onclick="return increment()">Next<i class="fa fa-angle-right ml-2"></i></button>
                         @else
                         <button class="submit btn btn-primary border-secondary align-items-center btn-secondary" type="button" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
                         @endif
@@ -71,7 +72,22 @@
 </body>
 
 <script>
-    const submit = document.querySelector('.submit')
+    window.onload = () => {
+        questionCount.textContent = window.localStorage.getItem('question_count');
+    }
+    const submit = document.querySelector('.submit');
+    const questionCount = document.querySelector('.question_count');
+    const next = document.querySelector('.next_btn');
+    const previous = document.querySelector('.previous_btn');
+
+    const increment = () => {
+        window.localStorage.setItem('question_count', Number(window.localStorage.getItem('question_count')) + 1);
+    }
+
+    const dicrement = () => {
+        window.localStorage.setItem('question_count', Number(window.localStorage.getItem('question_count')) - 1);
+    }
+
     submit.addEventListener('click', (e) => {
         return submitAnswers();
     })
