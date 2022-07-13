@@ -44,11 +44,9 @@ form.addEventListener('submit', (e) => {
         data: data,
         success: function (response) {
             if (response.status === 201) {
-                console.log(response)
                 window.location.href = "/question-bank/" + data.subjectId;
             } else {
-                console.log(response)
-                // alert("Please fill out all inputs")
+                alert("Please fill out all inputs")
             }
         },
         error: function (response) {

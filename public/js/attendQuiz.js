@@ -21,7 +21,7 @@ attendButton.addEventListener('click', (e) => {
                 if (response.status === 400) {
                     alertMsg.textContent = response.message;
                 } else {
-                    window.location.href = "/student/quiz-page/" + quizId
+                    window.location.href = "/student/quiz-page/" + quizId + "/" + response.first_quesiton;
                 }
             },
             error: function (result) {

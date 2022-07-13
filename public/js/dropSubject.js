@@ -14,9 +14,8 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
             type: 'GET',
             success: function (response) {
                 if (response.status === 400) {
-                    console.log(response)
+                    alert('Something went wrong')
                 } else {
-                    console.log(response)
                     window.location.reload();
                 }
             },

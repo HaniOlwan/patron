@@ -2,6 +2,7 @@
 
 use App\Models\SubjectStudent;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 function changeDateFormate($date, $date_format)
@@ -27,14 +28,13 @@ function studentJoinedSubject($studentId, $subjectId)
     return $is_true;
 }
 
-function hasAttended($student, $quiz)
+function hasAttended($quiz)
 {
-    $student = User::find($student)->first();
-    foreach ($student->finishedQuizzes as $stdQuiz) {
+    $attended = false;
+    foreach (Auth::user()->finishedQuizzes as $stdQuiz) {
         if ($stdQuiz->id == $quiz) {
-            return true;
-        } else {
-            return false;
+            $attended = true;
         }
     }
+    return $attended;
 }

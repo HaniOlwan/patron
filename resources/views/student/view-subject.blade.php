@@ -101,13 +101,13 @@
                             @elseif(($quiz->deadline_date <= Carbon::now()->toDateString()) && ($quiz->deadline_time < Carbon::now()->toTimeString()))
                                     <td scope="col">Expired</td>
                                     @else
-                                    @if(hasAttended(Auth::user()->id,$quiz->id))
-                                    <td scope="col" style="width: 144px">Submited Quiz</td>
+                                    @if(hasAttended($quiz->id))
+                                    <td scope="col" style="width: 144px">Submitted</td>
                                     @else
                                     <td scope="col" style="width: 144px"><a href="" class="attend" quiz-id="{{ $quiz->id }}">Attend quiz</a></td>
                                     @endif
                                     @endif
-                                    <td scope="col"><a href="view-student-answers.php?quiz_id= echo $quiz_id; ?>">{{ $quiz->mark }}</a></td>
+                                    <td scope="col"><a href="/student/{{ $quiz->id }}/mark">{{ $quiz->mark }}</a></td>
                         </tr>
                         @endforeach
                         @endif
@@ -119,10 +119,6 @@
     <meta name="_token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
-
-<script>
-    window.localStorage.clear();
-</script>
 
 <script src="{{ asset('js/attendQuiz.js') }}"></script>
 @endsection

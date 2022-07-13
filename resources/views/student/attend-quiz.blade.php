@@ -48,11 +48,17 @@
 
                     <input name="question_id" class="question_id" type="hidden" value="{{ $question->id }}">
                     <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                        @if($previous_question)
                         <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
+                        @else
+                        <button class="prev_btn btn d-flex align-items-center disabled" type="button"><i class="fa fa-angle-left mt-1 mr-1"></i></button>
+                        @endif
+                        @if($next_question)
                         <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="submit" name="next" value="next">Next<i class="fa fa-angle-right ml-2"></i></button>
+                        @else
+                        <button class="submit btn btn-primary border-secondary align-items-center btn-secondary" type="button" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
+                        @endif
                     </div>
-                    <button class="submit btn btn-primary border-success align-items-center btn-success" type="button" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
-
                     </form>
                     <input type="hidden" class="duration" value="{{ $quiz->duration }}">
                     <input type="hidden" class="subject_id" value="{{ $quiz->subject->id }}">

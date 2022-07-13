@@ -147,7 +147,7 @@ class QuizController extends Controller
     {
         session(['question_count' => 1]);
         session(['isAttendingQuiz' => true]);
-        return $quiz;
+        return $result = ["first_quesiton" => $quiz->questions[0]->id];
     }
 
 
@@ -157,11 +157,17 @@ class QuizController extends Controller
             return redirect()->back();
         }
         try {
+            $next = Question::where('id', '>', $question->id)->min('id');
+            $previous = Question::where('id', '<', $question->id)->max('id');
+
             $answer = Answer::where('question_id', $question->id)->first();
             session(['question_count' => session('quesiton_count') + 1]);
             return view('student.attend-quiz', [
                 'quiz' => $quiz, 'question' => $question,
                 'answer' => $answer,
+                'next_question' => $next,
+                'previous_question' => $previous
+
             ]);
         } catch (Exception $e) {
             return $e;
