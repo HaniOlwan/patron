@@ -43,4 +43,9 @@ class Quiz extends Model
     {
         return $this->belongsToMany(Question::class, 'quiz_question', 'quiz_id', 'question_id');
     }
+
+    function students()
+    {
+        return $this->belongsToMany(User::class, 'quiz_student', 'quiz_id', 'student_id')->withPivot('score');
+    }
 }

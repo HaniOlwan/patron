@@ -6,14 +6,10 @@ use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\Answer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
-use Illuminate\Contracts\Session\Session;
-
-
-
-
 
 class QuizController extends Controller
 
@@ -59,11 +55,21 @@ class QuizController extends Controller
                     'user_id' => Auth::user()->id,
                 ]
             );
+
+            $questions_count  = 0;
             foreach ($request['questions'] as $question) {
                 $quiz->topics()->attach($quiz, [
                     'quiz_id' => $quiz->id,
                     'topic_id' => $question['topicId'],
                     'topic_questions' => $question['value']
+                ]);
+                $questions_count = $questions_count  + $question['value'];
+            }
+
+            foreach (Question::where('subject_id', $request->subjectId)->limit($questions_count)->get() as $question) {
+                $quiz->questions()->attach($quiz, [
+                    'question_id' => $question->id,
+                    'quiz_id' => $quiz->id
                 ]);
             }
             return response()->json(["success" => 'Quiz created successfully', "status" => 201]);
@@ -157,8 +163,8 @@ class QuizController extends Controller
             return redirect()->back();
         }
         try {
-            $next = Question::where('id', '>', $question->id)->min('id');
-            $previous = Question::where('id', '<', $question->id)->max('id');
+            $previous = Question::where('id', '<', $question->id)->where('subject_id', $quiz->subject->id)->max('id');
+            $next = Question::where('id', '>', $question->id)->where('subject_id', $quiz->subject->id)->min('id');
 
             $answer = Answer::where('question_id', $question->id)->first();
             session(['question_count' => session('quesiton_count') + 1]);
@@ -191,8 +197,8 @@ class QuizController extends Controller
             $answer->update([
                 'answer' => $request->answer
             ]);
-            $previous = Question::where('id', '<', $question->id)->max('id');
-            $next = Question::where('id', '>', $question->id)->min('id');
+            $previous = Question::where('id', '<', $question->id)->where('subject_id', $quiz->subject->id)->max('id');
+            $next = Question::where('id', '>', $question->id)->where('subject_id', $quiz->subject->id)->min('id');
 
             if ($request->next) {
                 return redirect('/student/quiz-page/' . $quiz->id . '/' . $next);
@@ -226,7 +232,24 @@ class QuizController extends Controller
             'score' => $score,
         ]);
         session()->forget('isAttendingQuiz');
-
         return redirect('student/view-subject/' . $request->subjectId);
+    }
+
+    function getStudentQuizzes()
+    {
+        $quizzes = [];
+        $joinedSubjects = Auth::user()->joinedSubjects;
+        foreach ($joinedSubjects as $subject) {
+            foreach ($subject->quizzes as $quiz) {
+                array_push($quizzes, $quiz);
+            }
+        }
+        return view('student.quizzes', compact('quizzes'));
+    }
+
+    function getQuizzesResults()
+    {
+        $attendedQuizzes = Auth::user()->attendedQuizzes;
+        return view('student.quizzes-results', ['quizzes' => $attendedQuizzes]);
     }
 }

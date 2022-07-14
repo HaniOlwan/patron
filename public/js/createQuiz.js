@@ -1,7 +1,7 @@
 const token = document.querySelector('meta[name="_token"]').content;
 const form = document.querySelector('.quiz_form');
-const questionInputs = document.querySelectorAll('.questions_count')
-const selectedQuestions = document.querySelectorAll('.selected_questions')
+const questionInputs = document.querySelectorAll('.questions_count');
+const selectedQuestions = document.querySelectorAll('.selected_questions');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -27,9 +27,9 @@ form.addEventListener('submit', (e) => {
         'start_time': form.start_time.value,
         'exp_date': form.exp_date.value,
         'exp_time': form.exp_time.value,
-        'subjectId': form.subjectId.value,
         'duration': form.duration.value,
         'mark': count,
+        'subjectId': form.subjectId.value,
     }
 
     $.ajaxSetup({
@@ -46,7 +46,8 @@ form.addEventListener('submit', (e) => {
             if (response.status === 201) {
                 window.location.href = "/question-bank/" + data.subjectId;
             } else {
-                alert("Please fill out all inputs")
+                console.log(response)
+                // alert("Please fill out all inputs")
             }
         },
         error: function (response) {

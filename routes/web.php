@@ -84,6 +84,13 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
     Route::post('/end-quiz', [QuizController::class, 'deleteSession']);
 
+    Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
+
+    
+    Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
+
+
+
 
 });
 

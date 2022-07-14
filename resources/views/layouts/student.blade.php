@@ -73,7 +73,7 @@
                     <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/student/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/student/quizzes/results"><i class="fas fa-server"></i> View quizzes results</a></li>
                     </ul>
                 </li>
             </ul>
