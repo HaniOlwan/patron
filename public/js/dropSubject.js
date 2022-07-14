@@ -26,7 +26,5 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
     } else {
         // Do something 
     }
-
-
 }
 ))
