@@ -38,3 +38,22 @@ function hasAttended($quiz)
     }
     return $attended;
 }
+
+function notAttendedQuizzesCount()
+{
+    $count = 0;
+    $subjects = Auth::user()->joinedSubjects;
+    $attendedQuizzes = Auth::user()->attendedQuizzes;
+    foreach ($subjects as $subject) {
+        for ($i = 0; $i < $subject->quizzes->count(); $i++) {
+            if ($attendedQuizzes->count() > 0) {
+                if ($subject->quizzes[$i]->id != $attendedQuizzes[$i]->id) {
+                    $count++;
+                }
+            } else {
+                $count = $count + $subject->quizzes->count();
+            }
+        }
+    }
+    return $count;
+}

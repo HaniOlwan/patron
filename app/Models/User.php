@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id')->where('status', 'finished');
     }
+
+    public function notAttended()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id')->where('status', '<>', 'finished');
+    }
 }

@@ -44,7 +44,7 @@
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col">{{ $quiz->title }}</td>
-                            <td scope="col">{{ $quiz->subject->title }}</td>
+                            <td scope="col"><a href="/student/view-subject/{{ $quiz->subject->id }}">{{ $quiz->subject->title }}</a></td>
                             <td scope="col">{{ $quiz->mark }}</td>
                             @if($quiz->mark / 2 <= $quiz->pivot['score'])
                             <td class="text-success" scope="col">{{ $quiz->pivot['score'] }}</td>

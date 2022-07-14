@@ -34,7 +34,7 @@
                             </tr>
                             <tr>
                                 <td>Instructor name</td>
-                                <td><a href="">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
+                                <td><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                             </tr>
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td>Number of students</td>
-                                <td>students count</td>
+                                <td>{{ $subject->students->count() }}</td>
                             </tr>
                             <tr>
                                 <td>Number of quizzes</td>

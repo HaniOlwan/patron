@@ -55,7 +55,7 @@
             <ul class="cd-side__list js-cd-side__list">
                 <li class="cd-side__label"><span><i class="fas fa-tachometer-alt"></i> Dashboard</span></li>
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
+                    <a href="/student"><i class="fas fa-home"></i> Home</a>
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
@@ -70,7 +70,7 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
+                    <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ notAttendedQuizzesCount() }}</span></a>
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/student/quizzes/results"><i class="fas fa-server"></i> View quizzes results</a></li>
