@@ -8,7 +8,7 @@ const submitAnswers = () => {
         },
     });
     $.ajax({
-        url: '/student/end-quiz',
+        url: '/student/' + quizId + '/submit-quiz',
         type: 'POST',
         data: {
             subjectId,

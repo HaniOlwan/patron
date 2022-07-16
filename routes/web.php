@@ -76,20 +76,15 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 
-    Route::get('/attend-quiz/{quiz}', [QuizController::class, 'getAttendQuiz']);
+    Route::get('/register-quiz/{quiz}', [QuizController::class, 'attendQuiz']);
 
-    Route::get('/quiz-page/{quiz}/{question}', [QuizController::class, 'getQuizPage']);
-    Route::post('/quiz-page/{quiz}/{question}', [QuizController::class, 'submitAnswer']);
+    Route::get('/attend-quiz/{quiz}', [QuizController::class, 'attendQuizPage']);
 
-    Route::post('/end-quiz', [QuizController::class, 'deleteSession']);
+    Route::post('/{quiz}/submit-quiz', [QuizController::class, 'submitQuiz']);
 
     Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
-
     
     Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
-
-
-
 
 });
 

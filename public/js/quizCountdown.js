@@ -1,24 +1,35 @@
-const duration = document.querySelector('.duration').value;
+const quizDuration = document.querySelector('.duration');
 const display = document.querySelector('.countdown');
 
-function startTimer(duration, display) {
-    var timer = duration,
+
+function startTimer(duration, display, timer) {
+    if(!timer)  {
+        var timer = duration * 60,
         minutes, seconds;
-    setInterval(() => {
+    }
+    let interval = setInterval(() => {
+        clearInterval(interval);
         localStorage.setItem('countdown', timer)
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
+        if (display) {
+            display.textContent = minutes + ":" + seconds;
+        }
 
         if (--timer < 0) {
             submitAnswers();
+            clearInterval(interval);
         }
     }, 1000);
 }
 
-startTimer(localStorage.getItem('countdown') ?? duration * 60, display); // here put quiz timer
-
+let timer = localStorage.getItem('countdown');
+if(timer) {
+    startTimer(0, display, timer);
+} else if(quizDuration) {
+    const duration = quizDuration.value;
+    startTimer(duration, display); // here put quiz timer
+}
 

@@ -12,16 +12,14 @@ attendButton.forEach((ele) => ele.addEventListener('click', (e) => {
                 'X-CSRF-TOKEN': token
             },
         })
-
         $.ajax({
-            url: '/student/attend-quiz/' + quizId,
+            url: "/student/register-quiz/" + quizId,
             type: 'GET',
             success: function (response) {
                 if (response.status === 400) {
                     alertMsg.textContent = response.message;
                 } else {
-                    window.localStorage.setItem('question_count', window.localStorage.getItem('question_count') + 1);
-                    window.location.href = "/student/quiz-page/" + quizId + "/" + response.first_quesiton;
+                    window.location.href = "/student/attend-quiz/" + quizId;
                 }
             },
             error: function (result) {

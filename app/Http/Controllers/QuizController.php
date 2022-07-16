@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use phpDocumentor\Reflection\Types\Object_ as TypesObject_;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class QuizController extends Controller
 
@@ -149,82 +151,32 @@ class QuizController extends Controller
     }
 
 
-    function getAttendQuiz(Quiz $quiz)
+    function attendQuiz(Quiz $quiz)
     {
         session(['question_count' => 1]);
         session(['isAttendingQuiz' => true]);
-        return $result = ["first_quesiton" => $quiz->questions[0]->id];
     }
 
-
-    function getQuizPage(Quiz $quiz, Question $question, Request $request)
+    function attendQuizPage(Quiz $quiz)
     {
-        if (!session()->has('isAttendingQuiz')) {
-            return redirect()->back();
-        }
-        try {
-            $previous = Question::where('id', '<', $question->id)->where('subject_id', $quiz->subject->id)->max('id');
-            $next = Question::where('id', '>', $question->id)->where('subject_id', $quiz->subject->id)->min('id');
-
-            $answer = Answer::where('question_id', $question->id)->first();
-            session(['question_count' => session('quesiton_count') + 1]);
-            return view('student.attend-quiz', [
-                'quiz' => $quiz,
-                'question' => $question,
-                'answer' => $answer,
-                'next_question' => $next,
-                'previous_question' => $previous
-
-            ]);
-        } catch (Exception $e) {
-            return $e;
-        }
+        return view('student.attend-quiz', [
+            'quiz' => $quiz,
+            'questions' => $quiz->questions,
+        ]);
     }
 
-
-    function submitAnswer(Quiz $quiz, Question $question, Request $request)
+    function submitQuiz(Quiz $quiz, Request $request)
     {
-        try {
-            $answer = Answer::where('question_id', $question->id)->first();
-            if ($answer === null) {
-                Answer::create([
-                    'student_id' => Auth::user()->id,
-                    'quiz_id' => $quiz->id,
-                    'question_id' => $question->id,
-                    'answer' => $request->answer
-                ]);
-            }
-            $answer->update([
-                'answer' => $request->answer
-            ]);
-            $previous = Question::where('id', '<', $question->id)->where('subject_id', $quiz->subject->id)->max('id');
-            $next = Question::where('id', '>', $question->id)->where('subject_id', $quiz->subject->id)->min('id');
-
-            if ($request->next) {
-                return redirect('/student/quiz-page/' . $quiz->id . '/' . $next);
-            } else {
-                return redirect('/student/quiz-page/' . $quiz->id . '/' . $previous);
-            }
-        } catch (Exception $e) {
-            return $e;
+        $data = collect();
+        foreach ($quiz->questions as $question) {
+            $data->put($question->id, $question->correct_answer);
         }
-    }
-
-    function deleteSession(Request $request)
-
-    {
-        $quiz = Quiz::find($request->quizId)->first();
-
-        $student_answers = Answer::where('student_id', '=', Auth::user()->id)
-            ->where('quiz_id', '=', $request->quizId)->get();
-
         $score = 0;
-        for ($i = 0; $i < $quiz->questions->count(); $i++) {
-            if ($quiz->questions[$i]['correct_answer'] == $student_answers[$i]['answer']) {
+        foreach ($data as $key => $value) {
+            if ($value == $request->questions[$key]) {
                 $score++;
             }
         }
-
         Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
             'student_id' => Auth::user()->id,
             'quiz_id' => $quiz->id,

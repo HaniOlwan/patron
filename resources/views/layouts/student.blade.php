@@ -81,14 +81,12 @@
         <div class="cd-content-wrapper">
             <div class="container-fluid no-gutters">
                 <div class="row no-gutters">
-
                     <div class="col">
                         <div class="hero hero-dashboard">
                             <div class="layout">
                                 @yield('header')
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -97,6 +95,10 @@
             @yield('content')
         </div>
     </main>
+    <script>
+        window.localStorage.removeItem('question_count');
+    </script>
+    <script src="{{ asset('js/quizCountdown.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -106,7 +108,6 @@
     <script src="{{ asset('js/util.js') }}"></script>
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="{{ asset('js/script.js') }}"></script>
-
 </body>
 
 </html>
