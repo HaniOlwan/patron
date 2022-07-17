@@ -94,10 +94,12 @@
             <!-- dynamic content here -->
             @yield('content')
         </div>
+        <meta name="_token" content="{{ csrf_token() }}">
     </main>
     <script>
         window.localStorage.removeItem('question_count');
     </script>
+    <script src="{{ asset('js/submitAnswers.js') }}"></script>
     <script src="{{ asset('js/quizCountdown.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>

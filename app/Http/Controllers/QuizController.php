@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Subject;
-use App\Models\Answer;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
-use phpDocumentor\Reflection\Types\Object_ as TypesObject_;
-use PhpParser\Node\Expr\Cast\Object_;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 
@@ -151,7 +149,7 @@ class QuizController extends Controller
     }
 
 
-    function attendQuiz(Quiz $quiz)
+    function attendQuiz()
     {
         session(['question_count' => 1]);
         session(['isAttendingQuiz' => true]);
@@ -159,6 +157,13 @@ class QuizController extends Controller
 
     function attendQuizPage(Quiz $quiz)
     {
+        if (!session()->has('isAttendingQuiz')) {
+            return redirect()->back();
+        }
+
+        Cookie::queue('quiz', $quiz->id, $quiz->duration);
+        Cookie::queue('subject', $quiz->subject->id, $quiz->duration);
+
         return view('student.attend-quiz', [
             'quiz' => $quiz,
             'questions' => $quiz->questions,
@@ -167,24 +172,38 @@ class QuizController extends Controller
 
     function submitQuiz(Quiz $quiz, Request $request)
     {
-        $data = collect();
-        foreach ($quiz->questions as $question) {
-            $data->put($question->id, $question->correct_answer);
-        }
-        $score = 0;
-        foreach ($data as $key => $value) {
-            if ($value == $request->questions[$key]) {
-                $score++;
+        try {
+            $score = 0;
+            if ($request->questions) {
+                $data = collect();
+                foreach ($quiz->questions as $question) {
+                    $data->put($question->id, $question->correct_answer);
+                }
+                foreach ($data as $key => $value) {
+                    if (!empty($request->questions[$key])) {
+                        if ($request->questions[$key] === $value) {
+                            $score++;
+                        }
+                    }
+                }
+
+                if (!hasAttended($quiz->id)) {
+                    Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
+                        'student_id' => Auth::user()->id,
+                        'quiz_id' => $quiz->id,
+                        'status' => 'finished',
+                        'score' => $score,
+                    ]);
+                } else {
+                    return redirect('/student/quizzes');
+                }
+
+                session()->forget('isAttendingQuiz');
+                return redirect('/student/quizzes');
             }
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-        Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
-            'student_id' => Auth::user()->id,
-            'quiz_id' => $quiz->id,
-            'status' => 'finished',
-            'score' => $score,
-        ]);
-        session()->forget('isAttendingQuiz');
-        return redirect('student/view-subject/' . $request->subjectId);
     }
 
     function getStudentQuizzes()

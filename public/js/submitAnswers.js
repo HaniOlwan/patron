@@ -1,29 +1,27 @@
-const token = document.querySelector('meta[name="_token"]').content;
-const subjectId = document.querySelector('.subject_id').value;
-const quizId = document.querySelector('.quiz_id').value;
-const submitAnswers = () => {
+
+const submitAnswers = (questions) => {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': token
         },
     });
     $.ajax({
-        url: '/student/' + quizId + '/submit-quiz',
+        url: '/student/' + window.localStorage.getItem('quiz') + '/submit-quiz',
         type: 'POST',
         data: {
-            subjectId,
-            quizId
+            subjectId: localStorage.getItem('subject'),
+            'questions': JSON.parse(questions),
         },
         success: function (response) {
             if (response.status === 400) {
                 alertMsg.textContent = response.message;
             } else {
                 window.localStorage.clear();
-                window.location.href = "/student/view-subject/" + subjectId;
+                window.location.reload();
             }
         },
         error: function (result) {
-            console.log(result)
+            console.log("Some error occured")
         }
     });
 }

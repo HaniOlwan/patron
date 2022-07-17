@@ -22,32 +22,40 @@
                             <span>(<span class="question_count"></span> of {{ $questions->count() }})</span>
                         </div>
                     </div>
-                    @foreach($questions as $question)
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">{{ $question->title }}</h5>
+                    <div class="all_questions">
+                        @php
+                        $count = 1;
+                        @endphp
+                        @foreach($questions as $question)
+                        <div class="question bg-white p-3 border-bottom " count="{{ $count++ }}">
+                            <div class="d-flex flex-row align-items-center question-title">
+                                <h3 class="text-danger">Q.</h3>
+                                <h5 class="mt-1 ml-2">{{ $question->title }}</h5>
+                            </div>
+                            <form class="form" action="/student/{{ $quiz->id }}/submit-quiz" method="POST">
+                                @csrf
+                                <div class="ans ml-2">
+                                    <label class="radio"> <input id="first_answer" type="radio" name="questions[{{ $question->id }}]" value="a"> <span>{{ $question->first_answer }}</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio"> <input id="second_answer" type="radio" name="questions[{{ $question->id }}]" value="b"> <span>{{ $question->second_answer }}</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio"> <input id="third_answer" type="radio" name="questions[{{ $question->id }}]" value="c"> <span>{{ $question->third_answer }}</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio"> <input id="forth_answer" type="radio" name="questions[{{ $question->id }}]" value="d"> <span>{{ $question->forth_answer }}</span>
+                                    </label>
+                                </div>
                         </div>
-                        <form class="form" action="/student/{{ $quiz->id }}/submit-quiz" method="POST">
-                            @csrf
-                            <div class="ans ml-2">
-                                <label class="radio"> <input id="first_answer" type="radio" name="questions[{{ $question->id }}]" value="a"> <span>{{ $question->first_answer }}</span>
-                                </label>
-                            </div>
-                            <div class="ans ml-2">
-                                <label class="radio"> <input id="second_answer" type="radio" name="questions[{{ $question->id }}]"  value="b"> <span>{{ $question->second_answer }}</span>
-                                </label>
-                            </div>
-                            <div class="ans ml-2">
-                                <label class="radio"> <input id="third_answer" type="radio" name="questions[{{ $question->id }}]"  value="c"> <span>{{ $question->third_answer }}</span>
-                                </label>
-                            </div>
-                            <div class="ans ml-2">
-                                <label class="radio"> <input id="forth_answer" type="radio" name="questions[{{ $question->id }}]"  value="d"> <span>{{ $question->forth_answer }}</span>
-                                </label>
-                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <input type="hidden" class="duration" value="{{ $quiz->duration }}">
+                    <input type="hidden" class="quiz_id" value="{{ $quiz->id }}">
+                    <input type="hidden" class="subject_id" value="{{ $quiz->subject->id }}">
                     <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
                         <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit" onclick="return dicrement()"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
                         <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="button" name="next" value="next" onclick="return increment()">Next<i class="fa fa-angle-right ml-2"></i></button>
@@ -61,23 +69,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
 </body>
 
-<script>
-    window.onload = () => {
-        questionCount.textContent = window.localStorage.getItem('question_count');
-    }
-    const questionCount = document.querySelector('.question_count');
-    const next = document.querySelector('.next_btn');
-    const previous = document.querySelector('.previous_btn');
 
-    const increment = () => {
-        window.localStorage.setItem('question_count', Number(window.localStorage.getItem('question_count')) + 1);
-    }
-
-    const dicrement = () => {
-        window.localStorage.setItem('question_count', Number(window.localStorage.getItem('question_count')) - 1);
-    }
-  
-</script>
 <script src="{{ asset('js/submitAnswers.js') }}"></script>
 <script src="{{ asset('js/quizCountdown.js') }}"></script>
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
@@ -89,5 +81,22 @@
 <script src="{{ asset('js/util.js') }}"></script>
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="{{ asset('js/script.js') }}"></script>
+
+<script>
+    const token = document.querySelector('meta[name="_token"]').content;
+
+    localStorage.setItem('quiz', document.querySelector('.quiz_id').value);
+    localStorage.setItem('subject', document.querySelector('.subject_id').value);
+    $('input[type=radio]').change(function() {
+        questions = {};
+        $('input:radio').each(function() {
+            if ($(this).is(':checked')) {
+                let key = this.name.split('[')[1].split(']')[0];
+                questions[key] = this.value;
+            }
+        });
+        localStorage.setItem('questions', JSON.stringify(questions))
+    });
+</script>
 
 </html>

@@ -3,12 +3,13 @@ const display = document.querySelector('.countdown');
 
 
 function startTimer(duration, display, timer) {
-    if(!timer)  {
+    if (!timer) {
         var timer = duration * 60,
-        minutes, seconds;
+            minutes, seconds;
     }
+
     let interval = setInterval(() => {
-        clearInterval(interval);
+
         localStorage.setItem('countdown', timer)
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
@@ -19,16 +20,17 @@ function startTimer(duration, display, timer) {
         }
 
         if (--timer < 0) {
-            submitAnswers();
+            // console.log(localStorage.getItem('questions'))
+            submitAnswers(localStorage.getItem('questions'));
             clearInterval(interval);
         }
     }, 1000);
 }
 
 let timer = localStorage.getItem('countdown');
-if(timer) {
+if (timer) {
     startTimer(0, display, timer);
-} else if(quizDuration) {
+} else if (quizDuration) {
     const duration = quizDuration.value;
     startTimer(duration, display); // here put quiz timer
 }
