@@ -220,4 +220,17 @@ class QuizController extends Controller
         $attendedQuizzes = Auth::user()->attendedQuizzes;
         return view('student.quizzes-results', ['quizzes' => $attendedQuizzes]);
     }
+
+    function analysisResults(Quiz $quiz)
+    {
+        return view('teacher.quiz.analysis-results', compact('quiz'));
+    }
+
+    function sample(Quiz $quiz)
+    {
+        return view('teacher.quiz.attend-quiz', [
+            'quiz' => $quiz,
+            'questions' => $quiz->questions,
+        ]);
+    }
 }
