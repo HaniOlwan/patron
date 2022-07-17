@@ -17,7 +17,7 @@ const submitAnswers = (questions) => {
                 alertMsg.textContent = response.message;
             } else {
                 window.localStorage.clear();
-                window.location.reload();
+                window.location.href = '/student/quizzes';
             }
         },
         error: function (result) {

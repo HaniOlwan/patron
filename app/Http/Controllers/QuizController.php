@@ -186,21 +186,18 @@ class QuizController extends Controller
                         }
                     }
                 }
-
-                if (!hasAttended($quiz->id)) {
-                    Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
-                        'student_id' => Auth::user()->id,
-                        'quiz_id' => $quiz->id,
-                        'status' => 'finished',
-                        'score' => $score,
-                    ]);
-                } else {
-                    return redirect('/student/quizzes');
-                }
-
-                session()->forget('isAttendingQuiz');
-                return redirect('/student/quizzes');
             }
+            if (!hasAttended($quiz->id)) {
+                Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
+                    'student_id' => Auth::user()->id,
+                    'quiz_id' => $quiz->id,
+                    'status' => 'finished',
+                    'score' => $score,
+                ]);
+            }
+
+            session()->forget('isAttendingQuiz');
+            return redirect('/student/quizzes');
         } catch (Exception $e) {
             return $e->getMessage();
         }
