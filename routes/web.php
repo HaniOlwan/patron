@@ -114,6 +114,12 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
 
+    Route::get('/quiz/{quiz}/analysis-results', [QuizController::class, 'analysisResults']);
+    
+    Route::get('/quiz/{quiz}/sample', [QuizController::class, 'sample']);
+
+
+
 
     Route::get('/topic/{subject}', [TopicController::class, 'index']);
     Route::post('/topic/{subject}', [TopicController::class, 'create']);

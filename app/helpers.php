@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\SubjectStudent;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -55,4 +56,9 @@ function notAttendedQuizzesCount()
         }
     }
     return $count;
+}
+
+function quizScore($student, $quiz)
+{
+    return DB::table('quiz_student')->where('student_id', $student)->where('quiz_id', $quiz)->value('score');
 }
