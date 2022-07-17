@@ -19,7 +19,7 @@
                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
                             <h4>{{ $quiz->title }}</h4>
                             <h3 class="countdown"></h3>
-                            <span>(<span class="question_count"></span> of {{ $questions->count() }})</span>
+                            <span><span class="question_count"></span></span>
                         </div>
                     </div>
                     <div class="all_questions">
@@ -56,10 +56,8 @@
                     <input type="hidden" class="duration" value="{{ $quiz->duration }}">
                     <input type="hidden" class="quiz_id" value="{{ $quiz->id }}">
                     <input type="hidden" class="subject_id" value="{{ $quiz->subject->id }}">
-                    <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
-                        <button class="previous_btn btn btn-primary d-flex align-items-center btn-danger" type="submit" onclick="return dicrement()"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
-                        <button class="next_btn btn btn-primary border-success align-items-center btn-success" type="button" name="next" value="next" onclick="return increment()">Next<i class="fa fa-angle-right ml-2"></i></button>
-                        <button class="submit btn btn-primary border-secondary align-items-center btn-secondary" type="submit" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
+                    <div class="d-flex flex-row justify-content-end align-items-center p-3 bg-white">
+                        <button class="submit btn border-secondary align-items-center btn-secondary mb-2" type="submit" name="submit" value="submit">Submit<i class="fa fa-angle-right ml-2"></i></button>
                     </div>
                     </form>
                 </div>
