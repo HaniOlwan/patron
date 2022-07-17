@@ -8,7 +8,7 @@
         <div class="row no-gutters">
             <div class="col">
                 <div class="hero hero-subject">
-                    <div class="layout" dashboard.php>
+                    <div class="layout">
                         <h3>Quizzes</h3>
                     </div>
                 </div>
@@ -69,9 +69,9 @@
                             <td scope="col">{{ $quiz->deadline_date }}</td>
                             <td scope="col">{{ $quiz->deadline_time }}</td>
                             <td scope="col">{{ $quiz->duration }}</td>
-                            <td scope="col"><a href="quiz-details.php?quiz_id= echo $quiz_id; ?>&subject_id= echo $subject_id; ?>#students"> </a></td>
-                            <td scope="col"><a href="quiz-sample.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>" target="_blank"><i class="far fa-file-alt"></i></a></td>
-                            <td scope="col"><a href="analysis-result.html"><i class="fas fa-chart-pie"></i></a></td>
+                            <td scope="col"><a href=""> </a></td>
+                            <td scope="col"><a href="" target="_blank"><i class="far fa-file-alt"></i></a></td>
+                            <td scope="col"><a href=""><i class="fas fa-chart-pie"></i></a></td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}/edit-quiz"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz"></i></a></td>
                         </tr>

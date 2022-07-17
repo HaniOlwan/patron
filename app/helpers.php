@@ -1,9 +1,8 @@
 <?php
 
 use App\Models\SubjectStudent;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 function changeDateFormate($date, $date_format)
 {

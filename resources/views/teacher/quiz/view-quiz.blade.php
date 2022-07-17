@@ -81,7 +81,7 @@
             <div class="col text-right">
                 <a href="/quiz/{{$quiz->id}}/edit-quiz">Edit Quiz</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz" subject-id="{{ $quiz->subject->id }}">Delete Quiz</a>
-                <a href="quiz-sample.php?subject_id= echo $subject_id; ?>&quiz_id= echo $quiz_id; ?>" target="_blank">View Quiz Sample</a>
+                <a href="" target="_blank">View Quiz Sample</a>
                 <a href="">View Analysis Result</a>
             </div>
         </div>
@@ -102,10 +102,10 @@
                     <tbody>
                         <tr>
                             <td scope="row"> echo $student_number; ?></td>
-                            <td scope="col" style="text-transform: capitalize"><a href="teacher-profile.php?id= echo $student_id; ?>"> echo $student_fname; ?> echo $student_lname; ?></a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href=""> echo $student_fname; ?> echo $student_lname; ?></a></td>
                             <td scope="col"> echo $student_email; ?></td>
                             <td scope="col"> echo $student_phone; ?></td>
-                            <td scope="col"><a target="_blank" href="view-student-answers.php?quiz_id= echo $quiz_id; ?>&student_id= echo $student_id; ?>"> echo $student_mark; ?></a></td>
+                            <td scope="col"><a target="_blank" href=""> echo $student_mark; ?></a></td>
                         </tr>
                     </tbody>
                 </table>
