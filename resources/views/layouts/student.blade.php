@@ -55,7 +55,7 @@
             <ul class="cd-side__list js-cd-side__list">
                 <li class="cd-side__label"><span><i class="fas fa-tachometer-alt"></i> Dashboard</span></li>
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
+                    <a href="/student"><i class="fas fa-home"></i> Home</a>
                 </li>
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
@@ -70,10 +70,10 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
 
-                    <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">count</span></a>
+                    <a href="/student/quizzes"><i class="fas fa-question-circle"></i> Quizzes<span class="cd-count">{{ notAttendedQuizzesCount() }}</span></a>
 
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/student/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
+                        <li class="cd-side__sub-item"><a href="/student/quizzes/results"><i class="fas fa-server"></i> View quizzes results</a></li>
                     </ul>
                 </li>
             </ul>
@@ -81,14 +81,12 @@
         <div class="cd-content-wrapper">
             <div class="container-fluid no-gutters">
                 <div class="row no-gutters">
-
                     <div class="col">
                         <div class="hero hero-dashboard">
                             <div class="layout">
                                 @yield('header')
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -96,7 +94,13 @@
             <!-- dynamic content here -->
             @yield('content')
         </div>
+        <meta name="_token" content="{{ csrf_token() }}">
     </main>
+    <script>
+        window.localStorage.removeItem('question_count');
+    </script>
+    <script src="{{ asset('js/submitAnswers.js') }}"></script>
+    <script src="{{ asset('js/quizCountdown.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -106,7 +110,6 @@
     <script src="{{ asset('js/util.js') }}"></script>
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="{{ asset('js/script.js') }}"></script>
-
 </body>
 
 </html>

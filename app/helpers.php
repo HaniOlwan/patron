@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\SubjectStudent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 function changeDateFormate($date, $date_format)
 {
@@ -23,4 +25,34 @@ function studentJoinedSubject($studentId, $subjectId)
         }
     }
     return $is_true;
+}
+
+function hasAttended($quiz)
+{
+    $attended = false;
+    foreach (Auth::user()->finishedQuizzes as $stdQuiz) {
+        if ($stdQuiz->id == $quiz) {
+            $attended = true;
+        }
+    }
+    return $attended;
+}
+
+function notAttendedQuizzesCount()
+{
+    $count = 0;
+    $subjects = Auth::user()->joinedSubjects;
+    $attendedQuizzes = Auth::user()->attendedQuizzes;
+    foreach ($subjects as $subject) {
+        for ($i = 0; $i < $subject->quizzes->count(); $i++) {
+            if ($attendedQuizzes->count() > 0) {
+                if ($subject->quizzes[$i]->id != $attendedQuizzes[$i]->id) {
+                    $count++;
+                }
+            } else {
+                $count = $count + $subject->quizzes->count();
+            }
+        }
+    }
+    return $count;
 }

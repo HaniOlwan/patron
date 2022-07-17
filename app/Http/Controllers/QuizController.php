@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
-use App\Models\QuizTopic;
+use App\Models\Question;
 use App\Models\Subject;
-use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Arr;
 use Exception;
-
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
+
 {
+
+    static $questions_count = 0;
+
     function index()
     {
         $quizzes = Auth::user()->quizzes;
@@ -52,11 +55,21 @@ class QuizController extends Controller
                     'user_id' => Auth::user()->id,
                 ]
             );
+
+            $questions_count  = 0;
             foreach ($request['questions'] as $question) {
                 $quiz->topics()->attach($quiz, [
                     'quiz_id' => $quiz->id,
                     'topic_id' => $question['topicId'],
                     'topic_questions' => $question['value']
+                ]);
+                $questions_count = $questions_count  + $question['value'];
+            }
+
+            foreach (Question::where('subject_id', $request->subjectId)->limit($questions_count)->get() as $question) {
+                $quiz->questions()->attach($quiz, [
+                    'question_id' => $question->id,
+                    'quiz_id' => $quiz->id
                 ]);
             }
             return response()->json(["success" => 'Quiz created successfully', "status" => 201]);
@@ -133,25 +146,78 @@ class QuizController extends Controller
             ]); // add new record
         }
         return response()->json(['success' => "Topic added to quiz"], 201);
+    }
 
-        // foreach ($request->data as $question) {
-        //     if ($request == []) {
-        //         $quiz->topics()->detach(); // remove all records
-        //     } else if (!$quiz->topics->contains($question['topicId'])) {
-        //         $quiz->topics()->attach($quiz, [
-        //             'topic_id' => $question['topicId'],
-        //             'topic_questions' => $question['value']
-        //         ]); // add new record
-        //     } else {
-        //         $quiz->topics()->detach($question['topicId'], [
-        //             'topic_questions' => $question['value']
-        //         ]);
-        //         $quiz->topics()->attach($quiz, [
-        //             'topic_id' => $question['topicId'],
-        //             'topic_questions' => $question['value']
-        //         ]);
-        //         // update new record
-        //     }
-        // }
+
+    function attendQuiz()
+    {
+        session(['question_count' => 1]);
+        session(['isAttendingQuiz' => true]);
+    }
+
+    function attendQuizPage(Quiz $quiz)
+    {
+        if (!session()->has('isAttendingQuiz')) {
+            return redirect()->back();
+        }
+
+        Cookie::queue('quiz', $quiz->id, $quiz->duration);
+        Cookie::queue('subject', $quiz->subject->id, $quiz->duration);
+
+        return view('student.attend-quiz', [
+            'quiz' => $quiz,
+            'questions' => $quiz->questions,
+        ]);
+    }
+
+    function submitQuiz(Quiz $quiz, Request $request)
+    {
+        try {
+            $score = 0;
+            if ($request->questions) {
+                $data = collect();
+                foreach ($quiz->questions as $question) {
+                    $data->put($question->id, $question->correct_answer);
+                }
+                foreach ($data as $key => $value) {
+                    if (!empty($request->questions[$key])) {
+                        if ($request->questions[$key] === $value) {
+                            $score++;
+                        }
+                    }
+                }
+            }
+            if (!hasAttended($quiz->id)) {
+                Auth::user()->attendedQuizzes()->attach(Auth::user()->id, [
+                    'student_id' => Auth::user()->id,
+                    'quiz_id' => $quiz->id,
+                    'status' => 'finished',
+                    'score' => $score,
+                ]);
+            }
+
+            session()->forget('isAttendingQuiz');
+            return redirect('/student/quizzes');
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    function getStudentQuizzes()
+    {
+        $quizzes = [];
+        $joinedSubjects = Auth::user()->joinedSubjects;
+        foreach ($joinedSubjects as $subject) {
+            foreach ($subject->quizzes as $quiz) {
+                array_push($quizzes, $quiz);
+            }
+        }
+        return view('student.quizzes', compact('quizzes'));
+    }
+
+    function getQuizzesResults()
+    {
+        $attendedQuizzes = Auth::user()->attendedQuizzes;
+        return view('student.quizzes-results', ['quizzes' => $attendedQuizzes]);
     }
 }

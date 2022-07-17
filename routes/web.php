@@ -7,7 +7,6 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SubjectContoller;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserContoller;
-use App\Models\SubjectStudent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -33,11 +32,14 @@ Route::get('/logout', [SessionController::class, 'logout']);
 
 
 Route::get('/',  function () {
+
     $userStatus = Auth::user()->rule;
     if ($userStatus == 'teacher') {
         return view('teacher.dashboard');
-    } else {
+    } else if ($userStatus == 'student') {
         return view('student.dashboard');
+    } else {
+        return redirect('signin');
     }
 });
 
@@ -73,7 +75,19 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
 
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+
+    Route::get('/register-quiz/{quiz}', [QuizController::class, 'attendQuiz']);
+
+    Route::get('/attend-quiz/{quiz}', [QuizController::class, 'attendQuizPage']);
+
+    Route::post('/{quiz}/submit-quiz', [QuizController::class, 'submitQuiz']);
+
+    Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
+    
+    Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
+
 });
+
 
 
 Route::group(['middleware' => ['teacher']], function () {

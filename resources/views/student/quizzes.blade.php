@@ -1,5 +1,4 @@
 @extends('layouts.student')
-
 @section('content')
 <div class="cd-content-wrapper">
     @section('header')
@@ -8,58 +7,25 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3><span>{{ $subject->title }}</span></h3>
+                        <h3>Quizzes</h3>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
     @endsection
     <div class="container">
-        <div class="create row">
-            <div class="col ">
-                <div class="subject-details">
-                    <table class="table table-bordered">
+        <div class="add row">
+            <div class="col">
+                <form class="form-inline my-2 my-lg-0">
 
-                        <tbody>
-                            <tr>
-                                <td>Subject title</td>
-                                <td>{{ $subject->title }}</td>
-                            </tr>
-                            <tr>
-                                <td>Subject id</td>
-                                <td>{{ $subject->subject_id }}</td>
-                            </tr>
-                            <tr>
-                                <td>Instructor name</td>
-                                <td><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
-                            </tr>
-                            <tr>
-                                <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
-                                <td>{{ $subject->code }}</td>
-                            </tr>
-                            <tr>
-                                <td>Subject description</td>
-                                <td>{{ $subject->description }}</td>
-                            </tr>
-                            <tr>
-                                <td>Number of students</td>
-                                <td>{{ $subject->students->count() }}</td>
-                            </tr>
-                            <tr>
-                                <td>Number of quizzes</td>
-                                <td>{{ $subject->quizzes->count() }}</td>
-                            </tr>
-                            <tr>
-                                <td class="last">Created in</td>
-                                <td class="last">{{ $subject->created_at }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search for quiz ..." aria-label="Search">
+
+                </form>
             </div>
+
         </div>
         <div class="row">
             <div class="col">
@@ -68,12 +34,13 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Quiz title</th>
+                            <th scope="col">Subject</th>
                             <th scope="col">Start date</th>
                             <th scope="col">Start time</th>
-                            <th scope="col">deadline date</th>
-                            <th scope="col">deadline time</th>
+                            <th scope="col">Deadline date</th>
+                            <th scope="col">Deadline time</th>
                             <th scope="col">Questions</th>
-                            <th scope="col">Duration</th>
+                            <th scope="col">Duratuion</th>
                             <th scope="col">Option</th>
                             <th scope="col">Mark</th>
                         </tr>
@@ -82,11 +49,12 @@
                         @php
                         $row_count =1;
                         @endphp
-                        @if($subject->quizzes->count() > 0)
-                        @foreach($subject->quizzes as $quiz)
+                        @if($quizzes)
+                        @foreach($quizzes as $quiz)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col">{{ $quiz->title }}</td>
+                            <td scope="col">{{ $quiz->subject->title }}</td>
                             <td scope="col">{{ $quiz->start_date }}</td>
                             <td scope="col">{{ $quiz->start_time }}</td>
                             <td scope="col">{{ $quiz->deadline_date }}</td>
@@ -116,9 +84,8 @@
             </div>
         </div>
     </div>
-    <meta name="_token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
+<meta name="_token" content="{{ csrf_token() }}">
 </main> <!-- .cd-main-content -->
-
 <script src="{{ asset('js/attendQuiz.js') }}"></script>
 @endsection

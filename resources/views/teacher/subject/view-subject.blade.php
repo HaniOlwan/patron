@@ -128,7 +128,7 @@
                     <tbody>
                         <tr>
                             <td scope="row"> echo $student_number; ?></td>
-                            <td scope="col" style="text-transform: capitalize"><a href="teacher-profile.php?id= echo $student_id; ?>"> echo $row8['first_name']; ?> echo $row8['last_name']; ?></a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href=""> echo $row8['first_name']; ?> echo $row8['last_name']; ?></a></td>
                             <td scope="col">echo $row8['email']; ?></td>
                             <td scope="col"> echo $row8['gender']; ?></td>
                             <td scope="col"> echo $row8['phone']; ?></td>
