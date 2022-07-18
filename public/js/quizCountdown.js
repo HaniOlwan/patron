@@ -20,7 +20,6 @@ function startTimer(duration, display, timer) {
         }
 
         if (--timer < 0) {
-            // console.log(localStorage.getItem('questions'))
             submitAnswers(localStorage.getItem('questions'));
             clearInterval(interval);
         }
