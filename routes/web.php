@@ -33,15 +33,14 @@ Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::get('/',  function () {
 
-    $userStatus = Auth::user()->rule;
-    if ($userStatus == 'teacher') {
-        return view('teacher.dashboard');
-    } else if ($userStatus == 'student') {
-        return view('student.dashboard');
-    } else {
-        return redirect('signin');
-    }
+    return view('landing-page');
 });
+
+Route::get('/dashboard', function () {
+    return view('teacher.dashboard');
+});
+
+
 
 
 Route::group(['prefix' => '/student', 'middleware' => ['student']], function () {
@@ -83,9 +82,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::post('/{quiz}/submit-quiz', [QuizController::class, 'submitQuiz']);
 
     Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
-    
-    Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
 
+    Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
 });
 
 
@@ -115,7 +113,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
 
     Route::get('/quiz/{quiz}/analysis-results', [QuizController::class, 'analysisResults']);
-    
+
     Route::get('/quiz/{quiz}/sample', [QuizController::class, 'sample']);
 
 
