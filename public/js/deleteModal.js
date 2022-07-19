@@ -53,14 +53,12 @@ if (modaleDelete) {
                         window.location.href = "/quizzes/";
                     }
                     else {
-                        console.log(result)
-                        // window.location.reload();
+                        window.location.reload();
                     }
                 }
             },
             error: function (result) {
                 console.log(result)
-                console.log("Some error occured")
             }
         });
     })

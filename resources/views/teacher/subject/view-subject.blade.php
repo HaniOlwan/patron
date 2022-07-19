@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td># Participants</td>
-                                <td><a href="/participants">{{ $subject->students->count() }}</a></td>
+                                <td><a href="/subject/{{ $subject->id }}/participants">{{ $subject->students->count() }}</a></td>
                             </tr>
                             <tr>
                                 <td># Number of quizzes</td>

@@ -177,4 +177,9 @@ class SubjectContoller extends Controller
         if ($response) return response()->json(['status' => 201]);
         return response()->json(['status' => 400]);
     }
+
+    function participants(Subject $subject)
+    {
+        return view('teacher.subject.participants', compact('subject'));
+    }
 }
