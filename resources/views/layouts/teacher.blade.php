@@ -76,12 +76,9 @@
                         <li class="cd-side__sub-item"><a href="/quizzes"><i class="fas fa-server"></i> View quizzes</a></li>
                     </ul>
                 </li>
-
-                <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
-                    <a href="/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
-
-
-                </li>
+                    <!-- <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
+                        <a href="/results"><i class="fas fa-chart-pie"></i> Analysis results</a>
+                    </li> -->
             </ul>
         </nav>
         <div class="cd-content-wrapper">
