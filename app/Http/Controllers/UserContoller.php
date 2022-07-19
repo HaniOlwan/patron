@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Exception;
 
 
 class UserContoller extends Controller
@@ -66,18 +66,6 @@ class UserContoller extends Controller
         }
     }
 
-    function destroy()
-    {
-        $user = User::find(Auth::user()->id);
-        if (!$user) return response()->json(['success' => false], 404);
-        return response()->json([
-            'success' =>
-            $user->delete(),
-            Auth::logout()
-        ], 200);
-    }
-
-
     function studentProfile()
     {
         $student = Auth::user();
@@ -118,4 +106,22 @@ class UserContoller extends Controller
     {
         return view('student.teacher-profile', ['teacher' => $user]);
     }
+
+    function viewStudentProfile(User $user)
+    {
+        $registerdSubjects = collect($user->joinedSubjects)->where('user_id', Auth::user()->id)->all();
+        return view('teacher.student', ['student' => $user, 'subjects' => $registerdSubjects]);
+    }
+
+    function destroy()
+    {
+        $user = User::find(Auth::user()->id);
+        if (!$user) return response()->json(['success' => false], 404);
+        return response()->json([
+            'success' =>
+            $user->delete(),
+            Auth::logout()
+        ], 200);
+    }
+
 }

@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td># Participants</td>
-                                <td><a href="#students"></a></td>
+                                <td><a href="/subject/{{ $subject->id }}/participants">{{ $subject->students->count() }}</a></td>
                             </tr>
                             <tr>
                                 <td># Number of quizzes</td>
@@ -71,16 +71,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <!-- <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div> -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -101,9 +91,9 @@
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a href="">{{ $quiz->title }}</a></td>
                             <td scope="col">{{$quiz->questions->count()}}</td>
-                            <td scope="col"><a href="">Students count</a></td>
+                            <td scope="col"><a href="">{{ $quiz->students->count() }}</a></td>
                             <td scope="col"><a href=""><i class="fas fa-pencil-alt"></i></a></td>
-                            <td scope="col"><a><i class="fas fa-trash-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -126,14 +116,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count =1;
+                        @endphp
+                        @foreach($subject->students as $student)
                         <tr>
-                            <td scope="row">   </td>
-                            <td scope="col" style="text-transform: capitalize"><a href=""></a></td>
-                            <td scope="col">  </td>
-                            <td scope="col">  </td>
-                            <td scope="col">   </td>
-                            <td scope="col"><a href=""><i class="fas fa-trash-alt"></i></a></td>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col" style="text-transform: capitalize">{{ $student->first_name." ".$student->last_name }}<a href=""></a></td>
+                            <td scope="col">{{ $student->email }}</td>
+                            <td scope="col">{{ $student->gender }}</td>
+                            <td scope="col">{{ $student->phone }}</td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

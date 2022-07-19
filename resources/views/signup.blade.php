@@ -34,25 +34,21 @@
                         {{ session()->get('error') }}
                     </div>
                     @endif
-                    <!-- Success Message -->
-                    <!-- <div class="alert alert-success" role="alert">
-                            <i class="far fa-check-circle"></i>
-                        </div> -->
                     <div class="form-input">
                         <label for="fn">First Name</label>
-                        <input type="text" id="fn" name="first_name" value="{{old('first_name')}}" placeholder="eg. John" required />
+                        <input type="text" id="fn" name="first_name" value="{{old('first_name')}}" required />
                     </div>
                     <div class="form-input">
                         <label for="ln">Last Name</label>
-                        <input type="text" id="ln" name="last_name" value="{{old('last_name')}}" placeholder="eg. Doe" required />
+                        <input type="text" id="ln" name="last_name" value="{{old('last_name')}}" required />
                     </div>
                     <div class="form-input">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="example@exp.com" required />
+                        <input type="email" id="email" name="email" value="{{old('email')}}" required />
                     </div>
                     <div class="form-input">
                         <label for="pass">Password</label>
-                        <input type="password" id="pass" name="password" value="{{old('password')}}" placeholder="Password" required minlength="3" />
+                        <input type="password" id="pass" name="password" value="{{old('password')}}" required minlength="3" />
                     </div>
                     <label for="rule">Account Rule</label>
                     <div class="custom-control custom-radio custom-control-inline">

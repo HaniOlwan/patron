@@ -35,11 +35,11 @@
                     @endif
                     <div class="form-input">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="example@exp.com" required />
+                        <input type="email" id="email" name="email" value="{{old('email')}}" required />
                     </div>
                     <div class="form-input">
                         <label for="pass">Password</label>
-                        <input type="password" id="pass" name="password" value="" placeholder="Password" required minlength="3" />
+                        <input type="password" id="pass" name="password" value="" required minlength="3" />
                     </div>
                     <button class="btn" type="submit" name="login">Login</button>
                 </form>

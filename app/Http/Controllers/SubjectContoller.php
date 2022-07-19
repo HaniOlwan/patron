@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
-use App\Models\SubjectStudent;
-use Exception;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class SubjectContoller extends Controller
 {
@@ -45,13 +45,6 @@ class SubjectContoller extends Controller
             return redirect('/create-subject')->with('error', 'Subject name or id is already exists in your subjects')->withInput();
         }
     }
-
-    function destory(Subject $subject)
-    {
-        if (!$subject) return response()->json(['success' => false], 404);
-        return response()->json(['success' => $subject->delete()], 200);
-    }
-
 
     function updatePage(Subject $subject)
     {
@@ -120,19 +113,27 @@ class SubjectContoller extends Controller
 
     function viewSubjectStudent(Subject $subject)
     {
-        return view('student.view-subject', compact('subject'));
+        if (!$subject->private) {
+            return view('student.view-subject', compact('subject'));
+        }
+        if (session()->has('subject_ids')) {
+            if (in_array($subject->id, session()->get('subject_ids'))) {
+                return view('student.view-subject', compact('subject'));
+            }
+        }
+        return redirect()->back();
     }
 
 
     function registerSubject(Request $request, Subject $subject)
     {
         $student = Auth::user();
-
         if ($request->status === 'private') {
             if ($request->code == $subject->code) {
                 $student->joinedSubjects()->attach($subject, [
                     'subject_id' => $subject->id,
                 ]);
+                session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
                 return response()->json([
                     'message' => "Joined subject successfully",
                     'status' => 201
@@ -157,6 +158,11 @@ class SubjectContoller extends Controller
     {
         $result = $subject->students()->detach(Auth::user()->id);
         if ($result) {
+            $registeredSubjects = session()->get('subject_ids');
+            if (($key = array_search($subject->id, $registeredSubjects)) !== false) {
+                unset($registeredSubjects[$key]);
+            }
+            session()->put('subject_ids', $registeredSubjects);
             return response()->json([
                 'message' => "Subject dropped.",
                 'status' => 201
@@ -166,5 +172,26 @@ class SubjectContoller extends Controller
             'message' => "Something went wrong.",
             'status' => 400
         ]);
+    }
+
+    function deleteStudent(User $user, Subject $subject)
+    {
+        $response = $user->joinedSubjects()->detach([
+            'student_id' => $user->id,
+            'subject_id' => $subject->id,
+        ]);
+        if ($response) return response()->json(['status' => 201]);
+        return response()->json(['status' => 400]);
+    }
+
+    function participants(Subject $subject)
+    {
+        return view('teacher.subject.participants', compact('subject'));
+    }
+
+    function destory(Subject $subject)
+    {
+        if (!$subject) return response()->json(['success' => false], 404);
+        return response()->json(['success' => $subject->delete()], 200);
     }
 }

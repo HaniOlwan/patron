@@ -11,7 +11,6 @@ if (deleteBtn) {
         var url = e.target.getAttribute('data-url');
         modaleDelete.setAttribute('data-url', url);
     })
-
 }
 
 const deleteIcon = document.querySelector('.delete_icon');
@@ -32,6 +31,7 @@ if (modaleDelete) {
         const item_id = e.target.getAttribute('data-id');
         const item_url = e.target.getAttribute('data-url');
         const subjectId = e.target.getAttribute('subject-id');
+        console.log('/' + item_url + '/' + item_id)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': token
@@ -41,6 +41,7 @@ if (modaleDelete) {
         $.ajax({
             url: '/' + item_url + '/' + item_id,
             type: 'DELETE',
+           
             success: function (result) {
                 if (result.success) {
                     if (item_url === 'subject') {
@@ -48,7 +49,7 @@ if (modaleDelete) {
                     } else if (item_url === 'topic') {
                         window.location.href = "/question-bank/" + subjectId;
                     } else if (item_url === 'quiz') {
-                        window.location.href = "/quizzes/";
+                        history.back();
                     }
                     else {
                         window.location.reload();
@@ -56,7 +57,7 @@ if (modaleDelete) {
                 }
             },
             error: function (result) {
-                console.log("Some error occured")
+                console.log(result)
             }
         });
     })

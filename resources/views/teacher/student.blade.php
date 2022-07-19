@@ -66,35 +66,17 @@
                     </div>
                 </div>
             </div>
-            <div class="dash-cards col">
-                <div class="card dash-card bg-light mb-3">
-                    <div class="card-header">
-                        <h3>Settings</h3>
-                        <div class="icon mr-auto"><i class="fas fa-cog"></i></div>
-                    </div>
-                    <div class="card-body settings">
-
-                        <a href="/student/edit-profile"><i class="fas fa-user-edit"></i>Edit profile</a>
-                        <a href="/student/change-password"><i class="fas fa-undo-alt"></i>Change password</a>
-                        <a class="delete-user-button" href=""><i class="fas fa-times-circle"></i>Delete account</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="row">
             <div class="dash-cards col-lg-12">
                 <div class="card dash-card bg-light mb-3">
                     <div class="card-header">
-                        <h3>Statistics</h3>
+                        <h3>Subjects</h3>
                         <div class="icon mr-auto"><i class="fas fa-database"></i></div>
 
                     </div>
                     <div class="card-body statistics">
-
-                        <a class="statistics" href="/student/quizzes"><i class="fas fa-question-circle"></i> Attended &#40; {{ Auth::user()->finishedQuizzes->count() }}&#41; quizzes </a>
-                        <a class="statistics" href="/student/subjects"><i class="fas fa-book-open"></i> Joined &#40; {{ $student->joinedSubjects->count() }} &#41; subjects</a>
-                      
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -102,46 +84,26 @@
                                     <th scope="col">Subject title</th>
                                     <th scope="col">Subject id</th>
                                     <th scope="col">Subject code</th>
-                                    <th scope="col">Instructor</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
-                                $subjects = $student->joinedSubjects;
                                 $row_count = 1;
                                 @endphp
-                                @if($subjects)
                                 @foreach($subjects as $subject)
                                 <tr>
                                     <td scope="row">{{ $row_count++ }}</td>
-                                    <td scope="col"><a href="/student/view-subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                                    <td scope="col"><a href="/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
-                                    <td scope="col" style="text-transform: capitalize"><a href="/student/profile">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                                    <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
                                 </tr>
                                 @endforeach
-                                @endif
                             </tbody>
                         </table>
-                        <!-- <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
-<script src="{{ asset('js/deleteUser.js') }}"></script>
-                            You can join new subjects for this teacher or drop a subject.
-                        </div>
-
-                        <div class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -152,8 +114,19 @@
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
-<script src="{{ asset('js/joinSubject.js') }}"></script>
-<script src="{{ asset('js/dropSubject.js') }}"></script>
-<script src="{{ asset('js/deleteUser.js') }}"></script>
-
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Do you really want to delete this subject? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger active delete_modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<meta name="_token" content="{{ csrf_token() }}">
+<script src="{{ asset('js/deleteModal.js') }}"></script>
 @endsection

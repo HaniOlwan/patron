@@ -1,5 +1,4 @@
 @extends('layouts.teacher')
-@section('title','Subjects')
 @section('content')
 <div class="cd-content-wrapper">
     @section('header')
@@ -8,10 +7,8 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3>Subjects</h3>
-
+                        <h3>Participants</h3>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -19,11 +16,7 @@
     @endsection
 
     <div class="container">
-        <div class="add row justify-content-end">
-            <div class="col-sm-12 col-lg-4 text-right">
-                <a href="/create-subject">Create new subject</a>
-            </div>
-        </div>
+       
         <div class="row">
             <div class="col">
                 @if(session()->has('error'))
@@ -46,29 +39,25 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Subject title</th>
-                            <th scope="col">Subject id</th>
-                            <th scope="col">Subject code</th>
-                            <th scope="col">Participants</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Option</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                         $row_count = 1;
                         @endphp
-                        @foreach($subjects as $subject )
+                        @foreach($quiz->students as $student)
                         <tr>
-                            <td scope="row">{{$row_count++}}</td>
-                            <td scope="col"><a href="subject/{{$subject->id}}">{{$subject->title}}</a></td>
-                            <td scope="col">{{$subject->subject_id}}</td>
-                            <td scope="col">{{$subject->code}}</td>
-                            <td scope="col"><a href="/subject/{{$subject->id}}/participants">{{ $subject->students->count() }}</a></td>
-                            <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
-                            <td scope="col"><a href="/edit-subject/{{$subject->id}}"><i class="fas fa-pencil-alt"></i></a></td>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $student->id }}">{{ $student->first_name." ".$student->last_name }}</a></td>
+                            <td scope="col">{{ $student->email }}</td>
+                            <td scope="col">{{ $student->gender }}</td>
+                            <td scope="col">{{ $student->phone }}</td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
