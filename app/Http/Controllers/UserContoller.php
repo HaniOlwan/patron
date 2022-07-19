@@ -66,18 +66,6 @@ class UserContoller extends Controller
         }
     }
 
-    function destroy()
-    {
-        $user = User::find(Auth::user()->id);
-        if (!$user) return response()->json(['success' => false], 404);
-        return response()->json([
-            'success' =>
-            $user->delete(),
-            Auth::logout()
-        ], 200);
-    }
-
-
     function studentProfile()
     {
         $student = Auth::user();
@@ -124,4 +112,16 @@ class UserContoller extends Controller
         $registerdSubjects = collect($user->joinedSubjects)->where('user_id', Auth::user()->id)->all();
         return view('teacher.student', ['student' => $user, 'subjects' => $registerdSubjects]);
     }
+
+    function destroy()
+    {
+        $user = User::find(Auth::user()->id);
+        if (!$user) return response()->json(['success' => false], 404);
+        return response()->json([
+            'success' =>
+            $user->delete(),
+            Auth::logout()
+        ], 200);
+    }
+
 }

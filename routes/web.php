@@ -20,30 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
-Route::get('/signup', [RegisterController::class, 'signup']);
-Route::post('/signup', [RegisterController::class, 'store']);
-
-Route::get('/signin', [SessionController::class, 'login']);
-Route::post('/signin', [SessionController::class, 'authenticate']);
-
-Route::get('/logout', [SessionController::class, 'logout']);
-
-
-
 Route::get('/',  function () {
-
     return view('landing-page');
 });
 
-Route::get('/dashboard', function () {
-    return view('teacher.dashboard');
-});
-
-
-
+Route::get('/signup', [RegisterController::class, 'signup']);
+Route::post('/signup', [RegisterController::class, 'store']);
+Route::get('/signin', [SessionController::class, 'login']);
+Route::post('/signin', [SessionController::class, 'authenticate']);
+Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::group(['prefix' => '/student', 'middleware' => ['student']], function () {
     // all students routes goes here
@@ -54,45 +39,43 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
         }
     );
 
-    Route::get('/subjects',  function () {
-        return view('student.subjects');
-    });
-
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
-    
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
     Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
-    Route::get('/teacher/{user}', [UserContoller::class, 'viewTeacherProfile']);
-
-
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
 
+    Route::get('/teacher/{user}', [UserContoller::class, 'viewTeacherProfile']);
     Route::get('/profile', [UserContoller::class, 'studentProfile']);
     Route::get('/change-password', [UserContoller::class, 'viewChangePasswordStudentPage']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
-
     Route::get('/edit-profile', [UserContoller::class, 'viewEditStudentProfile']);
     Route::patch('/edit-profile', [UserContoller::class, 'updateStudent']);
-
-
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 
     Route::get('/register-quiz/{quiz}', [QuizController::class, 'attendQuiz']);
-
     Route::get('/attend-quiz/{quiz}', [QuizController::class, 'attendQuizPage']);
-
     Route::post('/{quiz}/submit-quiz', [QuizController::class, 'submitQuiz']);
-
     Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
-
     Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
 });
 
 
 
 Route::group(['middleware' => ['teacher']], function () {
-    // all teacher routes goes here
+
+    Route::get('/dashboard', function () {
+        return view('teacher.dashboard');
+    });
+
+    Route::get('/profile', [UserContoller::class, 'profile']);
+    Route::get('/edit-profile', [UserContoller::class, 'viewEditProfile']);
+    Route::patch('/edit-profile', [UserContoller::class, 'update']);
+    Route::get('/change-password', [UserContoller::class, 'viewPassword']);
+    Route::post('/change-password', [UserContoller::class, 'updatePassword']);
+    Route::get('/student/{user}', [UserContoller::class, 'viewStudentProfile']);
+    Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+    
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
@@ -101,7 +84,8 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/create-subject', [SubjectContoller::class, 'create']);
     Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
     Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
-
+    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudent']);
+    Route::get('/subject/{subject}/participants', [SubjectContoller::class, 'participants']);
 
     Route::get('/quizzes', [QuizController::class, 'index']);
     Route::get('/quiz/{subject}/create-quiz', [QuizController::class, 'createPage']);
@@ -109,18 +93,12 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/quiz/{quiz}', [QuizController::class, 'viewQuiz']);
     Route::get('/quiz/{quiz}/edit-quiz', [QuizController::class, 'viewEditQuiz']);
     Route::patch('/quiz/{quiz}/edit-quiz', [QuizController::class, 'update']);
-
     Route::get('/quiz/{quiz}/select-topic', [QuizController::class, 'viewSelectPage']);
     Route::post('/quiz/{quiz}/select-topic', [QuizController::class, 'selectTopic']);
-
     Route::delete('/quiz/{quiz}', [QuizController::class, 'destroy']);
-
     Route::get('/quiz/{quiz}/analysis-results', [QuizController::class, 'analysisResults']);
-
     Route::get('/quiz/{quiz}/sample', [QuizController::class, 'sample']);
-
-
-
+    Route::get('/quiz/{quiz}/participants', [QuizController::class, 'participants']);
 
     Route::get('/topic/{subject}', [TopicController::class, 'index']);
     Route::post('/topic/{subject}', [TopicController::class, 'create']);
@@ -129,25 +107,9 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/view-topic/{topic}', [TopicController::class, 'viewTopic']);
     Route::delete('/topic/{topic}', [TopicController::class, 'destroy']);
 
-
     Route::get('/{topic}/create-question', [QuestionController::class, 'index']);
     Route::post('/{topic}/create-question', [QuestionController::class, 'create']);
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
-
-
-    Route::get('/profile', [UserContoller::class, 'profile']);
-    Route::get('/edit-profile', [UserContoller::class, 'viewEditProfile']);
-    Route::patch('/edit-profile', [UserContoller::class, 'update']);
-    Route::get('/change-password', [UserContoller::class, 'viewPassword']);
-    Route::post('/change-password', [UserContoller::class, 'updatePassword']);
-    Route::delete('/delete-account', [UserContoller::class, 'destroy']);
-
-    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudent']);
-
-
-    Route::get('/subject/{subject}/participants', [SubjectContoller::class, 'participants']);
-
-    Route::get('/student/{user}', [UserContoller::class, 'viewStudentProfile']);
 });

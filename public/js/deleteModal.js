@@ -11,7 +11,6 @@ if (deleteBtn) {
         var url = e.target.getAttribute('data-url');
         modaleDelete.setAttribute('data-url', url);
     })
-
 }
 
 const deleteIcon = document.querySelector('.delete_icon');
@@ -50,7 +49,7 @@ if (modaleDelete) {
                     } else if (item_url === 'topic') {
                         window.location.href = "/question-bank/" + subjectId;
                     } else if (item_url === 'quiz') {
-                        window.location.href = "/quizzes/";
+                        history.back();
                     }
                     else {
                         window.location.reload();

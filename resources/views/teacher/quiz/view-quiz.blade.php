@@ -11,9 +11,7 @@
                     <div class="layout">
                         <h3>{{ $quiz->title }}</h3>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -32,19 +30,16 @@
 
                             <tr>
                                 <td>Instructor name</td>
-                                <td style="text-transform: capitalize">{{ $quiz->teacher->first_name." ".$quiz->teacher->last_name }}</td>
+                                <td style="text-transform: capitalize">{{ $quiz->user->first_name." ".$quiz->user->last_name}}</td>
                             </tr>
 
                             <tr>
                                 <td>topics of quiz</td>
                                 <td>
-                                    @if(count($quiz->topics) ==! 0)
                                     @foreach($quiz->topics as $topic)
-                                    <a style="text-transform: capitalize" href="/view-topic/{{ $topic->id }}">{{$topic->title}} {{$topic['pivot']['topic_questions']}}</a><br>
+                                    <a style="text-transform: capitalize" href="/view-topic/{{ $topic->id }}">{{ $topic->title }} [{{ $topic->question->count() }}]</a>
+                                    <br>
                                     @endforeach
-                                    @else
-                                    <a style="text-transform: capitalize" href="">0</a><br>
-                                    @endif
                                 </td>
                             </tr>
                             <tr>
@@ -70,7 +65,7 @@
 
                             <tr>
                                 <td class="last"># Participants</td>
-                                <td class="last">&#40; Quiz Student count ?>&#41; of students_count ?> students</td>
+                                <td class="last">&#40;{{ $quiz->students->count() }}&#41; attended Quiz</td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,9 +75,9 @@
         <div class="add row">
             <div class="col text-right">
                 <a href="/quiz/{{$quiz->id}}/edit-quiz">Edit Quiz</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz" subject-id="{{ $quiz->subject->id }}">Delete Quiz</a>
-                <a href="" target="_blank">View Quiz Sample</a>
-                <a href="">View Analysis Result</a>
+                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz">Delete Quiz</a>
+                <a href="/quiz/{{ $quiz->id }}/sample" target="_blank">View Quiz Sample</a>
+                <a href="/quiz/{{ $quiz->id }}/analysis-results">View Analysis Result</a>
             </div>
         </div>
 
@@ -96,17 +91,22 @@
                             <th scope="col">Student Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Mark <span>from &#40; Mark &#41;</span></th>
+                            <th scope="col">Mark <span>from &#40; {{ $quiz->mark }} &#41;</span></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $row_count = 1;
+                        @endphp
+                        @foreach($quiz->students as $student)
                         <tr>
-                            <td scope="row"></td>
-                            <td scope="col" style="text-transform: capitalize"><a href=""> </a></td>
-                            <td scope="col"></td>
-                            <td scope="col"></td>
-                            <td scope="col"><a target="_blank" href=""></a></td>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="">{{ $student->first_name." ".$student->last_name }}</a></td>
+                            <td scope="col">{{ $student->email }}</td>
+                            <td scope="col">{{ $student->phone }}</td>
+                            <td scope="col"><a target="_blank" href="">{{ $student->pivot['score'] }}</a></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -114,12 +114,11 @@
     </div>
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
-<!-- Delete Modal -->
 <div id="myModal" class="modal">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Do you really want to delete this Topic? This process cannot be undone.</p>
+                <p>Do you really want to delete this subject? This process cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

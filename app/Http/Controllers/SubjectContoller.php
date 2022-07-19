@@ -46,13 +46,6 @@ class SubjectContoller extends Controller
         }
     }
 
-    function destory(Subject $subject)
-    {
-        if (!$subject) return response()->json(['success' => false], 404);
-        return response()->json(['success' => $subject->delete()], 200);
-    }
-
-
     function updatePage(Subject $subject)
     {
         return view('teacher.subject.edit-subject', compact('subject'));
@@ -194,5 +187,11 @@ class SubjectContoller extends Controller
     function participants(Subject $subject)
     {
         return view('teacher.subject.participants', compact('subject'));
+    }
+
+    function destory(Subject $subject)
+    {
+        if (!$subject) return response()->json(['success' => false], 404);
+        return response()->json(['success' => $subject->delete()], 200);
     }
 }

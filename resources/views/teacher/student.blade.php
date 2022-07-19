@@ -95,7 +95,7 @@
                                 @foreach($subjects as $subject)
                                 <tr>
                                     <td scope="row">{{ $row_count++ }}</td>
-                                    <td scope="col"><a href="/student/view-subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                                    <td scope="col"><a href="/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>

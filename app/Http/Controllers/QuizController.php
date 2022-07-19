@@ -124,13 +124,6 @@ class QuizController extends Controller
         }
     }
 
-
-    function destroy(Quiz $quiz)
-    {
-        if (!$quiz) return response()->json(['success' => false], 404);
-        return response()->json(['success' => $quiz->delete()], 200);
-    }
-
     function viewSelectPage(Quiz $quiz)
     {
         return view('teacher.quiz.select-topic', compact('quiz'));
@@ -231,5 +224,16 @@ class QuizController extends Controller
             'quiz' => $quiz,
             'questions' => $quiz->questions,
         ]);
+    }
+
+    function participants(Quiz $quiz)
+    {
+        return view('teacher.quiz.participants', compact('quiz'));
+    }
+
+    function destroy(Quiz $quiz)
+    {
+        if (!$quiz) return response()->json(['success' => false], 404);
+        return response()->json(['success' => $quiz->delete()], 200);
     }
 }
