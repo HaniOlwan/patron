@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Exception;
 
 
 class UserContoller extends Controller
@@ -117,5 +117,11 @@ class UserContoller extends Controller
     function viewTeacherProfile(User $user)
     {
         return view('student.teacher-profile', ['teacher' => $user]);
+    }
+
+    function viewStudentProfile(User $user)
+    {
+        $registerdSubjects = collect($user->joinedSubjects)->where('user_id', Auth::user()->id)->all();
+        return view('teacher.student', ['student' => $user, 'subjects' => $registerdSubjects]);
     }
 }

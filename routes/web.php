@@ -59,6 +59,7 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     });
 
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
+    
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
     Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
     Route::get('/teacher/{user}', [UserContoller::class, 'viewTeacherProfile']);
@@ -148,4 +149,5 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::get('/subject/{subject}/participants', [SubjectContoller::class, 'participants']);
 
+    Route::get('/student/{user}', [UserContoller::class, 'viewStudentProfile']);
 });

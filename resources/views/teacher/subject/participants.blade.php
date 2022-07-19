@@ -53,7 +53,7 @@
                         @foreach($subject->students as $student)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col" style="text-transform: capitalize">{{ $student->first_name." ".$student->last_name }}<a href=""></a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $student->id }}">{{ $student->first_name." ".$student->last_name }}</a></td>
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->gender }}</td>
                             <td scope="col">{{ $student->phone }}</td>
