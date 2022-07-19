@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td># Participants</td>
-                                <td><a href="#students"> echo $students_count; ?></a></td>
+                                <td><a href="#students"></a></td>
                             </tr>
                             <tr>
                                 <td># Number of quizzes</td>
@@ -65,7 +65,7 @@
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->id }}">Edit subject</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"">Delete Subject</a>
-                <a href="/question-bank/{{ $subject->id}}">Manage Question Bank</a>
+                <a href=" /question-bank/{{ $subject->id}}">Manage Question Bank</a>
                 <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>
         </div>
@@ -127,11 +127,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td scope="row"> echo $student_number; ?></td>
-                            <td scope="col" style="text-transform: capitalize"><a href=""> echo $row8['first_name']; ?> echo $row8['last_name']; ?></a></td>
-                            <td scope="col">echo $row8['email']; ?></td>
-                            <td scope="col"> echo $row8['gender']; ?></td>
-                            <td scope="col"> echo $row8['phone']; ?></td>
+                            <td scope="row">   </td>
+                            <td scope="col" style="text-transform: capitalize"><a href=""></a></td>
+                            <td scope="col">  </td>
+                            <td scope="col">  </td>
+                            <td scope="col">   </td>
                             <td scope="col"><a href=""><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                     </tbody>

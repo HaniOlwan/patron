@@ -92,7 +92,7 @@
                     </div>
                     <div class="card-body statistics">
 
-                        <a class="statistics" href="/student/quizzes"><i class="fas fa-question-circle"></i> Attended &#40; echo $quizzes_count; ?>&#41; quizzes </a>
+                        <a class="statistics" href="/student/quizzes"><i class="fas fa-question-circle"></i> Attended &#40; Quizzes count&#41; quizzes </a>
                         <a class="statistics" href="/student/subjects"><i class="fas fa-book-open"></i> Joined &#40; {{ $student->joinedSubjects->count() }} &#41; subjects</a>
                         <!-- <div class="alert alert-danger" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

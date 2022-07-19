@@ -27,9 +27,9 @@ class SessionController extends Controller
             $request->session()->regenerate(); //prevent session faxation attack
             $rule = User::where('email', $validatedUser['email'])->pluck('rule')->first();
             if ($rule === 'teacher') {
-                return redirect('/');
+                return redirect('/dashboard');
             }
-            return redirect('/');
+            return redirect('/student');
         } else {
             return back()->with('error', 'The provided credentials do not match our records.')->onlyInput('email');
         }
