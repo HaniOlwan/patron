@@ -32,6 +32,7 @@ if (modaleDelete) {
         const item_id = e.target.getAttribute('data-id');
         const item_url = e.target.getAttribute('data-url');
         const subjectId = e.target.getAttribute('subject-id');
+        console.log('/' + item_url + '/' + item_id)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': token
@@ -41,6 +42,7 @@ if (modaleDelete) {
         $.ajax({
             url: '/' + item_url + '/' + item_id,
             type: 'DELETE',
+           
             success: function (result) {
                 if (result.success) {
                     if (item_url === 'subject') {
@@ -51,11 +53,13 @@ if (modaleDelete) {
                         window.location.href = "/quizzes/";
                     }
                     else {
-                        window.location.reload();
+                        console.log(result)
+                        // window.location.reload();
                     }
                 }
             },
             error: function (result) {
+                console.log(result)
                 console.log("Some error occured")
             }
         });

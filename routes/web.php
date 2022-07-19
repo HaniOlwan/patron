@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudent']);
+
+
 Route::get('/signup', [RegisterController::class, 'signup']);
 Route::post('/signup', [RegisterController::class, 'store']);
 
@@ -140,4 +143,5 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/change-password', [UserContoller::class, 'viewPassword']);
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
+
 });

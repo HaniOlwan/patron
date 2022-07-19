@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
-use App\Models\SubjectStudent;
-use Exception;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class SubjectContoller extends Controller
 {
@@ -166,5 +166,15 @@ class SubjectContoller extends Controller
             'message' => "Something went wrong.",
             'status' => 400
         ]);
+    }
+
+    function deleteStudent(User $user, Subject $subject)
+    {
+        $response = $user->joinedSubjects()->detach([
+            'student_id' => $user->id,
+            'subject_id' => $subject->id,
+        ]);
+        if ($response) return response()->json(['status' => 201]);
+        return response()->json(['status' => 400]);
     }
 }

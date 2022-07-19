@@ -18,7 +18,7 @@
 
     <header class="cd-main-header js-cd-main-header">
         <div class="cd-logo-wrapper">
-            <h1><a href="/dashboard" class="cd-logo">PATRON</a></h1>
+            <h1><a href="/" class="cd-logo">PATRON</a></h1>
         </div>
 
         <div class="cd-search js-cd-search">
