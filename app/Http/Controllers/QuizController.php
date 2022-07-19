@@ -151,7 +151,6 @@ class QuizController extends Controller
 
     function attendQuiz()
     {
-        session(['question_count' => 1]);
         session(['isAttendingQuiz' => true]);
     }
 

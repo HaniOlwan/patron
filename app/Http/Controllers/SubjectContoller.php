@@ -120,19 +120,27 @@ class SubjectContoller extends Controller
 
     function viewSubjectStudent(Subject $subject)
     {
-        return view('student.view-subject', compact('subject'));
+        if (!$subject->private) {
+            return view('student.view-subject', compact('subject'));
+        }
+        if (session()->has('subject_ids')) {
+            if (in_array($subject->id, session()->get('subject_ids'))) {
+                return view('student.view-subject', compact('subject'));
+            }
+        }
+        return redirect()->back();
     }
 
 
     function registerSubject(Request $request, Subject $subject)
     {
         $student = Auth::user();
-
         if ($request->status === 'private') {
             if ($request->code == $subject->code) {
                 $student->joinedSubjects()->attach($subject, [
                     'subject_id' => $subject->id,
                 ]);
+                session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
                 return response()->json([
                     'message' => "Joined subject successfully",
                     'status' => 201
@@ -157,6 +165,11 @@ class SubjectContoller extends Controller
     {
         $result = $subject->students()->detach(Auth::user()->id);
         if ($result) {
+            $registeredSubjects = session()->get('subject_ids');
+            if (($key = array_search($subject->id, $registeredSubjects)) !== false) {
+                unset($registeredSubjects[$key]);
+            }
+            session()->put('subject_ids', $registeredSubjects);
             return response()->json([
                 'message' => "Subject dropped.",
                 'status' => 201

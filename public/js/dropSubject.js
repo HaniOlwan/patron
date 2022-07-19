@@ -23,8 +23,6 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
                 console.log(result)
             }
         });
-    } else {
-        // Do something 
     }
 }
 ))
