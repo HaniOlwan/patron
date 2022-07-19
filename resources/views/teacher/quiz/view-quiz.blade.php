@@ -70,7 +70,7 @@
 
                             <tr>
                                 <td class="last"># Participants</td>
-                                <td class="last">&#40; echo $quiz_students_count; ?>&#41; of echo $students_count; ?> students</td>
+                                <td class="last">&#40; Quiz Student count ?>&#41; of students_count ?> students</td>
                             </tr>
                         </tbody>
                     </table>
@@ -96,16 +96,16 @@
                             <th scope="col">Student Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Mark <span>from &#40; echo $mark; ?>&#41;</span></th>
+                            <th scope="col">Mark <span>from &#40; Mark &#41;</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td scope="row"> echo $student_number; ?></td>
-                            <td scope="col" style="text-transform: capitalize"><a href=""> echo $student_fname; ?> echo $student_lname; ?></a></td>
-                            <td scope="col"> echo $student_email; ?></td>
-                            <td scope="col"> echo $student_phone; ?></td>
-                            <td scope="col"><a target="_blank" href=""> echo $student_mark; ?></a></td>
+                            <td scope="row"></td>
+                            <td scope="col" style="text-transform: capitalize"><a href=""> </a></td>
+                            <td scope="col"></td>
+                            <td scope="col"></td>
+                            <td scope="col"><a target="_blank" href=""></a></td>
                         </tr>
                     </tbody>
                 </table>
