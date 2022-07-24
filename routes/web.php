@@ -75,7 +75,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
     Route::get('/student/{user}', [UserContoller::class, 'viewStudentProfile']);
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
-    
+
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
@@ -112,4 +112,10 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
+});
+
+Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
+    Route::get('/', function () {
+        return "Welcome Admin";
+    });
 });

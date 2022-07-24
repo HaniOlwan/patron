@@ -65,16 +65,20 @@
                         <li class="log-vj ml-lg-5">
                             @if(Auth::user() !== null)
                             @if(Auth::user()->rule === 'teacher')
-                            <a href="/dashboard" ><span class="far fa-user-circle" aria-hidden="true"></span>
+                            <a href="/dashboard"><span class="far fa-user-circle" aria-hidden="true"></span>
+                                {{ Auth::user()->first_name }}
+                            </a>
+                            @elseif(Auth::user()->rule === 'student')
+                            <a href="/student"><span class="far fa-user-circle" aria-hidden="true"></span>
                                 {{ Auth::user()->first_name }}
                             </a>
                             @else
-                            <a href="/student"><span class="far fa-user-circle" aria-hidden="true"></span>
-                            {{ Auth::user()->first_name }}
+                            <a href="/admin"><span class="far fa-user-circle" aria-hidden="true"></span>
+                                {{ Auth::user()->first_name }}
                             </a>
                             @endif
                             @else
-                            <a href="/signin" ><span class="far fa-user-circle" aria-hidden="true"></span>
+                            <a href="/signin"><span class="far fa-user-circle" aria-hidden="true"></span>
                                 Login
                             </a>
                             @endif
