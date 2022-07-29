@@ -73,7 +73,7 @@
                                 {{ Auth::user()->first_name }}
                             </a>
                             @else
-                            <a href="/admin"><span class="far fa-user-circle" aria-hidden="true"></span>
+                            <a href="/admin/subjects"><span class="far fa-user-circle" aria-hidden="true"></span>
                                 {{ Auth::user()->first_name }}
                             </a>
                             @endif

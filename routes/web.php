@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
@@ -115,7 +116,19 @@ Route::group(['middleware' => ['teacher']], function () {
 });
 
 Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
-    Route::get('/', function () {
-        return "Welcome Admin";
-    });
+    Route::get('/subjects', [AdminDashboardController::class, 'subjects']);
+    Route::get('/students', [AdminDashboardController::class, 'students']);
+    
+    Route::get('/create-subject', [AdminDashboardController::class, 'viewCreateSubject']);
+    Route::post('/create-subject', [AdminDashboardController::class, 'createSubject']);
+
+    Route::get('/subject/{subject}', [AdminDashboardController::class, 'viewSubject']);
+
+    Route::get('/edit-subject/{subject}', [AdminDashboardController::class, 'viewEditSubject']);
+    Route::patch('/edit-subject/{subject}', [AdminDashboardController::class, 'updateSubject']);
+
+    Route::delete('/subject/{subject}', [AdminDashboardController::class, 'destorySubject']);
+
+
+
 });
