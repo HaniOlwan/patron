@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id')->where('status', '<>', 'finished');
     }
+
+    public function assignedSubjects()
+    {
+        return $this->belongsToMany(Subject::class, 'subject_teacher', 'teacher_id', 'subject_id');
+    }
 }

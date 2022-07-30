@@ -62,3 +62,15 @@ function quizScore($student, $quiz)
 {
     return DB::table('quiz_student')->where('student_id', $student)->where('quiz_id', $quiz)->value('score');
 }
+
+function isTeacherAssigned($teacherId, $subjectId)
+{
+    $isAssigned = false;
+    $teacher = User::query()->whereId($teacherId)->first();
+    foreach ($teacher->assignedSubjects as $subject) {
+        if ($subject->id === $subjectId) {
+            $isAssigned = true;
+        }
+    }
+    return $isAssigned;
+}

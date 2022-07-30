@@ -62,7 +62,10 @@
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/admin/subjects"><i class="fas fa-server"></i> Subjects <span class="cd-count">count</span></a></li>
                     </ul>
-                    <a href="/admin/create-subject"><i class="fas fa-book-open"></i> Create subject</a>
+                    <a href="/admin/create-subject"><i class="fas fa-plus"></i> Create subject</a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="/admin/teachers"><i class="fas fa-server"></i> Teachers <span class="cd-count">count</span></a></li>
+                    </ul>
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/admin/students"><i class="fas fa-server"></i> Students <span class="cd-count">count</span></a></li>
                     </ul>

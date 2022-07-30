@@ -118,7 +118,7 @@ Route::group(['middleware' => ['teacher']], function () {
 Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
     Route::get('/subjects', [AdminDashboardController::class, 'subjects']);
     Route::get('/students', [AdminDashboardController::class, 'students']);
-    
+
     Route::get('/create-subject', [AdminDashboardController::class, 'viewCreateSubject']);
     Route::post('/create-subject', [AdminDashboardController::class, 'createSubject']);
 
@@ -129,6 +129,12 @@ Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
 
     Route::delete('/subject/{subject}', [AdminDashboardController::class, 'destorySubject']);
 
+    Route::get('/assign-teachers/{subject}', [AdminDashboardController::class, 'viewAssignTeachers']);
+    Route::post('/assign-teachers/{subject}', [AdminDashboardController::class, 'assignTeacher']);
+
+    Route::get('/drop-subject/{subject}', [AdminDashboardController::class, 'dropSubject']);
 
 
+
+    Route::get('/teacher/{user}', [AdminDashboardController::class, 'teacherProfile']);
 });

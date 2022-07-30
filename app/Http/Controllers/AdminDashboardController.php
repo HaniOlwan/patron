@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,5 +89,41 @@ class AdminDashboardController extends Controller
     {
         if (!$subject) return response()->json(['success' => false], 404);
         return response()->json(['success' => $subject->delete()], 200);
+    }
+
+    function viewAssignTeachers(Subject $subject)
+    {
+        $teachers = User::where('rule', 'teacher')->get();
+        return view('admin.subject.assign-teachers', ['teachers' => $teachers, 'subject' => $subject]);
+    }
+
+    function teacherProfile(User $user)
+    {
+        return view('admin.teacher-profile', ['teacher' => $user, 'subject' => Subject::all()->first()]);
+    }
+
+    function assignTeacher(Request $request, Subject $subject)
+    {
+        $id = $request->teacherId;
+        $teacher = User::query()->whereId($id)->first();
+        $teacher->assignedSubjects()->sync($subject, [
+            'teacher_id' => $teacher->id,
+            'subject_id' => $subject->id
+        ]);
+        return response()->json([
+            'message' => "Successfully assigned teacher to subject.",
+            'status' => 201
+        ]);
+    }
+
+    function dropSubject(Request $request, Subject $subject)
+    {
+        $subject->teachers()->detach([
+            'teacher_id' => $request->teacherId
+        ]);
+        return response()->json([
+            'message' => "Subject dropped.",
+            'status' => 201
+        ]);
     }
 }

@@ -43,7 +43,7 @@
                         @php
                         $row_count = 1;
                         @endphp
-                        @foreach($subjects as $subject )
+                        @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
                             <td scope="col"><a href="/admin/subject/{{$subject->id}}">{{$subject->title}}</a></td>
