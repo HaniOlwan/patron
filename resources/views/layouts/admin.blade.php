@@ -60,14 +60,14 @@
 
                 <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/admin/subjects"><i class="fas fa-server"></i> Subjects <span class="cd-count">count</span></a></li>
+                        <li class="cd-side__sub-item"><a href="/admin/subjects"><i class="fas fa-server"></i> Subjects <span class="cd-count">{{ subjectsCount() }}</span></a></li>
                     </ul>
                     <a href="/admin/create-subject"><i class="fas fa-plus"></i> Create subject</a>
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/admin/teachers"><i class="fas fa-server"></i> Teachers <span class="cd-count">count</span></a></li>
+                        <li class="cd-side__sub-item"><a href="/admin/teachers"><i class="fas fa-server"></i> Teachers <span class="cd-count">{{ teachersCount() }}</span></a></li>
                     </ul>
                     <ul class="cd-side__sub-list">
-                        <li class="cd-side__sub-item"><a href="/admin/students"><i class="fas fa-server"></i> Students <span class="cd-count">count</span></a></li>
+                        <li class="cd-side__sub-item"><a href="/admin/students"><i class="fas fa-server"></i> Students <span class="cd-count">{{ studentsCount() }}</span></a></li>
                     </ul>
                 </li>
             </ul>

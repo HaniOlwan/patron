@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Subject;
 use App\Models\SubjectStudent;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -73,4 +74,21 @@ function isTeacherAssigned($teacherId, $subjectId)
         }
     }
     return $isAssigned;
+}
+
+function subjectsCount()
+{
+    return Subject::all()->count();
+}
+
+
+function teachersCount()
+{
+    return User::where('rule', 'teacher')->count();
+}
+
+
+function studentsCount()
+{
+    return User::where('rule', 'student')->count();
 }

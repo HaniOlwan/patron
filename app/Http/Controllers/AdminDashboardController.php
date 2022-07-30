@@ -16,7 +16,7 @@ class AdminDashboardController extends Controller
     function subjects()
     {
         $subjects = Subject::all();
-        return view('admin.subjects', compact('subjects'));
+        return view('admin.subject.subjects', compact('subjects'));
     }
 
     function students()
@@ -99,7 +99,12 @@ class AdminDashboardController extends Controller
 
     function teacherProfile(User $user)
     {
-        return view('admin.teacher-profile', ['teacher' => $user, 'subject' => Subject::all()->first()]);
+        return view('admin.teacher.teacher-profile', ['teacher' => $user, 'subject' => $user->assignedSubjects]);
+    }
+
+    function studentProfile(User $user)
+    {
+        return view('admin.student.student-profile', ['student' => $user]);
     }
 
     function assignTeacher(Request $request, Subject $subject)
@@ -118,12 +123,48 @@ class AdminDashboardController extends Controller
 
     function dropSubject(Request $request, Subject $subject)
     {
-        $subject->teachers()->detach([
-            'teacher_id' => $request->teacherId
-        ]);
+        if ($request->teacherId) {
+            $subject->teachers()->detach([
+                'teacher_id' => $request->teacherId
+            ]);
+        } else {
+            $subject->students()->detach([
+                'student_id' => $request->studentId
+            ]);
+        }
         return response()->json([
             'message' => "Subject dropped.",
             'status' => 201
         ]);
+    }
+
+    function viewSubjectParticipants(Subject $subject)
+    {
+        return view('admin.subject.participants', compact('subject'));
+    }
+
+    function viewSubjectStudents(Subject $subject)
+    {
+        return view('admin.subject.students', compact('subject'));
+    }
+
+    function viewTeachers()
+    {
+        $teachers = User::where('rule', 'teacher')->get();
+        return view('admin.teacher.teachers', compact('teachers'));
+    }
+    function viewStudents(){
+        $students = User::where('rule', 'student')->get();
+        return view('admin.student.students', compact('students'));
+    }
+
+    function viewTeacherSubjects(User $user)
+    {
+        return view('admin.teacher.subjects', ['teacher' => $user]);
+    }
+
+    function viewStudentSubjects(User $user)
+    {
+        return view('admin.student.subjects', ['student' => $user]);
     }
 }

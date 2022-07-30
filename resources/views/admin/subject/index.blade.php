@@ -83,7 +83,7 @@
         <div class="add row">
             <div class="col text-right ">
                 <a href="/admin/assign-teachers/{{ $subject->id }}">Assign Teachers</a>
-                <a href="/admin/edit-subject/{{ $subject->id }}">View Students</a>
+                <a href="/admin/subject/{{ $subject->id }}/students">View Students</a>
                 <a href="/admin/edit-subject/{{ $subject->id }}">Edit Subject</a>
                 <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"">Delete Subject</a>
             </div>

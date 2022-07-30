@@ -61,9 +61,6 @@
 
                     </div>
                     <div class="card-body statistics">
-                        <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
-                            You can join new subjects for this teacher or drop a subject.
-                        </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -80,27 +77,27 @@
                                 $subjects = $teacher->joinedSubjects;
                                 $row_count = 1;
                                 @endphp
+                                @foreach($teacher->assignedSubjects as $subject)
                                 <tr>
                                     <td scope="row">{{ $row_count++ }}</td>
                                     <td scope="col"><a href="/admin/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                                    <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
 <script src="{{ asset('js/dropSubject.js') }}"></script>
-<script src="{{ asset('js/joinSubject.js') }}"></script>
 
 @endsection

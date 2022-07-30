@@ -134,7 +134,17 @@ Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
 
     Route::get('/drop-subject/{subject}', [AdminDashboardController::class, 'dropSubject']);
 
-
+    Route::get('/subject/{subject}/participants', [AdminDashboardController::class, 'viewSubjectParticipants']);
+    Route::get('/subject/{subject}/students', [AdminDashboardController::class, 'viewSubjectStudents']);
 
     Route::get('/teacher/{user}', [AdminDashboardController::class, 'teacherProfile']);
+    Route::get('/student/{user}', [AdminDashboardController::class, 'studentProfile']);
+
+    Route::get('/teachers', [AdminDashboardController::class, 'viewTeachers']);
+    Route::get('/students', [AdminDashboardController::class, 'viewStudents']);
+
+
+    Route::get('/teacher/{user}/subjects', [AdminDashboardController::class, 'viewTeacherSubjects']);
+    Route::get('/student/{user}/subjects', [AdminDashboardController::class, 'viewStudentSubjects']);
+
 });
