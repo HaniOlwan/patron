@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegisterController;
@@ -75,7 +76,7 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/change-password', [UserContoller::class, 'updatePassword']);
     Route::get('/student/{user}', [UserContoller::class, 'viewStudentProfile']);
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
-    
+
     Route::get('/subjects', [SubjectContoller::class, 'index']);
     Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
@@ -112,4 +113,38 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
+});
+
+Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
+    Route::get('/subjects', [AdminDashboardController::class, 'subjects']);
+    Route::get('/students', [AdminDashboardController::class, 'students']);
+
+    Route::get('/create-subject', [AdminDashboardController::class, 'viewCreateSubject']);
+    Route::post('/create-subject', [AdminDashboardController::class, 'createSubject']);
+
+    Route::get('/subject/{subject}', [AdminDashboardController::class, 'viewSubject']);
+
+    Route::get('/edit-subject/{subject}', [AdminDashboardController::class, 'viewEditSubject']);
+    Route::patch('/edit-subject/{subject}', [AdminDashboardController::class, 'updateSubject']);
+
+    Route::delete('/subject/{subject}', [AdminDashboardController::class, 'destorySubject']);
+
+    Route::get('/assign-teachers/{subject}', [AdminDashboardController::class, 'viewAssignTeachers']);
+    Route::post('/assign-teachers/{subject}', [AdminDashboardController::class, 'assignTeacher']);
+
+    Route::get('/drop-subject/{subject}', [AdminDashboardController::class, 'dropSubject']);
+
+    Route::get('/subject/{subject}/participants', [AdminDashboardController::class, 'viewSubjectParticipants']);
+    Route::get('/subject/{subject}/students', [AdminDashboardController::class, 'viewSubjectStudents']);
+
+    Route::get('/teacher/{user}', [AdminDashboardController::class, 'teacherProfile']);
+    Route::get('/student/{user}', [AdminDashboardController::class, 'studentProfile']);
+
+    Route::get('/teachers', [AdminDashboardController::class, 'viewTeachers']);
+    Route::get('/students', [AdminDashboardController::class, 'viewStudents']);
+
+
+    Route::get('/teacher/{user}/subjects', [AdminDashboardController::class, 'viewTeacherSubjects']);
+    Route::get('/student/{user}/subjects', [AdminDashboardController::class, 'viewStudentSubjects']);
+
 });

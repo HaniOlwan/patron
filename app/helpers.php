@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Subject;
 use App\Models\SubjectStudent;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -61,4 +62,33 @@ function notAttendedQuizzesCount()
 function quizScore($student, $quiz)
 {
     return DB::table('quiz_student')->where('student_id', $student)->where('quiz_id', $quiz)->value('score');
+}
+
+function isTeacherAssigned($teacherId, $subjectId)
+{
+    $isAssigned = false;
+    $teacher = User::query()->whereId($teacherId)->first();
+    foreach ($teacher->assignedSubjects as $subject) {
+        if ($subject->id === $subjectId) {
+            $isAssigned = true;
+        }
+    }
+    return $isAssigned;
+}
+
+function subjectsCount()
+{
+    return Subject::all()->count();
+}
+
+
+function teachersCount()
+{
+    return User::where('rule', 'teacher')->count();
+}
+
+
+function studentsCount()
+{
+    return User::where('rule', 'student')->count();
 }
