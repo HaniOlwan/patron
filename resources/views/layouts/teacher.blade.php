@@ -64,7 +64,7 @@
 
                     <ul class="cd-side__sub-list">
                         <li class="cd-side__sub-item"><a href="/subjects"><i class="fas fa-server"></i> View subjects</a></li>
-                        <li class="cd-side__sub-item"><a href="/create-subject"><i class="fas fa-plus-circle"></i> Create subject</a></li>
+                        <!-- <li class="cd-side__sub-item"><a href="/create-subject"><i class="fas fa-plus-circle"></i> Create subject</a></li> -->
                     </ul>
                 </li>
 

@@ -15,7 +15,7 @@ class SubjectContoller extends Controller
 
     function index()
     {
-        $subjects = Auth::user()->subjects;
+        $subjects = Subject::all();
         return view('teacher.subject.subjects', ['subjects' => $subjects]);
     }
 
@@ -113,44 +113,72 @@ class SubjectContoller extends Controller
 
     function viewSubjectStudent(Subject $subject)
     {
-        if (!$subject->private) {
-            return view('student.view-subject', compact('subject'));
-        }
-        if (session()->has('subject_ids')) {
-            if (in_array($subject->id, session()->get('subject_ids'))) {
-                return view('student.view-subject', compact('subject'));
-            }
-        }
-        return redirect()->back();
+        // if (!$subject->private) {
+        //     return view('student.view-subject', compact('subject'));
+        // }
+        // if (session()->has('subject_ids')) {
+        // if (in_array($subject->id, session()->get('subject_ids'))) {
+        return view('student.view-subject', compact('subject'));
+        //     }
+        // }
+        // return redirect()->back();
     }
 
 
     function registerSubject(Request $request, Subject $subject)
     {
-        $student = Auth::user();
-        if ($request->status === 'private') {
-            if ($request->code == $subject->code) {
-                $student->joinedSubjects()->attach($subject, [
+        if ($request->role === 'teacher') {
+            $teacher = Auth::user();
+            if ($request->status === 'private') {
+                if ($request->code == $subject->code) {
+                    $teacher->assignedSubjects()->attach($subject, [
+                        'subject_id' => $subject->id,
+                    ]);
+                    session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
+                    return response()->json([
+                        'message' => "Joined subject successfully",
+                        'status' => 201
+                    ]);
+                }
+                return response()->json([
+                    'message' => "Incorrect subject code",
+                    'status' => 400
+                ]);
+            } else {
+                $teacher->assignedSubjects()->attach($subject, [
                     'subject_id' => $subject->id,
                 ]);
-                session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
                 return response()->json([
                     'message' => "Joined subject successfully",
                     'status' => 201
                 ]);
             }
-            return response()->json([
-                'message' => "Incorrect subject code",
-                'status' => 400
-            ]);
         } else {
-            $student->joinedSubjects()->attach($subject, [
-                'subject_id' => $subject->id,
-            ]);
-            return response()->json([
-                'message' => "Joined subject successfully",
-                'status' => 201
-            ]);
+            $student = Auth::user();
+            if ($request->status === 'private') {
+                if ($request->code == $subject->code) {
+                    $student->joinedSubjects()->attach($subject, [
+                        'subject_id' => $subject->id,
+                    ]);
+                    session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
+                    return response()->json([
+                        'message' => "Joined subject successfully",
+                        'status' => 201
+                    ]);
+                }
+                return response()->json([
+                    'message' => "Incorrect subject code",
+                    'status' => 400
+                ]);
+            } else {
+                $student->joinedSubjects()->attach($subject, [
+                    'subject_id' => $subject->id,
+                ]);
+                return response()->json([
+                    'message' => "Joined subject successfully",
+                    'status' => 201
+                ]);
+            }
         }
     }
 
@@ -188,6 +216,13 @@ class SubjectContoller extends Controller
     {
         return view('teacher.subject.participants', compact('subject'));
     }
+
+    function viewTeachers(Subject $subject)
+    {
+        $teachers = $subject->teachers;
+        return view('student.teachers', compact('teachers'));
+    }
+
 
     function destory(Subject $subject)
     {

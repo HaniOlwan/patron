@@ -5,12 +5,14 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
     let subjectId = e.target.getAttribute('subject-id');
     let teacherId = e.target.getAttribute('teacher-id');
     let studentId = e.target.getAttribute('student-id');
+    let role = e.target.getAttribute('role');
+
 
     if (confirm("Are you sure you want to drop", "")) {
-        let url = '/student/drop-subject/' + subjectId;
-        if (teacherId || studentId) {
-            url = '/admin/drop-subject/' + subjectId;
-        }
+        let url = '/' + role + '/drop-subject/' + subjectId;
+        // if (teacherId || studentId) {
+        //     url = '/admin/drop-subject/' + subjectId;
+        // }
         $.ajax({
             url,
             type: 'GET',

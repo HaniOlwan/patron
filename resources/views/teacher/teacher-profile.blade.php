@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.teacher')
 
 @section('content')
 <div class="cd-content-wrapper">
@@ -25,20 +25,6 @@
     </div>
     @endsection
     <div class="container">
-        @if(session()->has('error'))
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session()->get('error') }}
-        </div>
-        @else
-        <div class="alert" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
         <div class="row">
             <div class="dash-cards col">
                 <div class="card dash-card bg-light mb-3">
@@ -83,9 +69,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Subject title</th>
                                     <th scope="col">Subject id</th>
-                                    <th scope="col">Subject code</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,21 +80,9 @@
                                 @foreach($teacher->assignedSubjects as $subject)
                                 <tr>
                                     <td scope="row">{{ $row_count++ }}</td>
-                                    <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                                    <td scope="col"><a href="/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
-                                    <td scope="col">
-                                        @if(studentJoinedSubject(Auth::user()->id, $subject->id))
-                                        {{ $subject->code }}
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    @if(studentJoinedSubject(Auth::user()->id, $subject->id))
-                                    <td scope="col"><a href="" class="drop" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
-                                    @else
-                                    <td scope="col"><a href="" class="join" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Join</a></td>
-                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -118,14 +90,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
 
 <script src="{{ asset('js/dropSubject.js') }}"></script>
-<script src="{{ asset('js/joinSubject.js') }}"></script>
 
 @endsection

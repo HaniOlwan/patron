@@ -60,18 +60,20 @@
                         $subjects = Auth::user()->joinedSubjects;
                         $row_count = 1;
                         @endphp
-                        @if($subjects)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col"><a href="/student/view-subject/{{ $subject->id  }}">{{ $subject->title }}</a></td>
+                            <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/teachers">{{ $subject->teachers->count() }}</a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                            <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
+                            @if(studentJoinedSubject(Auth::user()->id, $subject->id))
+                            <td scope="col"><a href="" class="drop" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
+                            @else
+                            <td scope="col"><a href="" class="join" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
+                            @endif
                         </tr>
                         @endforeach
-                        @endif
                     </tbody>
                 </table>
             </div>

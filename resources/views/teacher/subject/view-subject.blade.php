@@ -33,12 +33,22 @@
                                 <td>{{ $subject->subject_id }}</td>
                             </tr>
                             <tr>
-                                <td>Instructor name</td>
-                                <td>{{ ucfirst($subject->teacher->first_name." ".$subject->teacher->last_name)}}</td>
+                                <td>Instructors names</td>
+                                <td>
+                                    @foreach($subject->teachers as $teacher)
+                                    <a href="/teacher/{{ $teacher->id }}">{{ ucfirst($teacher->first_name." ".$teacher->last_name)}}
+                                    </a>
+                                    <br>
+                                    @endforeach
+                                </td>
                             </tr>
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
+                                @if(isTeacherAssigned(Auth::user()->id, $subject->id))
                                 <td>{{ $subject->code }}</td>
+                                @else
+                                <td></td>
+                                @endif
                             </tr>
                             <tr>
                                 <td>Subject description</td>
@@ -62,12 +72,13 @@
             </div>
         </div>
         <div class="add row">
+            @if(isTeacherAssigned(Auth::user()->id, $subject->id))
             <div class="col text-right ">
                 <a href="/edit-subject/{{ $subject->id }}">Edit subject</a>
-                <a href="" class="delete_btn" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"">Delete Subject</a>
                 <a href=" /question-bank/{{ $subject->id}}">Manage Question Bank</a>
                 <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
             </div>
+            @endif
         </div>
         <div class="row">
             <div class="col">
