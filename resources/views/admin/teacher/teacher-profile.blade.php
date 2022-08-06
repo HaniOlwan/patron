@@ -84,7 +84,7 @@
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                                    <td scope="col"><a href="" class="drop" role="admin" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Quiz;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -202,11 +203,21 @@ class SubjectContoller extends Controller
         ]);
     }
 
-    function deleteStudent(User $user, Subject $subject)
+    function deleteStudentfromSubject(User $user, Subject $subject)
     {
         $response = $user->joinedSubjects()->detach([
             'student_id' => $user->id,
             'subject_id' => $subject->id,
+        ]);
+        if ($response) return response()->json(['status' => 201]);
+        return response()->json(['status' => 400]);
+    }
+
+    function deleteStudentfromQuiz(User $user, Quiz $quiz)
+    {
+        $response = $user->finishedQuizzes()->detach([
+            'student_id' => $user->id,
+            'quiz_id' => $quiz->id,
         ]);
         if ($response) return response()->json(['status' => 201]);
         return response()->json(['status' => 400]);

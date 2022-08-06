@@ -7,7 +7,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3>Participants</h3>
+                        <h3>{{ $quiz->title }} Participants</h3>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->gender }}</td>
                             <td scope="col">{{ $student->phone }}</td>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="student/{{ $student->id }}/quiz"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>

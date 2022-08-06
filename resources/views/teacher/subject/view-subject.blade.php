@@ -45,7 +45,13 @@
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
                                 @if(isTeacherAssigned(Auth::user()->id, $subject->id))
-                                <td>{{ $subject->code }}</td>
+                                <td>
+                                    @if(isTeacherAssigned(Auth::user()->id, $subject->id))
+                                    {{ $subject->code }}
+                                    @else
+                                    -
+                                    @endif
+                                </td>
                                 @else
                                 <td></td>
                                 @endif
@@ -100,10 +106,10 @@
                         @foreach($subject->quizzes as $quiz)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col"><a href="">{{ $quiz->title }}</a></td>
+                            <td scope="col"><a href="/quiz/{{ $quiz->id }}">{{ $quiz->title }}</a></td>
                             <td scope="col">{{$quiz->questions->count()}}</td>
-                            <td scope="col"><a href="">{{ $quiz->students->count() }}</a></td>
-                            <td scope="col"><a href=""><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a href="/quiz/{{ $quiz->id }}/participants">{{ $quiz->students->count() }}</a></td>
+                            <td scope="col"><a href="/quiz/{{ $quiz->id }}/edit-quiz"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz"></i></a></td>
                         </tr>
                         @endforeach
@@ -133,11 +139,15 @@
                         @foreach($subject->students as $student)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col" style="text-transform: capitalize">{{ $student->first_name." ".$student->last_name }}<a href=""></a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $student->id }}">{{ $student->first_name." ".$student->last_name }}</a></td>
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->gender }}</td>
                             <td scope="col">{{ $student->phone }}</td>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
+                            <td scope="col">
+                                @if(isTeacherAssigned(Auth::user()->id, $subject->id))
+                                <a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

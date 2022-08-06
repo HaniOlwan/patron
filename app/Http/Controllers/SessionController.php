@@ -27,7 +27,7 @@ class SessionController extends Controller
             $request->session()->regenerate(); //prevent session faxation attack
             $rule = User::where('email', $validatedUser['email'])->pluck('rule')->first();
             if ($rule === 'admin') {
-                return redirect('/admin');
+                return redirect('/admin/subjects');
             } else if ($rule === 'teacher') {
                 return redirect('/dashboard');
             } else {

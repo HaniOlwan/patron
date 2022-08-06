@@ -44,9 +44,9 @@
                             <td scope="col">{{$teacher->gender }}</td>
                             <td scope="col">{{$teacher->phone}}</td>
                             @if(!isTeacherAssigned($teacher->id, $subject->id))
-                            <td scope="col"><a href="" class="join" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Assign</a></td>
+                            <td scope="col"><a href="" role="admin" class="join" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Assign</a></td>
                             @else
-                            <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                            <td scope="col"><a href="" role="admin" class="drop" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
                             @endif
                         </tr>
                         @endforeach

@@ -101,7 +101,7 @@
                         @foreach($quiz->students as $student)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="">{{ $student->first_name." ".$student->last_name }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $student->id }}">{{ $student->first_name." ".$student->last_name }}</a></td>
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->phone }}</td>
                             <td scope="col"><a target="_blank" href="">{{ $student->pivot['score'] }}</a></td>

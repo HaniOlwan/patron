@@ -87,7 +87,9 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::post('/create-subject', [SubjectContoller::class, 'create']);
     Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
     Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
-    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudent']);
+    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudentFromSubject']);
+    Route::delete('/student/{user}/quiz/{quiz}', [SubjectContoller::class, 'deleteStudentFromQuiz']);
+
     Route::get('/subject/{subject}/participants', [SubjectContoller::class, 'participants']);
 
     Route::get('/quizzes', [QuizController::class, 'index']);
