@@ -18,6 +18,12 @@ class UserContoller extends Controller
         return view('teacher.profile.profile', compact('teacher'));
     }
 
+    function teacherProfile(User $user)
+    {
+        return view('teacher.teacher-profile', ['teacher' => $user, 'subject' => $user->assignedSubjects]);
+    }
+
+
     function viewEditProfile()
     {
         $teacher = Auth::user();
@@ -123,5 +129,4 @@ class UserContoller extends Controller
             Auth::logout()
         ], 200);
     }
-
 }

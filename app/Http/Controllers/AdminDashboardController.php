@@ -153,7 +153,9 @@ class AdminDashboardController extends Controller
         $teachers = User::where('rule', 'teacher')->get();
         return view('admin.teacher.teachers', compact('teachers'));
     }
-    function viewStudents(){
+    
+    function viewStudents()
+    {
         $students = User::where('rule', 'student')->get();
         return view('admin.student.students', compact('students'));
     }

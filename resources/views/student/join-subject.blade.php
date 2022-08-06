@@ -25,16 +25,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <!-- <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div> -->
                 <div class="alert alert-info alert-dismissible fade show display_text" role="alert" id="msg">
                     search for subject title or subject id
                 </div>
@@ -44,7 +34,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Subject title</th>
                             <th scope="col">Subject id</th>
-                            <th scope="col">Instructor name</th>
+                            <th scope="col">Instructors</th>
                             <th scope="col">Participants</th>
                             <th scope="col">Status</th>
                             <th scope="col">Option</th>
@@ -54,23 +44,21 @@
                         @php
                         $row_count = 1;
                         @endphp
-                        @if($subjects)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
-                            <td scope="col"><a href="/student/view-subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                            <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/teachers">{{ $subject->teachers->count() }}</a></td>
                             <td scope="col">{{ $subject->students->count() }}</td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
                             @if(studentJoinedSubject(Auth::user()->id, $subject->id))
-                            <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
+                            <td scope="col"><a href="" class="drop" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
                             @else
-                            <td scope="col"><a href="" class="join" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
+                            <td scope="col"><a href="" class="join" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
                             @endif
                         </tr>
                         @endforeach
-                        @endif
                     </tbody>
                 </table>
             </div>

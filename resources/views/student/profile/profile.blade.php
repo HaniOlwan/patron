@@ -116,32 +116,17 @@
                                 @foreach($subjects as $subject)
                                 <tr>
                                     <td scope="row">{{ $row_count++ }}</td>
-                                    <td scope="col"><a href="/student/view-subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                                    <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
                                     <td scope="col" style="text-transform: capitalize"><a href="/student/profile">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                                    <td scope="col"><a href="" role="student" class="drop" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
                                 </tr>
                                 @endforeach
                                 @endif
                             </tbody>
                         </table>
-                        <!-- <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
-<script src="{{ asset('js/deleteUser.js') }}"></script>
-                            You can join new subjects for this teacher or drop a subject.
-                        </div>
-
-                        <div class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>

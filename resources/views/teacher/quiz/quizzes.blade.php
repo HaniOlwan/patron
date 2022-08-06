@@ -68,7 +68,7 @@
                             <td scope="col"><a href="/subject/{{ $quiz->subject->id }}">{{ $quiz->subject->title }}</a></td>
                             <td scope="col">{{ $quiz->deadline_date }}</td>
                             <td scope="col">{{ $quiz->deadline_time }}</td>
-                            <td scope="col">{{ $quiz->duration }}</td>
+                            <td scope="col">{{ $quiz->duration }} m</td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}/participants">{{ $quiz->students->count() }}</a></td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}/sample" target="_blank"><i class="far fa-file-alt"></i></a></td>
                             <td scope="col"><a href="/quiz/{{ $quiz->id }}/analysis-results"><i class="fas fa-chart-pie"></i></a></td>

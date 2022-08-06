@@ -42,7 +42,7 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
 
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
-    Route::get('/view-subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
+    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
 
@@ -59,6 +59,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::post('/{quiz}/submit-quiz', [QuizController::class, 'submitQuiz']);
     Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
     Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
+    Route::get('/{subject}/teachers', [SubjectContoller::class, 'viewTeachers']);
+
 });
 
 
@@ -78,14 +80,16 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
-    Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
+    // Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
     Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
     Route::get('/edit-subject/{subject}', [SubjectContoller::class, 'updatePage']);
     Route::post('/create-subject', [SubjectContoller::class, 'create']);
     Route::delete('/subject/{subject}', [SubjectContoller::class, 'destory']);
     Route::patch('/edit-subject/{subject}', [SubjectContoller::class, 'update']);
-    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudent']);
+    Route::delete('/student/{user}/subject/{subject}', [SubjectContoller::class, 'deleteStudentFromSubject']);
+    Route::delete('/student/{user}/quiz/{quiz}', [SubjectContoller::class, 'deleteStudentFromQuiz']);
+
     Route::get('/subject/{subject}/participants', [SubjectContoller::class, 'participants']);
 
     Route::get('/quizzes', [QuizController::class, 'index']);
@@ -113,6 +117,12 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::get('/question/{question:id}/edit', [QuestionController::class, 'viewEditQuestion']);
     Route::patch('/question/{question:id}/edit', [QuestionController::class, 'update']);
     Route::delete('/question/{question:id}', [QuestionController::class, 'destroy']);
+
+    Route::post('/teacher/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
+    Route::get('/teacher/drop-subject/{subject}', [AdminDashboardController::class, 'dropSubject']);
+
+    Route::get('/teacher/{user}', [UserContoller::class, 'teacherProfile']);
+
 });
 
 Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
@@ -146,5 +156,6 @@ Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
 
     Route::get('/teacher/{user}/subjects', [AdminDashboardController::class, 'viewTeacherSubjects']);
     Route::get('/student/{user}/subjects', [AdminDashboardController::class, 'viewStudentSubjects']);
+
 
 });
