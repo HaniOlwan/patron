@@ -10,7 +10,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3><span>{{ $subject->title }}</span></h3>
+                        <h3><span>{{ $topic->title }} Topic</span></h3>
                     </div>
 
                 </div>

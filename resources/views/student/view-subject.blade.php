@@ -33,12 +33,22 @@
                                 <td>{{ $subject->subject_id }}</td>
                             </tr>
                             <tr>
-                                <td>Instructor name</td>
-                                <td><a href="/student/teacher/{{ $subject->teacher->id }}">{{ $subject->teacher->first_name." ".$subject->teacher->last_name }}</a></td>
+                                <td>Instructors names</td>
+                                <td>
+                                    @foreach($subject->teachers as $teacher)
+                                    <a href="/student/teacher/{{ $teacher->id }}">{{ ucfirst($teacher->first_name." ".$teacher->last_name)}}
+                                    </a>
+                                    <br>
+                                    @endforeach
+                                </td>
                             </tr>
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
-                                <td>{{ $subject->code }}</td>
+                                <td>
+                                    @if(studentJoinedSubject(Auth::user()->id, $subject->id))
+                                    {{ $subject->code }}
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td>Subject description</td>
@@ -61,6 +71,7 @@
                 </div>
             </div>
         </div>
+        @if(studentJoinedSubject(Auth::user()->id, $subject->id))
         <div class="row">
             <div class="col">
                 <table class="table table-striped">
@@ -115,6 +126,7 @@
                 </table>
             </div>
         </div>
+        @endif
     </div>
     <meta name="_token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->

@@ -16,7 +16,7 @@
     @endsection
 
     <div class="container">
-       
+
         <div class="row">
             <div class="col">
                 @if(session()->has('error'))
@@ -57,7 +57,12 @@
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->gender }}</td>
                             <td scope="col">{{ $student->phone }}</td>
-                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
+
+                            <td scope="col"><a>
+                                    @if(isTeacherAssigned(Auth::user()->id, $subject->id))
+                                    <i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i>
+                                    @endif
+                                </a></td>
                         </tr>
                         @endforeach
                     </tbody>

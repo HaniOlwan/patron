@@ -1,8 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.student')
 @section('content')
 <div class="cd-content-wrapper">
     <div class="container">
-    <h2 class="mt-4 mb-4">Assign teachers to {{ $subject->title }}</h2>
         <div class="row">
             <div class="col">
                 @if(session()->has('error'))
@@ -29,7 +28,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Option</th>
+                            <!-- <th scope="col">Participated subjects</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -39,15 +38,11 @@
                         @foreach($teachers as $teacher)
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
-                            <td scope="col"><a href="/admin/teacher/{{$teacher->id}}">{{$teacher->first_name." ".$teacher->last_name}}</a></td>
+                            <td scope="col"><a href="/student/teacher/{{$teacher->id}}">{{$teacher->first_name." ".$teacher->last_name}}</a></td>
                             <td scope="col">{{$teacher->email}}</td>
                             <td scope="col">{{$teacher->gender }}</td>
                             <td scope="col">{{$teacher->phone}}</td>
-                            @if(!isTeacherAssigned($teacher->id, $subject->id))
-                            <td scope="col"><a href="" role="admin" class="join" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Assign</a></td>
-                            @else
-                            <td scope="col"><a href="" role="admin" class="drop" subject-id="{{ $subject->id }}" teacher-id="{{ $teacher->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
-                            @endif
+                            <!-- <td scope="col"><a href="/admin/teacher/{{$teacher->id}}/subjects">{{ $teacher->assignedSubjects->count() }}</a></td> -->
                         </tr>
                         @endforeach
                     </tbody>

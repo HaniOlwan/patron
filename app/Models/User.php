@@ -65,11 +65,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Quiz::class, 'user_id');
     }
-    public function quizzestest()
-    {
-        return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id');
-    }
-
+    
     public function attendedQuizzes()
     {
         return $this->belongsToMany(Quiz::class, 'quiz_student', 'student_id', 'quiz_id')->withPivot('score');

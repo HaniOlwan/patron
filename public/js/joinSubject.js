@@ -7,6 +7,8 @@ joinButtons.forEach((ele) => ele.addEventListener('click', (e) => {
     e.preventDefault();
     let subjectId = e.target.getAttribute('subject-id');
     let subjectStatus = e.target.getAttribute('data-status');
+    let role = e.target.getAttribute('role');
+
     if (subjectStatus == 1) {
         subjectCode = prompt("Enter subject code", "");
     }
@@ -16,9 +18,10 @@ joinButtons.forEach((ele) => ele.addEventListener('click', (e) => {
         },
     });
     $.ajax({
-        url: '/student/join-subject/' + subjectId,
+        url: '/' + role + '/join-subject/' + subjectId,
         type: 'POST',
         data: {
+            role,
             code: subjectCode,
             status: subjectStatus == 1 ? "private" : 'public'
         },
@@ -26,7 +29,11 @@ joinButtons.forEach((ele) => ele.addEventListener('click', (e) => {
             if (response.status === 400) {
                 alertMsg.textContent = response.message;
             } else {
-                window.location.href = "/student/view-subject/" + subjectId;
+                if(role === 'student'){
+                    window.location.href = "/student/subject/" + subjectId;
+                }else{
+                    window.location.href = "/subject/" + subjectId;
+                }
             }
         },
         error: function (result) {

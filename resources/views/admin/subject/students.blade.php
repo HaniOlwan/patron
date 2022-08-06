@@ -43,7 +43,7 @@
                             <td scope="col">{{$student->email}}</td>
                             <td scope="col">{{$student->gender }}</td>
                             <td scope="col">{{$student->phone}}</td>
-                            <td scope="col"><a href="" class="drop" subject-id="{{ $subject->id }}" student-id="{{ $student->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
+                            <td scope="col"><a href="" class="drop" role="admin" subject-id="{{ $subject->id }}" student-id="{{ $student->id }}" data-status="{{ $subject->private }}" style="text-align:center">Drop</a></td>
                         </tr>
                         @endforeach
                     </tbody>
