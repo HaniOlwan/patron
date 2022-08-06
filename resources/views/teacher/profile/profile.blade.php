@@ -151,10 +151,11 @@
             </div>
         </div>
     </div>
+    <meta name="_token" content="{{ csrf_token() }}">
 </div> <!-- .cd-content-wrapper -->
 </main> <!-- .cd-main-content -->
-<script src="{{ asset('js/deleteUser.js') }}"></script>
 <script src="{{ asset('js/deleteModal.js') }}"></script>
+<script src="{{ asset('js/deleteUser.js') }}"></script>
 <script>
     (".card-body").niceScroll(".card-text", {
         cursorcolor: "#ff7d66",

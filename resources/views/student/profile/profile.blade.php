@@ -76,7 +76,7 @@
 
                         <a href="/student/edit-profile"><i class="fas fa-user-edit"></i>Edit profile</a>
                         <a href="/student/change-password"><i class="fas fa-undo-alt"></i>Change password</a>
-                        <a class="delete-user-button" href=""><i class="fas fa-times-circle"></i>Delete account</a>
+                        <a class="delete-user-button" role="student" href=""><i class="fas fa-times-circle"></i>Delete account</a>
                     </div>
                 </div>
             </div>
