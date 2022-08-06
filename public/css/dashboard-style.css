@@ -129,16 +129,19 @@ nav ul li a i {
 }
 
 .hero-dashboard {
-  background-image: url("../images/my-banner1.jpg");
+  background-image: url("https://i.ibb.co/PGC8zFx/my-banner1.jpg");
 }
 
+/* <a href="https://ibb.co/KxyHzb6"><img src="https://i.ibb.co/PGC8zFx/my-banner1.jpg" alt="my-banner1" border="0"></a> */
+/* <a href="https://ibb.co/QQpFHh0"><img src="https://i.ibb.co/7CjJpBh/my-banner2.jpg" alt="my-banner2" border="0"></a> */
+<a href="https://ibb.co/DtYwCWh"><img src="https://i.ibb.co/80bP5sq/my-banner3.jpg" alt="my-banner3" border="0"></a>
 .hero-subject {
-  background-image: url("../images/my-banner4.jpg");
+  background-image: url("https://i.ibb.co/8NF9JFV/my-banner4.jpg");
   /*    background-position: bottom;*/
 }
 
 .hero-profile {
-  background-image: url("../images/my-banner7.jpg");
+  background-image: url("https://i.ibb.co/K6NGLZY/my-banner7.jpg");
   height: 300px;
 }
 

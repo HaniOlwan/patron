@@ -576,7 +576,7 @@ a.button-style {
 
 /* background images for banner */
 .banner-w3pvt-1 {
-    background: url(../images/my-banner1.jpg) no-repeat top;
+    background: url(https://i.ibb.co/30SV01V/my-banner1.jpg) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -584,9 +584,8 @@ a.button-style {
     -ms-background-size: cover;
     min-height: 800px;
 }
-
 .banner-w3pvt-2 {
-    background: url(../images/my-banner2.jpg) no-repeat center;
+    background: url(https://i.ibb.co/hZJNzHR/my-banner2.jpg) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -596,7 +595,7 @@ a.button-style {
 }
 
 .banner-w3pvt-3 {
-    background: url(../images/my-banner3.jpg) no-repeat center;
+    background: url(https://i.ibb.co/124fnZ8/my-banner3.jpg) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
