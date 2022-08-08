@@ -51,10 +51,10 @@
                             <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
                             <td scope="col"><a href="/admin/subject/{{$subject->id}}/students">
-                                    {{ $subject->students }}
+                                    {{ $subject->students() }}
                                 </a></td>
                             <td scope="col"><a href="/admin/subject/{{$subject->id}}/participants">
-                                    {{ $subject->teachers }}
+                                    {{ $subject->teachers() }}
                                 </a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
                             <td scope="col"><a href="/admin/edit-subject/{{$subject->id}}"><i class="fas fa-pencil-alt"></i></a></td>
