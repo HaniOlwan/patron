@@ -50,6 +50,20 @@
                             <td scope="col"><a href="/admin/subject/{{$subject->id}}">{{$subject->title}}</a></td>
                             <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
+                            <td scope="col"><a href="/admin/subject/{{$subject->id}}/students">
+                                    @if($subject->students->count() !== null)
+                                    {{ $subject->students->count() }}
+                                    @else
+                                    0
+                                    @endf
+                                </a></td>
+                            <td scope="col"><a href="/admin/subject/{{$subject->id}}/participants">
+                                    @if($subject->teachers->count())
+                                    {{ $subject->teachers->count() }}
+                                    @else
+                                    0
+                                    @endif
+                                </a></td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
                             <td scope="col"><a href="/admin/edit-subject/{{$subject->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
