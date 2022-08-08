@@ -43,6 +43,7 @@
                         @php
                         $row_count = 1;
                         @endphp
+                        @if($subjects !== null)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
@@ -56,6 +57,7 @@
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
