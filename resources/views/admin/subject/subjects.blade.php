@@ -51,7 +51,7 @@
                             <td scope="col">{{$subject->subject_id}}</td>
                             <td scope="col">{{$subject->code}}</td>
                             <td scope="col"><a href="/admin/subject/{{$subject->id}}/students">
-                                    @if($subject->students->count() !== null)
+                                    @if($subject->students->count())
                                     {{ $subject->students->count() }}
                                     @endf
                                 </a></td>
