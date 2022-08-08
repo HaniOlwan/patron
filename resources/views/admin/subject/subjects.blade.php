@@ -40,7 +40,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+                        @php
+                        $row_count = 1;
+                        @endphp
+                        @if($subjects !== null)
+                        @foreach($subjects as $subject)
+                        <tr>
+                            <td scope="row">{{$row_count++}}</td>
+                            <td scope="col"><a href="/admin/subject/{{$subject->id}}">{{$subject->title}}</a></td>
+                            <td scope="col">{{$subject->subject_id}}</td>
+                            <td scope="col">{{$subject->code}}</td>
+                            <td scope="col"><a href="/admin/subject/{{$subject->id}}/students">{{ $subject->students->count() ? $subject->students->count() : 0 }}</a></td>
+                            <td scope="col"><a href="/admin/subject/{{$subject->id}}/participants">{{ $subject->teachers->count() ? $subject->teachers->count() : 0  }}</a></td>
+                            <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "private": "public"}}</td>
+                            <td scope="col"><a href="/admin/edit-subject/{{$subject->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
