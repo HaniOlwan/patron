@@ -60,6 +60,7 @@
                         $subjects = Auth::user()->joinedSubjects;
                         $row_count = 1;
                         @endphp
+                        @if($subjects->count() > 0)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
@@ -74,6 +75,16 @@
                             @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="">-</a></td>
+                            <td scope="col"><i class="fas fa-lock"></i></td>
+                            <td scope="col"><a href="" class="join" role="student">Join</a></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

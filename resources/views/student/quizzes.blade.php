@@ -78,6 +78,20 @@
                                     <td scope="col"><a href="/student/{{ $quiz->id }}/mark">{{ $quiz->mark }}</a></td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col"> m</td>
+                            <td scope="col">Not available</td>
+                            <td scope="col">-</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>

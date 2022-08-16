@@ -16,7 +16,6 @@ class AdminDashboardController extends Controller
     function subjects()
     {
         $subjects = Subject::withCount(['students', 'teachers'])->get();
-        // dd($subjects->toArray());
         return view('admin.subject.subjects', compact('subjects'));
     }
 

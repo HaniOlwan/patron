@@ -114,15 +114,11 @@ class SubjectContoller extends Controller
 
     function viewSubjectStudent(Subject $subject)
     {
-        // if (!$subject->private) {
-        //     return view('student.view-subject', compact('subject'));
-        // }
-        // if (session()->has('subject_ids')) {
-        // if (in_array($subject->id, session()->get('subject_ids'))) {
-        return view('student.view-subject', compact('subject'));
-        //     }
-        // }
-        // return redirect()->back();
+        if (studentJoinedSubject(Auth::user()->id, $subject->id) || $subject->private !== 1) {
+            return view('student.view-subject', compact('subject'));
+        } else {
+            return redirect()->back();
+        }
     }
 
 

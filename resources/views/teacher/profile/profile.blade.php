@@ -114,21 +114,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($teacher->subjects->count()!=0)
+                                @php
+                                $row_count = 1;
+                                @endphp
+                                @if($teacher->subjects->count() !== 0)
                                 @foreach($teacher->subjects as $subject)
                                 <tr>
-                                    <td scope="row"></td>
+                                    <td scope="row">{{ $row_count++ }}</td>
                                     <td scope="col">
                                         <a href="/subject/{{ $subject->id }}">{{ $subject->title }}</a>
                                     </td>
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
-                                    <td scope="col">count</td>
+                                    <td scope="col">{{ $subject->students->count() }}</td>
                                     <td scope="col">{{ $subject->quizzes->count() }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"> </i>{{$subject->private== 1? "Private": "Public"}}</td>
                                     <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="subject"></i></a></td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td scope="row">{{ $row_count++ }}</td>
+                                    <td scope="col">
+                                        <a href="/subject">-</a>
+                                    </td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col"><i class="fas fa-lock"> </i></td>
+                                    <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal"></i></a></td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>

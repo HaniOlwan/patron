@@ -39,7 +39,6 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
             return view('student.dashboard');
         }
     );
-
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
     Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
@@ -80,7 +79,6 @@ Route::group(['middleware' => ['teacher']], function () {
     Route::delete('/delete-account', [UserContoller::class, 'destroy']);
 
     Route::get('/subjects', [SubjectContoller::class, 'index']);
-    // Route::get('/create-subject', [SubjectContoller::class, 'createPage']);
     Route::get('/question-bank/{subject}', [SubjectContoller::class, 'questionBank']);
     Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubject']);
     Route::get('/edit-subject/{subject}', [SubjectContoller::class, 'updatePage']);

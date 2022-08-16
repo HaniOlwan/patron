@@ -45,8 +45,10 @@
                             <tr>
                                 <td>Subject code <span>&#40;students can join subject only via this code&#41;</span></td>
                                 <td>
-                                    @if(studentJoinedSubject(Auth::user()->id, $subject->id))
+                                    @if(studentJoinedSubject(Auth::user()->id, $subject->id) || $subject->private != 1)
                                     {{ $subject->code }}
+                                    @else
+                                    Code
                                     @endif
                                 </td>
                             </tr>
@@ -104,7 +106,6 @@
                             <td scope="col">{{ $quiz->deadline_time }}</td>
                             <td scope="col">{{ $quiz->questions->count() }}</td>
                             <td scope="col">{{ $quiz->duration }} m</td>
-
                             @if(($quiz->start_date == '0000-00-00') || ($quiz->deadline_date == '0000-00-00'))
                             <td scope="col">Not available yet</td>
                             @elseif(($quiz->start_date >= Carbon::now()->toDateString()) && ($quiz->start_time >= Carbon::now()->toTimeString()))

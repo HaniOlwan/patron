@@ -19,14 +19,14 @@
             <div class="col">
                 <form action="{{ route('search') }}" method="GET" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search for subject name or id" aria-label="Search" id="search" value="{{ old('query') }}">
-                    <button type="button" class="btn btn-secondary">Search</button>
+                    <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div class="alert alert-info alert-dismissible fade show display_text" role="alert" id="msg">
-                    search for subject title or subject id
+                    Search for subject title or subject id
                 </div>
                 <table class="table table-striped">
                     <thead>
@@ -44,12 +44,17 @@
                         @php
                         $row_count = 1;
                         @endphp
+                        @if($subjects)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
+                            @if(studentJoinedSubject(Auth::user()->id, $subject->id))
                             <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                            @elseif($subject->private !== 1)
+                            <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
+                            @endif
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/student/teachers">{{ $subject->teachers->count() }}</a></td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $subject->id }}/teachers">{{ $subject->teachers->count() }}</a></td>
                             <td scope="col">{{ $subject->students->count() }}</td>
                             <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
                             @if(studentJoinedSubject(Auth::user()->id, $subject->id))
@@ -59,6 +64,17 @@
                             @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col"><i class="fas fa-lock"></i></td>
+                            <td scope="col"><a href="" class="join">Join</a></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

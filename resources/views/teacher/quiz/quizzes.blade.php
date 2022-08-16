@@ -61,6 +61,7 @@
                         @php
                         $row_count =1;
                         @endphp
+                        @if($quizzes->count() > 0)
                         @foreach($quizzes as $quiz)
                         <tr>
                             <td scope="col">{{ $row_count++ }}</td>
@@ -76,6 +77,21 @@
                             <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $quiz->id }}" data-url="quiz"></i></a></td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="col">{{ $row_count }}</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col"><a href="/quiz">-</a></td>
+                            <td scope="col"><a href="/quiz" target="_blank"><i class="far fa-file-alt"></i></a></td>
+                            <td scope="col"><a href="/quiz"><i class="fas fa-chart-pie"></i></a></td>
+                            <td scope="col"><a href="/quiz"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="" data-url="quiz"></i></a></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

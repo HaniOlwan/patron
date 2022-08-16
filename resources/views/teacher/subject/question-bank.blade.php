@@ -71,7 +71,7 @@
                         @foreach($topics as $topic)
                         <tr>
                             <th scope="row">{{ $row_count++ }}</th>
-                            <th scope="col"><a href="/view-topic/{{ $topic->id }}}">{{ $topic->title }}</a></th>
+                            <th scope="col"><a href="/view-topic/{{ $topic->id }}/">{{ $topic->title }}</a></th>
                             <th scope="col">{{ $topic->question->count() }}</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_btn" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->id }}"></i></a></td>

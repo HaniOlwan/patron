@@ -58,12 +58,12 @@
                         @php
                         $row_count = 1;
                         @endphp
-                        @foreach($subjects as $subject )
+                        @if($subjects->count() > 0)
+                        @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
                             <td scope="col"><a href="subject/{{$subject->id}}">{{$subject->title}}</a></td>
                             <td scope="col">{{$subject->subject_id}}</td>
-
                             <td scope="col">
                                 @if(isTeacherAssigned(Auth::user()->id, $subject->id))
                                 {{$subject->code}}
@@ -80,6 +80,17 @@
                             @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{$row_count++}}</td>
+                            <td scope="col"><a href="/subject">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col"><a href="/subject">-</a></td>
+                            <td scope="col"><i class="fas fa-lock-open"></i></td>
+                            <td scope="col"><a href="" class="join" role="teacher" subject-id="" data-status="">Join</a></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

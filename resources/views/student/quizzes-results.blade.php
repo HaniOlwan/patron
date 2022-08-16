@@ -39,7 +39,7 @@
                         @php
                         $row_count =1;
                         @endphp
-                        @if($quizzes)
+                        @if($quizzes->count() > 0)
                         @foreach($quizzes as $quiz)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
@@ -47,12 +47,20 @@
                             <td scope="col"><a href="/student/subject/{{ $quiz->subject->id }}">{{ $quiz->subject->title }}</a></td>
                             <td scope="col">{{ $quiz->mark }}</td>
                             @if($quiz->mark / 2 <= $quiz->pivot['score'])
-                            <td class="text-success" scope="col">{{ $quiz->pivot['score'] }}</td>
-                            @else
-                            <td class="text-danger" scope="col">{{ $quiz->pivot['score'] }}</td>
-                            @endif
+                                <td class="text-success" scope="col">{{ $quiz->pivot['score'] }}</td>
+                                @else
+                                <td class="text-danger" scope="col">{{ $quiz->pivot['score'] }}</td>
+                                @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col">-</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td class="text-success" scope="col">-</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>

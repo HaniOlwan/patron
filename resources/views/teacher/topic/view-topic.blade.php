@@ -12,9 +12,7 @@
                     <div class="layout">
                         <h3><span>{{ $topic->title }} Topic</span></h3>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
