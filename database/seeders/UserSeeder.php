@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
 
 class UserSeeder extends Seeder
 {
@@ -35,31 +34,10 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => '$2y$10$WubUd6gm5lCzS14ysdWt9u7f1TPXfll2pAO0JcqHyW5Igd2WgsNiy',
             'rule' => 'admin',
-        ], [
-            'first_name' => Str::random(10),
-            'last_name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => '$2y$10$oKlOVZFuvBeNTMuf3UksOeOWM8qcge8320m5yC2BioZWY6TZjZw5O',
-            'rule' => 'student',
-        ], [
-            'first_name' => Str::random(10),
-            'last_name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => '$2y$10$oKlOVZFuvBeNTMuf3UksOeOWM8qcge8320m5yC2BioZWY6TZjZw5O',
-            'rule' => 'student',
-        ], [
-            'first_name' => Str::random(10),
-            'last_name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => '$2y$10$oKlOVZFuvBeNTMuf3UksOeOWM8qcge8320m5yC2BioZWY6TZjZw5O',
-            'rule' => 'student',
-        ], [
-            'first_name' => Str::random(10),
-            'last_name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => '$2y$10$oKlOVZFuvBeNTMuf3UksOeOWM8qcge8320m5yC2BioZWY6TZjZw5O',
-            'rule' => 'student',
         ]];
+
+        User::factory()->count(7)->create();
+
         DB::table('users')->insert($users);
     }
 }
