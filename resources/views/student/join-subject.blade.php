@@ -36,7 +36,6 @@
                             <th scope="col">Subject id</th>
                             <th scope="col">Instructors</th>
                             <th scope="col">Participants</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Option</th>
                         </tr>
                     </thead>
@@ -56,11 +55,16 @@
                             <td scope="col">{{ $subject->subject_id }}</td>
                             <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $subject->id }}/teachers">{{ $subject->teachers->count() }}</a></td>
                             <td scope="col">{{ $subject->students->count() }}</td>
-                            <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
+                            @if($subject->teachers->count() > 0)
                             @if(studentJoinedSubject(Auth::user()->id, $subject->id))
                             <td scope="col"><a href="" class="drop" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
                             @else
                             <td scope="col"><a href="" class="join" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Join</a></td>
+                            @endif
+                            @else
+                            <td scope="col">Not available
+                                <span class="text-xs">&#40;There's no assigned </br> Instructors to this subject&#41;</span>
+                            </td>
                             @endif
                         </tr>
                         @endforeach
@@ -71,7 +75,6 @@
                             <td scope="col">-</td>
                             <td scope="col" style="text-transform: capitalize"><a href="">-</a></td>
                             <td scope="col">-</td>
-                            <td scope="col"><i class="fas fa-lock"></i></td>
                             <td scope="col"><a href="" class="join">Join</a></td>
                         </tr>
                         @endif

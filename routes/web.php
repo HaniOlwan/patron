@@ -41,8 +41,8 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     );
     Route::get('/subjects', [SubjectContoller::class, 'viewSubjectsPage']);
     Route::get('/join-subject', [SubjectContoller::class, 'search'])->name('search');
-    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
     Route::post('/join-subject/{subject}', [SubjectContoller::class, 'registerSubject']);
+    Route::get('/subject/{subject}', [SubjectContoller::class, 'viewSubjectStudent']);
     Route::get('/drop-subject/{subject}', [SubjectContoller::class, 'dropSubject']);
 
     Route::get('/teacher/{user}', [UserContoller::class, 'viewTeacherProfile']);
@@ -59,7 +59,6 @@ Route::group(['prefix' => '/student', 'middleware' => ['student']], function () 
     Route::get('/quizzes', [QuizController::class, 'getStudentQuizzes']);
     Route::get('/quizzes/results', [QuizController::class, 'getQuizzesResults']);
     Route::get('/{subject}/teachers', [SubjectContoller::class, 'viewTeachers']);
-
 });
 
 
@@ -121,6 +120,7 @@ Route::group(['middleware' => ['teacher']], function () {
 
     Route::get('/teacher/{user}', [UserContoller::class, 'teacherProfile']);
 
+    Route::get('/{quiz}/export', [QuizController::class, 'export']);
 });
 
 Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {

@@ -31,7 +31,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Quiz title</th>
                             <th scope="col">Subject</th>
-                            <th scope="col">Mark</th>
                             <th scope="col">Result</th>
                         </tr>
                     </thead>
@@ -45,11 +44,20 @@
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col">{{ $quiz->title }}</td>
                             <td scope="col"><a href="/student/subject/{{ $quiz->subject->id }}">{{ $quiz->subject->title }}</a></td>
-                            <td scope="col">{{ $quiz->mark }}</td>
                             @if($quiz->mark / 2 <= $quiz->pivot['score'])
-                                <td class="text-success" scope="col">{{ $quiz->pivot['score'] }}</td>
+                                <td scope="col">
+                                    <span class="text-success">
+                                        {{ $quiz->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
                                 @else
-                                <td class="text-danger" scope="col">{{ $quiz->pivot['score'] }}</td>
+                                <td scope="col">
+                                    <span class="text-danger">
+                                        {{ $quiz->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
                                 @endif
                         </tr>
                         @endforeach

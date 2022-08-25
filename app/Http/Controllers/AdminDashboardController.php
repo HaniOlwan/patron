@@ -11,6 +11,7 @@ use Exception;
 
 
 
+
 class AdminDashboardController extends Controller
 {
     function subjects()
@@ -45,6 +46,7 @@ class AdminDashboardController extends Controller
                 'description' => $validatedCredentials["description"],
                 'private' => $request->private ? true : false,
             ]);
+
             return redirect('/admin/subjects')->with('success', 'Subject created successfully.');
         } catch (QueryException $qe) {
             return redirect('/admin/create-subject')->with('error', 'Subject name or id is already exists in your subjects')->withInput();
@@ -81,7 +83,7 @@ class AdminDashboardController extends Controller
 
             return redirect('/admin/subject' . "/" . $subject->id)->with('success', 'Subject edited successfully.');
         } catch (Exception $e) {
-            return redirect('/admin/edit-subject' . "/" . $subject->id)->with('error', 'Something went wrong.');
+            return redirect('/admin/edit-subject' . "/" . $subject->id)->with('error', 'Subject id must be unique');
         }
     }
 
@@ -153,7 +155,7 @@ class AdminDashboardController extends Controller
         $teachers = User::where('rule', 'teacher')->get();
         return view('admin.teacher.teachers', compact('teachers'));
     }
-    
+
     function viewStudents()
     {
         $students = User::where('rule', 'student')->get();

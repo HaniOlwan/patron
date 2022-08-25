@@ -13,7 +13,7 @@
                     </div>
 
                 </div>
-
+                Data
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="start_date" value="{{ $quiz->start_date }}" class="form-control" id="date">
+                            <input type="date" name="start_date" value="{{ $quiz->start_date }}" class="form-control start_date" id="date" min="{{ Carbon::now()->toDateString() }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,7 +75,7 @@
                     <div class="form-group row">
                         <label for="exp-date" class="col-sm-2 col-form-label">Deadline date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="exp_date" value="{{ $quiz->deadline_date }}" class="form-control" id="exp-date">
+                            <input type="date" name="exp_date" value="{{ $quiz->deadline_date }}" class="form-control exp_date" id="exp-date">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -105,4 +105,11 @@
 </main> <!-- .cd-main-content -->
 <meta name="_token" content="{{ csrf_token() }}">
 <script src="{{ asset('js/editQuiz.js') }}"></script>
+<script>
+    const startDate = document.querySelector('.start_date');
+    const endDate = document.querySelector('.exp_date');
+    startDate.addEventListener('change', (event) => {
+        endDate.setAttribute("min", event.target.value);
+    });
+</script>
 @endsection

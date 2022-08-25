@@ -9,9 +9,12 @@ joinButtons.forEach((ele) => ele.addEventListener('click', (e) => {
     let subjectStatus = e.target.getAttribute('data-status');
     let role = e.target.getAttribute('role');
 
-    if (subjectStatus == 1) {
-        subjectCode = prompt("Enter subject code", "");
+    if (role !== 'student') {
+        if (subjectStatus == 1) {
+            subjectCode = prompt("Enter subject code", "");
+        }
     }
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': token
@@ -29,9 +32,9 @@ joinButtons.forEach((ele) => ele.addEventListener('click', (e) => {
             if (response.status === 400) {
                 alertMsg.textContent = response.message;
             } else {
-                if(role === 'student'){
+                if (role === 'student') {
                     window.location.href = "/student/subject/" + subjectId;
-                }else{
+                } else {
                     window.location.href = "/subject/" + subjectId;
                 }
             }

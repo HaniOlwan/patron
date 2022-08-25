@@ -7,9 +7,12 @@ use App\Models\Question;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Exception;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
+use App\Exports\QuizzesExport;
+use Exception;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 class QuizController extends Controller
 
@@ -235,5 +238,10 @@ class QuizController extends Controller
     {
         if (!$quiz) return response()->json(['success' => false], 404);
         return response()->json(['success' => $quiz->delete()], 200);
+    }
+
+    public function export(Quiz $quiz)
+    {
+        return Excel::download(new QuizzesExport($quiz->id), $quiz->title . ' analysis-results.xlsx');
     }
 }

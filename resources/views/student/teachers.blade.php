@@ -1,6 +1,21 @@
 @extends('layouts.student')
 @section('content')
 <div class="cd-content-wrapper">
+    @section('header')
+    <div class="container-fluid no-gutters">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="hero hero-subject">
+                    <div class="layout">
+                        <h3><span>{{ $subject->title }} Teachers</span></h3>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endsection
     <div class="container">
         <div class="row">
             <div class="col">
