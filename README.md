@@ -1,6 +1,6 @@
-<div id="top" align="">
+<div id="top" align="center">
     
-<h1 >
+<h1 align="center">
      <a style="text-decoration:none;color: #FF7D66;font-size:60px;" href="https://github.com/haniolwan/patron">
  PATRON
     </a>
@@ -13,7 +13,7 @@
   <p align="">
       Everything your need to make an online quiz and analyze the students answers.
     <div align=''>
- <h3><a style="font-size:30px;" href="https://patron.herokuapp.com/">Live Link</a></h3>
+ <h3><a style="font-size:30px;" href="https://e-learning-patron.herokuapp.com/">Live Link</a></h3>
    <h4></h4>
       </p>
 </div>
