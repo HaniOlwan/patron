@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subject;
-use Faker\Core\Number;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
