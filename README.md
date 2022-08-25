@@ -18,8 +18,6 @@
       </p>
 </div>
 
-<br>
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 Patron is a platform for online learning that enables you to create online courses, create quizzes, and keep an eye on your students' progress.
