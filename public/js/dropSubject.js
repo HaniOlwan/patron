@@ -10,9 +10,6 @@ dropButton.forEach((ele) => ele.addEventListener('click', (e) => {
 
     if (confirm("Are you sure you want to drop", "")) {
         let url = '/' + role + '/drop-subject/' + subjectId;
-        // if (teacherId || studentId) {
-        //     url = '/admin/drop-subject/' + subjectId;
-        // }
         $.ajax({
             url,
             type: 'GET',

@@ -20,15 +20,6 @@
     @endsection
     <div class="container">
         <div class="add row">
-            <!--
-            <div class="col">
-                <form class="form-inline my-2 my-lg-0">
-
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search for topic or question ..." aria-label="Search">
-
-                </form>
-            </div>
--->
             <div class="col text-right">
                 <a href="/topic/{{ $subject->id }}">Add new topic</a>
                 <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
@@ -71,7 +62,7 @@
                         @foreach($topics as $topic)
                         <tr>
                             <th scope="row">{{ $row_count++ }}</th>
-                            <th scope="col"><a href="/view-topic/{{ $topic->id }}}">{{ $topic->title }}</a></th>
+                            <th scope="col"><a href="/view-topic/{{ $topic->id }}/">{{ $topic->title }}</a></th>
                             <th scope="col">{{ $topic->question->count() }}</th>
                             <th scope="col"><a href="/topic/{{ $topic->id }}/edit"><i class="fas fa-pencil-alt"></i></a></th>
                             <td scope="col"><a><i class="fas fa-trash-alt delete_btn" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $topic->id }}" data-url="topic" subject-id="{{ $topic->subject->id }}"></i></a></td>

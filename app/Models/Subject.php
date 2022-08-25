@@ -23,12 +23,12 @@ class Subject extends Model
 
     public function teachers()
     {
-        return $this->belongsToMany(User::class,'subject_teacher','subject_id','teacher_id')->where('rule', self::TYPE_TEACHER);
+        return $this->belongsToMany(User::class, 'subject_teacher', 'subject_id', 'teacher_id')->where('rule', self::TYPE_TEACHER);
     }
 
     public function students()
     {
-        return $this->belongsToMany(User::class,'subject_student','subject_id','student_id')->where('rule', self::TYPE_STUDENT);
+        return $this->belongsToMany(User::class, 'subject_student', 'subject_id', 'student_id')->where('rule', self::TYPE_STUDENT);
     }
 
     public function topics()

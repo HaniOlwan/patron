@@ -12,7 +12,7 @@
     <link href="{{ asset('css/nav-style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard-style.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    @notifyCss
 </head>
 
 <body>
@@ -76,6 +76,9 @@
         <div class="cd-content-wrapper">
             @yield('content')
         </div>
+        @include('notify::messages')
+        <x:notify-messages />
+        @notifyJs
     </main>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>

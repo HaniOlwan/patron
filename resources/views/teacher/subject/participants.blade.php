@@ -7,7 +7,7 @@
             <div class="col">
                 <div class="hero hero-subject">
                     <div class="layout">
-                        <h3>Participants</h3>
+                        <h3>{{$subject->title}} Participants</h3>
                     </div>
                 </div>
             </div>
@@ -57,12 +57,13 @@
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->gender }}</td>
                             <td scope="col">{{ $student->phone }}</td>
-
-                            <td scope="col"><a>
+                            <td scope="col">
+                                <a>
                                     @if(isTeacherAssigned(Auth::user()->id, $subject->id))
                                     <i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i>
                                     @endif
-                                </a></td>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -76,7 +77,7 @@
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Do you really want to delete this Topic? This process cannot be undone.</p>
+                <p>Do you really want to delete this Participant? This process cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

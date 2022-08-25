@@ -104,7 +104,21 @@
                             <td scope="col" style="text-transform: capitalize"><a href="/student/{{ $student->id }}">{{ $student->first_name." ".$student->last_name }}</a></td>
                             <td scope="col">{{ $student->email }}</td>
                             <td scope="col">{{ $student->phone }}</td>
-                            <td scope="col"><a target="_blank" href="">{{ $student->pivot['score'] }}</a></td>
+                            @if($quiz->mark / 2 <= $student->pivot['score'])
+                                <td scope="col">
+                                    <span class="text-success">
+                                        {{ $student->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
+                                @else
+                                <td scope="col">
+                                    <span class="text-danger">
+                                        {{ $student->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
+                                @endif
                         </tr>
                         @endforeach
                     </tbody>

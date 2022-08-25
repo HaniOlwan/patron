@@ -54,25 +54,25 @@
                     <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="start_date" value="{{ old('start_date') }}" class="form-control" id="date" required>
+                            <input type="date" name="start_date" value="{{ old('start_date') }}" class="form-control start_date" id="date" required min="{{ Carbon::now()->toDateString() }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="time" class="col-sm-2 col-form-label">Start time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="start_time" value="{{ old('start_time') }}" class="form-control" id="time" required>
+                            <input type="time" name="start_time" value="{{ old('start_time') }}" class="form-control start_time" id="time" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-date" class="col-sm-2 col-form-label">Deadline date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="exp_date" value="{{ old('exp_date') }}"  class="form-control" id="exp-date" required>
+                            <input type="date" name="exp_date" value="{{ old('exp_date') }}" class="form-control exp_date" id="exp-date" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exp-time" class="col-sm-2 col-form-label">Deadline time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="exp_time" value="{{ old('exp_time') }}" class="form-control" id="exp-time" required>
+                            <input type="time" name="exp_time" value="{{ old('exp_time') }}" class="form-control exp_time" id="exp-time" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -98,4 +98,11 @@
 </main> <!-- .cd-main-content -->
 <meta name="_token" content="{{ csrf_token() }}">
 <script src="{{ asset('js/createQuiz.js') }}"></script>
+<script>
+    const startDate = document.querySelector('.start_date');
+    const endDate = document.querySelector('.exp_date');
+    startDate.addEventListener('change', (event) => {
+        endDate.setAttribute("min", event.target.value);
+    });
+</script>
 @endsection

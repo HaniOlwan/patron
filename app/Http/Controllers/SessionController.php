@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Exception;
 
 
 class SessionController extends Controller
@@ -25,10 +24,10 @@ class SessionController extends Controller
 
         if (Auth::attempt($validatedUser)) {
             $request->session()->regenerate(); //prevent session faxation attack
-            $rule = User::where('email', $validatedUser['email'])->pluck('rule')->first();
-            if ($rule === 'admin') {
+            $user = User::where('email', $validatedUser['email'])->first();
+            if ($user->rule === 'admin') {
                 return redirect('/admin/subjects');
-            } else if ($rule === 'teacher') {
+            } else if ($user->rule === 'teacher') {
                 return redirect('/dashboard');
             } else {
                 return redirect('/student');

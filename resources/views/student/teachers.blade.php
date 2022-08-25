@@ -1,6 +1,21 @@
 @extends('layouts.student')
 @section('content')
 <div class="cd-content-wrapper">
+    @section('header')
+    <div class="container-fluid no-gutters">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="hero hero-subject">
+                    <div class="layout">
+                        <h3><span>{{ $subject->title }} Teachers</span></h3>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endsection
     <div class="container">
         <div class="row">
             <div class="col">
@@ -28,13 +43,13 @@
                             <th scope="col">Email</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Phone</th>
-                            <!-- <th scope="col">Participated subjects</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         @php
                         $row_count = 1;
                         @endphp
+                        @if($teachers->count() > 0)
                         @foreach($teachers as $teacher)
                         <tr>
                             <td scope="row">{{$row_count++}}</td>
@@ -42,9 +57,17 @@
                             <td scope="col">{{$teacher->email}}</td>
                             <td scope="col">{{$teacher->gender }}</td>
                             <td scope="col">{{$teacher->phone}}</td>
-                            <!-- <td scope="col"><a href="/admin/teacher/{{$teacher->id}}/subjects">{{ $teacher->assignedSubjects->count() }}</a></td> -->
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{$row_count++}}</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

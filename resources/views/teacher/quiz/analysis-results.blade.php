@@ -16,7 +16,8 @@
     </div>
     @endsection
     <div class="container">
-        <div class="add row">
+        <div class="col text-right">
+            <a href="/{{ $quiz->id }}/export" class="btn bg-secondary text-light">Print Quiz Results</a>
         </div>
         <div class="row">
             <div class="col">
@@ -25,7 +26,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Student name</th>
-                            <th scope="col">Mark</th>
                             <th scope="col">Result</th>
                         </tr>
                     </thead>
@@ -33,18 +33,35 @@
                         @php
                         $row_count =1;
                         @endphp
+                        @if($quiz->students->count() > 0)
                         @foreach($quiz->students as $student)
                         <tr>
                             <td scope="col">{{ $row_count++ }}</td>
                             <td scope="col">{{ $student->first_name." ".$student->last_name }}</td>
-                            <td scope="col">{{ $quiz->mark }}</td>
-                            @if($quiz->mark / 2 <= quizScore($student->id, $quiz->id ))
-                            <td class="text-success" scope="col">{{quizScore($student->id, $quiz->id )}}</td>
-                            @else
-                            <td class="text-danger" scope="col">{{quizScore($student->id, $quiz->id )}}</td>
-                            @endif
+                            @if($quiz->mark / 2 <= $student->pivot['score'])
+                                <td scope="col">
+                                    <span class="text-success">
+                                        {{ $student->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
+                                @else
+                                <td scope="col">
+                                    <span class="text-danger">
+                                        {{ $student->pivot['score'] }}
+                                    </span> /
+                                    {{ $quiz->mark }}
+                                </td>
+                                @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="col">{{ $row_count++ }}</td>
+                            <td scope="col">-</td>
+                            <td scope="col">-</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

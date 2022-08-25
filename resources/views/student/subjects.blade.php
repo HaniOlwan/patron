@@ -51,7 +51,6 @@
                             <th scope="col">Subject title</th>
                             <th scope="col">Subject id</th>
                             <th scope="col">Instructor</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Option</th>
                         </tr>
                     </thead>
@@ -60,13 +59,13 @@
                         $subjects = Auth::user()->joinedSubjects;
                         $row_count = 1;
                         @endphp
+                        @if($subjects->count() > 0)
                         @foreach($subjects as $subject)
                         <tr>
                             <td scope="row">{{ $row_count++ }}</td>
                             <td scope="col"><a href="/student/subject/{{ $subject->id }}">{{ $subject->title }}</a></td>
                             <td scope="col">{{ $subject->subject_id }}</td>
-                            <td scope="col" style="text-transform: capitalize"><a href="/student/teachers">{{ $subject->teachers->count() }}</a></td>
-                            <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="/student/{{$subject->id}}/teachers">{{ $subject->teachers->count() }}</a></td>
                             @if(studentJoinedSubject(Auth::user()->id, $subject->id))
                             <td scope="col"><a href="" class="drop" role="student" subject-id="{{ $subject->id }}" data-status="{{ $subject->private }}">Drop</a></td>
                             @else
@@ -74,6 +73,15 @@
                             @endif
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td scope="row">{{ $row_count++ }}</td>
+                            <td scope="col"><a href="">-</a></td>
+                            <td scope="col">-</td>
+                            <td scope="col" style="text-transform: capitalize"><a href="">-</a></td>
+                            <td scope="col"><a href="" class="join" role="student">Join</a></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

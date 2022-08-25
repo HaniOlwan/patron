@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -115,8 +114,7 @@ class UserContoller extends Controller
 
     function viewStudentProfile(User $user)
     {
-        $registerdSubjects = collect($user->joinedSubjects)->where('user_id', Auth::user()->id)->all();
-        return view('teacher.student', ['student' => $user, 'subjects' => $registerdSubjects]);
+        return view('teacher.student', ['student' => $user, 'subjects' => $user->joinedSubjects]);
     }
 
     function destroy()

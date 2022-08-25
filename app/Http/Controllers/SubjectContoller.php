@@ -84,7 +84,7 @@ class SubjectContoller extends Controller
     function questionBank(Subject $subject)
     {
         $topics = $subject->topics;
-        $questions = Question::all();
+        $questions = Question::query()->whereSubjectId($subject->id)->get();
         return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics, 'questions' => $questions]);
     }
 
@@ -104,25 +104,19 @@ class SubjectContoller extends Controller
         session()->flashInput($request->input()); // save old search input
         $search = $request->input('query');
         $subjects = [];
-        if ($search) {
-            $subjects = Subject::query()
-                ->where('subject_id', 'LIKE', "%{$search}%")
-                ->orWhere('title', 'LIKE', "%{$search}%")->get();
-        }
+        $subjects = Subject::query()
+            ->where('subject_id', 'ILIKE', "%{$search}%")
+            ->orWhere('title', 'ILIKE', "%{$search}%")->get();
         return view('student.join-subject', compact('subjects'));
     }
 
     function viewSubjectStudent(Subject $subject)
     {
-        // if (!$subject->private) {
-        //     return view('student.view-subject', compact('subject'));
-        // }
-        // if (session()->has('subject_ids')) {
-        // if (in_array($subject->id, session()->get('subject_ids'))) {
-        return view('student.view-subject', compact('subject'));
-        //     }
-        // }
-        // return redirect()->back();
+        if (studentJoinedSubject(Auth::user()->id, $subject->id) || $subject->private !== 1) {
+            return view('student.view-subject', compact('subject'));
+        } else {
+            return redirect()->back();
+        }
     }
 
 
@@ -156,30 +150,14 @@ class SubjectContoller extends Controller
             }
         } else {
             $student = Auth::user();
-            if ($request->status === 'private') {
-                if ($request->code == $subject->code) {
-                    $student->joinedSubjects()->attach($subject, [
-                        'subject_id' => $subject->id,
-                    ]);
-                    session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
-                    return response()->json([
-                        'message' => "Joined subject successfully",
-                        'status' => 201
-                    ]);
-                }
-                return response()->json([
-                    'message' => "Incorrect subject code",
-                    'status' => 400
-                ]);
-            } else {
-                $student->joinedSubjects()->attach($subject, [
-                    'subject_id' => $subject->id,
-                ]);
-                return response()->json([
-                    'message' => "Joined subject successfully",
-                    'status' => 201
-                ]);
-            }
+            $student->joinedSubjects()->attach($subject, [
+                'subject_id' => $subject->id,
+            ]);
+            session()->push('subject_ids', $subject->id); // protect private subjects by storing subject ids in session 
+            return response()->json([
+                'message' => "Joined subject successfully",
+                'status' => 201
+            ]);
         }
     }
 
@@ -230,8 +208,10 @@ class SubjectContoller extends Controller
 
     function viewTeachers(Subject $subject)
     {
-        $teachers = $subject->teachers;
-        return view('student.teachers', compact('teachers'));
+        return view('student.teachers', [
+            'subject' => $subject,
+            'teachers' => $subject->teachers
+        ]);
     }
 
 

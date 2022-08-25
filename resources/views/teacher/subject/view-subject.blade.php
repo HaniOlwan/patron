@@ -68,10 +68,6 @@
                                 <td># Number of quizzes</td>
                                 <td>{{ $subject->quizzes->count() }}</td>
                             </tr>
-                            <tr>
-                                <td class="last">Created in</td>
-                                <td class="last">{{ $subject->created_at }}</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
