@@ -14,7 +14,7 @@ class SubjectTeacher extends Seeder
      */
     public function run()
     {
-        $subjects = [[
+        $teachers = [[
             'teacher_id' => '8',
             'subject_id' => '1',
         ],[
@@ -39,6 +39,6 @@ class SubjectTeacher extends Seeder
             'teacher_id' => '9',
             'subject_id' => '6',
         ]];
-        DB::table('subject_teacher')->insert($subjects);
+        DB::table('subject_teacher')->insert($teachers);
     }
 }

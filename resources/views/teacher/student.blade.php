@@ -99,7 +99,13 @@
                                     <td scope="col">{{ $subject->subject_id }}</td>
                                     <td scope="col">{{ $subject->code }}</td>
                                     <td scope="col"><i class="{{$subject->private== '1' ? 'fas fa-lock' : 'fas fa-lock-open'}}"></i> {{$subject->private== '1' ? 'Private' : 'Public'}}</td>
-                                    <td scope="col"><a><i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i></a></td>
+                                    <td scope="col">
+                                        <a>
+                                            @if(isTeacherAssigned(Auth::user()->id, $subject->id))
+                                            <i class="fas fa-trash-alt delete_icon" type="button" data-toggle="modal" data-target="#myModal" data-id="{{ $subject->id }}" data-url="student/{{ $student->id }}/subject"></i>
+                                            @endif
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -118,7 +124,7 @@
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Do you really want to delete this subject? This process cannot be undone.</p>
+                <p>Do you really want to delete this Student from Subject? This process cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

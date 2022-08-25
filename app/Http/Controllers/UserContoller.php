@@ -114,8 +114,7 @@ class UserContoller extends Controller
 
     function viewStudentProfile(User $user)
     {
-        $registerdSubjects = collect($user->joinedSubjects)->where('user_id', Auth::user()->id)->all();
-        return view('teacher.student', ['student' => $user, 'subjects' => $registerdSubjects]);
+        return view('teacher.student', ['student' => $user, 'subjects' => $user->joinedSubjects]);
     }
 
     function destroy()
