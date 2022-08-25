@@ -113,7 +113,7 @@
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Do you really want to delete this Topic? This process cannot be undone.</p>
+                <p>Do you really want to delete this? This process cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

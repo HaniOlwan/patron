@@ -84,7 +84,7 @@ class SubjectContoller extends Controller
     function questionBank(Subject $subject)
     {
         $topics = $subject->topics;
-        $questions = Question::all();
+        $questions = Question::query()->whereSubjectId($subject->id)->get();
         return view('teacher.subject.question-bank', ['subject' => $subject, 'topics' => $topics, 'questions' => $questions]);
     }
 

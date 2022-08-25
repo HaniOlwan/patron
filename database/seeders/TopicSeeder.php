@@ -16,6 +16,7 @@ class TopicSeeder extends Seeder
     public function run()
     {
         $topics = [
+            // Data Structure
             [
                 'title' => 'Stack',
                 'teacher_id' => '8',
@@ -29,6 +30,7 @@ class TopicSeeder extends Seeder
                 'teacher_id' => '9',
                 'subject_id' => '1',
             ],
+            // Data Mining
             [
                 'title' => 'Data Objects',
                 'teacher_id' => '9',
@@ -42,6 +44,7 @@ class TopicSeeder extends Seeder
                 'teacher_id' => '9',
                 'subject_id' => '2',
             ],
+            // Computer Networking
             [
                 'title' => 'Network Equipment',
                 'teacher_id' => '8',
@@ -51,6 +54,7 @@ class TopicSeeder extends Seeder
                 'teacher_id' => '8',
                 'subject_id' => '3',
             ],
+            // Algorithms
             [
                 'title' => 'Searching and Sorting',
                 'teacher_id' => '8',
@@ -63,7 +67,9 @@ class TopicSeeder extends Seeder
                 'title' => 'Pattern Searching',
                 'teacher_id' => '9',
                 'subject_id' => '4',
-            ], [
+            ],
+            // Assembly Languague
+            [
                 'title' => 'Procedures',
                 'teacher_id' => '8',
                 'subject_id' => '5',
@@ -80,6 +86,7 @@ class TopicSeeder extends Seeder
                 'teacher_id' => '8',
                 'subject_id' => '5',
             ],
+            // Discrete Math
             [
                 'title' => 'Set theory',
                 'teacher_id' => '8',
