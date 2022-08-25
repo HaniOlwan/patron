@@ -1,18 +1,18 @@
 <div id="top" align="center">
     
-<h1 align="center">
+<h1>
      <a style="text-decoration:none;color: #FF7D66;font-size:60px;" href="https://github.com/haniolwan/patron">
  PATRON
     </a>
 </h1>
 <div>    
-<div align="">
+<div>
   <a href="https://github.com/haniolwan/patron">
   </a>
 </div>
-  <p align="">
+  <p>
       Everything your need to make an online quiz and analyze the students answers.
-    <div align=''>
+    <div >
  <h3><a style="font-size:30px;" href="https://e-learning-patron.herokuapp.com/">Live Link</a></h3>
    <h4></h4>
       </p>
@@ -56,6 +56,9 @@ Patron is a platform for online learning that enables you to create online cours
  ``php artisan serve``  
 
 
+## Admin Access :8ball: 
+ ``email: admin@gmail.com``
+ ``password: admin``  
 
 
 <!-- CONTRIBUTING -->
