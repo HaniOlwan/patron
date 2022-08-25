@@ -27,7 +27,7 @@
                         $count = 1;
                         @endphp
                         @foreach($questions->shuffle() as $question)
-                        <div class="question bg-white p-3 border-bottom " count="{{ $count++ }}">
+                        <div class="question bg-white p-4 border-bottom" count="{{ $count++ }}">
                             <div class="d-flex flex-row align-items-center question-title">
                                 <h3 class="text-danger">Q.</h3>
                                 <h5 class="mt-1 ml-2">{{ $question->title }}</h5>
@@ -35,19 +35,19 @@
                             <form class="form" action="/student/{{ $quiz->id }}/submit-quiz" method="POST">
                                 @csrf
                                 <div class="ans ml-2">
-                                    <label class="radio"> <input id="first_answer" type="radio" name="questions[{{ $question->id }}]" value="a"> <span>{{ $question->first_answer }}</span>
+                                    <label class="radio"> <input id="first_answer" type="radio" name="questions[{{ $question->id }}]" value="a"> <span class="answer_container">{{ $question->first_answer }}</span>
                                     </label>
                                 </div>
                                 <div class="ans ml-2">
-                                    <label class="radio"> <input id="second_answer" type="radio" name="questions[{{ $question->id }}]" value="b"> <span>{{ $question->second_answer }}</span>
+                                    <label class="radio"> <input id="second_answer" type="radio" name="questions[{{ $question->id }}]" value="b"> <span class="answer_container">{{ $question->second_answer }}</span>
                                     </label>
                                 </div>
                                 <div class="ans ml-2">
-                                    <label class="radio"> <input id="third_answer" type="radio" name="questions[{{ $question->id }}]" value="c"> <span>{{ $question->third_answer }}</span>
+                                    <label class="radio"> <input id="third_answer" type="radio" name="questions[{{ $question->id }}]" value="c"> <span class="answer_container">{{ $question->third_answer }}</span>
                                     </label>
                                 </div>
                                 <div class="ans ml-2">
-                                    <label class="radio"> <input id="forth_answer" type="radio" name="questions[{{ $question->id }}]" value="d"> <span>{{ $question->forth_answer }}</span>
+                                    <label class="radio"> <input id="forth_answer" type="radio" name="questions[{{ $question->id }}]" value="d"> <span class="answer_container">{{ $question->forth_answer }}</span>
                                     </label>
                                 </div>
                         </div>

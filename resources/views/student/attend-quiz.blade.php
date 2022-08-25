@@ -27,7 +27,7 @@
                         $count = 1;
                         @endphp
                         @foreach($questions as $question)
-                        <div class="question bg-white p-3 border-bottom " count="{{ $count++ }}">
+                        <div class="question bg-white p-3 border-bottom" count="{{ $count++ }}">
                             <div class="d-flex flex-row align-items-center question-title">
                                 <h3 class="text-danger">Q.</h3>
                                 <h5 class="mt-1 ml-2">{{ $question->title }}</h5>
