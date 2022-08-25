@@ -76,9 +76,6 @@
         <div class="cd-content-wrapper">
             @yield('content')
         </div>
-        @include('notify::messages')
-        <x:notify-messages />
-        @notifyJs
     </main>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
