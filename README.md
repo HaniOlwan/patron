@@ -1,4 +1,4 @@
-<div id="top" align="center">
+<div id="top">
     
 <h1>
      <a style="text-decoration:none;color: #FF7D66;font-size:60px;" href="https://github.com/haniolwan/patron">
