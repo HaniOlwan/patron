@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class SubjectStudent extends Seeder
+class SubjectStudentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -20,15 +20,6 @@
     @endsection
     <div class="container">
         <div class="add row">
-            <!--
-            <div class="col">
-                <form class="form-inline my-2 my-lg-0">
-
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search for topic or question ..." aria-label="Search">
-
-                </form>
-            </div>
--->
             <div class="col text-right">
                 <a href="/topic/{{ $subject->id }}">Add new topic</a>
                 <a href="/quiz/{{ $subject->id }}/create-quiz">Create new Quiz</a>
